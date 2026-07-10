@@ -8,6 +8,16 @@ for your target role and difficulty, listens to your spoken answers, asks follow
 hints, scores every answer on an 8-metric rubric, and produces a full readiness report with a
 study curriculum that tracks your progress across sessions.
 
+**Why this exists.** Real technical interviews are scarce and unforgiving. An average corporate
+opening draws roughly 250 applicants; only about four to six are interviewed and one is hired
+(Glassdoor) — so months of preparation and dozens-to-hundreds of applications buy only a handful
+of live interviews, and when you finally interview you almost never learn why you fell short
+(surveys put the share of candidates who want post-interview feedback near 94%, while only a
+small fraction ever receive any). This is the rehearsal room that otherwise doesn't exist:
+unlimited, role- and seniority-specific mock interviews that give you the rubric scoring,
+readiness report, and study plan a real interview never will — built to train myself and other
+candidates for the real thing.
+
 Built to a written specification (`technical_interviewer_software_specification.pdf`) with a
 binding architecture contract in [`DESIGN.md`](DESIGN.md). (The spec predates this
 implementation: its "Codex agents" wording maps to the Claude-based agent roles built here —
@@ -39,10 +49,12 @@ the browser's built-in speech synthesis, so bilingual voice works with zero setu
 - **Barge-in.** You can interrupt the interviewer mid-sentence: speaking flushes the TTS
   queue and hands the floor to your mic, with an echo guard so the recognizer never picks up
   the interviewer's own audio.
-- **AI interviewee (both-AI mock interviews).** An optional simulated candidate *hears* the
-  interviewer through local speech-to-text (`faster-whisper`) and answers with **Gemini
-  conditioned on a CV** — with a structural "no backdoor" guarantee: the candidate only ever
-  receives the interviewer's *audio*, never its source text (`backend/app/sim/`).
+- **Simulated interviewee (internal test harness).** So the full audio loop can be exercised
+  and load-tested without a human, an optional simulated candidate *hears* the interviewer
+  through local speech-to-text (`faster-whisper`) and answers with Gemini conditioned on a CV
+  — with a structural "no backdoor" guarantee: it only ever receives the interviewer's *audio*,
+  never its source text (`backend/app/sim/`). This is a development/QA aid, not part of the
+  product a candidate uses.
 - **Style-based characters.** The interviewer character is fixed per interviewer *style* and is
   always gender-consistent with that style's voice, so face and voice agree in every language.
 
@@ -229,8 +241,8 @@ All settings are environment variables with working defaults (`backend/app/confi
    Follow-ups, style-consistent phrasing, silence check-ins, hints on request or adaptively
    (hints cost score), pause/resume/skip/end. Voice is **bilingual** (English via the browser,
    Hebrew via Google Cloud TTS) and supports **barge-in** — talk over the interviewer and it
-   stops to listen. An optional **AI interviewee** can play the candidate for both-AI mock runs
-   (`backend/app/sim/`).
+   stops to listen. (A simulated interviewee can stand in for the human to exercise a full
+   session end to end — an internal test harness in `backend/app/sim/`, not part of a real run.)
 4. **Report** — overall score and role-readiness (0–100), per-topic scores, best/weakest
    answers, missing concepts, communication + technical feedback, a study plan, and a
    recommended next interview.
