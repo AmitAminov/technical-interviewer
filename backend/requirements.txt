@@ -1,0 +1,23 @@
+fastapi>=0.116
+uvicorn>=0.35
+websockets>=12
+pydantic>=2.11
+sqlalchemy>=2.0
+aiosqlite
+# ML-critical: lower bounds match the APIs the code uses
+# (SentenceTransformer(device=...) + encode(normalize_embeddings=True);
+# faiss IndexFlatIP / read_index / write_index; anthropic Messages API).
+sentence-transformers>=2.2
+faiss-cpu>=1.7
+anthropic>=0.8
+# Gemini barge-in reply via Vertex AI, authenticated with project ADC (no key).
+google-auth>=2.30
+pypdf
+cryptography
+beautifulsoup4
+httpx
+requests
+jinja2
+python-multipart
+pytest
+pytest-asyncio

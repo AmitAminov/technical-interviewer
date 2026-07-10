@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Node
+frontend/node_modules/
+frontend/dist/
+
+# Voice sidecar: HeadTTS source (pinned clone + patches + npm deps + Kokoro
+# model cache under node_modules/@huggingface/transformers/.cache) is
+# provisioned by scripts/setup_voice.ps1 and never committed.
+voice/headtts/
+
+# App data (user sessions, encrypted content, secrets, generated index)
+backend/data/app.db
+backend/data/secret.key
+backend/data/wiki_index/
+backend/data/question_bank_internet.json
+backend/data/*.log
+
+# Optional local knowledge base (see TI_WIKI_DIR / scripts/index_wiki.py)
+wiki/
+
+# QA artifacts
+.gstack/
+
+# Local agent tooling state
+.claude/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Deepfake sidecar: track the small service source, ignore the heavy runtime
+# artifacts (own CUDA venv, model weights, bundled ffmpeg, caches).
+/deepfake/.venv/
+/deepfake/bin/
+/deepfake/cache/
+/deepfake/sidecar/cache/
+/deepfake/sidecar/weights/
+/deepfake/sidecar/*.mp4
+/deepfake/sidecar/*.wav
+/deepfake/sidecar/frame_*.png

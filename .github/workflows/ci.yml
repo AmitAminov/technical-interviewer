@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  backend:
+    name: Backend (pytest)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    env:
+      # Pin the provider chain to the deterministic offline engine: no
+      # Claude CLI probing, no API key, no network calls from the app.
+      TI_DISABLE_CLAUDE_CLI: "1"
+      USE_TF: "0"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: pip
+          cache-dependency-path: backend/requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Cache sentence-transformers model
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: hf-minilm-l6-v2
+
+      - name: Fast tier (offline, no embedding model)
+        run: python -m pytest tests -q -m "not slow"
+
+      - name: Slow tier (real FAISS index over the in-repo fixture wiki)
+        # Downloads all-MiniLM-L6-v2 from the HF Hub on a cold cache; the
+        # external wiki and the voice sidecar are NOT required — tests use
+        # tests/fixtures/mini_wiki and a mocked/absent sidecar.
+        run: python -m pytest tests -q -m "slow"
+
+  frontend:
+    name: Frontend (vitest + tsc)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type check
+        run: npx tsc --noEmit -p tsconfig.app.json
+
+      - name: Tests
+        run: npx vitest run

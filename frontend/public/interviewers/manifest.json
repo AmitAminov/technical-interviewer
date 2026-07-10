@@ -1,0 +1,17 @@
+{
+ "model": "gemini-3-pro-image-preview",
+ "characters": [
+  {"id": "data-scientist-0", "role": "data-scientist", "gender": "female", "file": "data-scientist-0.jpg"},
+  {"id": "data-scientist-1", "role": "data-scientist", "gender": "female", "file": "data-scientist-1.jpg"},
+  {"id": "data-scientist-2", "role": "data-scientist", "gender": "male", "file": "data-scientist-2.jpg"},
+  {"id": "data-scientist-3", "role": "data-scientist", "gender": "male", "file": "data-scientist-3.jpg"},
+  {"id": "algorithm-researcher-0", "role": "algorithm-researcher", "gender": "female", "file": "algorithm-researcher-0.jpg"},
+  {"id": "algorithm-researcher-1", "role": "algorithm-researcher", "gender": "female", "file": "algorithm-researcher-1.jpg"},
+  {"id": "algorithm-researcher-2", "role": "algorithm-researcher", "gender": "male", "file": "algorithm-researcher-2.jpg"},
+  {"id": "algorithm-researcher-3", "role": "algorithm-researcher", "gender": "male", "file": "algorithm-researcher-3.jpg"},
+  {"id": "ai-engineer-0", "role": "ai-engineer", "gender": "female", "file": "ai-engineer-0.jpg"},
+  {"id": "ai-engineer-1", "role": "ai-engineer", "gender": "female", "file": "ai-engineer-1.jpg"},
+  {"id": "ai-engineer-2", "role": "ai-engineer", "gender": "male", "file": "ai-engineer-2.jpg"},
+  {"id": "ai-engineer-3", "role": "ai-engineer", "gender": "male", "file": "ai-engineer-3.jpg"}
+ ]
+}

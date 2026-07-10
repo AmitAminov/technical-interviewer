@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    @apply bg-slate-950 font-sans text-slate-100;
+  }
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: theme(colors.slate.700) transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  *::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-slate-700;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  /* Unified keyboard focus ring for elements without a component-level ring
+     (nav links, checkboxes, …). Components that opt out via focus:outline-none
+     and draw their own focus-visible ring win on specificity. */
+  *:focus-visible {
+    outline: 2px solid theme(colors.indigo.400);
+    outline-offset: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex min-h-[44px] cursor-pointer items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 disabled:cursor-not-allowed disabled:bg-slate-700 disabled:text-slate-400 disabled:shadow-none disabled:hover:bg-slate-700;
+  }
+  .btn-primary {
+    @apply bg-indigo-600 text-white shadow-lg shadow-indigo-950/40 hover:bg-indigo-500;
+  }
+  .btn-ghost {
+    @apply border border-slate-700 bg-slate-800/70 text-slate-200 hover:bg-slate-700;
+  }
+  .btn-danger {
+    @apply bg-rose-600/90 text-white hover:bg-rose-500;
+  }
+  /* Quiet destructive action in lists/toolbars — the ConfirmDialog stays the
+     strong step, so the trigger doesn't need to shout. */
+  .btn-danger-outline {
+    @apply border border-rose-600/40 bg-transparent text-rose-300 hover:bg-rose-600 hover:text-white;
+  }
+  .btn-sm {
+    @apply min-h-0 px-3 py-1.5 text-xs;
+  }
+  .input {
+    @apply w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-100 placeholder-slate-500 focus:border-indigo-400 focus:outline-none focus:ring-1 focus:ring-indigo-400;
+  }
+  .label {
+    @apply mb-1.5 block text-xs font-semibold uppercase tracking-wider text-slate-400;
+  }
+  .card {
+    @apply rounded-2xl border border-slate-800 bg-slate-900/70;
+  }
+  /* .card, but opaque — for toasts/overlays that must not show through. */
+  .card-solid {
+    @apply rounded-2xl border border-slate-800 bg-slate-900 shadow-xl;
+  }
+  .chip {
+    @apply inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400;
+  }
+  /* Custom selector controls (cards/chips/segments acting as radio buttons). */
+  .selectable {
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400;
+  }
+  /* Loading spinner; override the size per-site (e.g. "spinner h-3 w-3"). */
+  .spinner {
+    @apply h-4 w-4 animate-spin rounded-full border-2 border-slate-600 border-t-indigo-400;
+  }
+}

@@ -1,0 +1,3729 @@
+[
+ {
+  "id": "ds-py-001",
+  "role": "Data Scientist",
+  "topic": "Python",
+  "difficulty": "Junior",
+  "question_text": "Explain the difference between a Python list and a generator. When would you prefer a generator while processing a large dataset?",
+  "expected_points": [
+   "Lists are materialized in memory while generators produce values lazily",
+   "Generators keep memory footprint constant for large or streaming data",
+   "Generators are single-pass and exhausted after iteration",
+   "Useful for chaining transformations in data pipelines"
+  ],
+  "followups": [
+   "How would you measure the memory difference between the two approaches in practice?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "הסבר את ההבדל בין Python list ל-generator. מתי תעדיף generator בעיבוד דאטה-סט גדול?",
+  "expected_points_he": [
+   "Lists נטענים במלואם לזיכרון בעוד ש-generators מייצרים ערכים באופן עצלני (lazily)",
+   "Generators שומרים על צריכת זיכרון קבועה עבור דאטה גדול או streaming",
+   "Generators הם חד-מעבריים (single-pass) ומתרוקנים לאחר איטרציה",
+   "שימושיים לשרשור טרנספורמציות ב-data pipelines"
+  ],
+  "followups_he": [
+   "איך היית מודד בפועל את ההבדל בצריכת הזיכרון בין שתי הגישות?"
+  ]
+ },
+ {
+  "id": "ds-py-002",
+  "role": "Data Scientist",
+  "topic": "Python",
+  "difficulty": "Mid-level",
+  "question_text": "Your pandas pipeline takes hours on a 50 GB dataset. Walk me through how you would diagnose and speed it up.",
+  "expected_points": [
+   "Profile first to find the actual bottleneck before optimizing",
+   "Replace row-wise apply loops with vectorized operations",
+   "Reduce memory with appropriate dtypes such as categoricals and downcast numerics",
+   "Process in chunks or move to out-of-core tools like Dask, Polars, or DuckDB",
+   "Push heavy aggregation into the database or a columnar engine"
+  ],
+  "followups": [
+   "At what point does moving to Spark become justified over a single machine?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "pandas pipeline שלך לוקח שעות על דאטה-סט בגודל 50 GB. תאר איך היית מאבחן ומאיץ אותו.",
+  "expected_points_he": [
+   "קודם כל בצע profiling כדי למצוא את צוואר הבקבוק האמיתי לפני אופטימיזציה",
+   "החלף לולאות apply הפועלות על שורות בפעולות וקטוריות",
+   "הפחת זיכרון באמצעות dtypes מתאימים כמו categoricals ו-downcast לערכים נומריים",
+   "עבד ב-chunks או עבור לכלים out-of-core כמו Dask, Polars, או DuckDB",
+   "דחוף אגרגציות כבדות למסד הנתונים או ל-columnar engine"
+  ],
+  "followups_he": [
+   "באיזה שלב מעבר ל-Spark הופך למוצדק על פני מכונה בודדת?"
+  ]
+ },
+ {
+  "id": "ds-py-003",
+  "role": "Data Scientist",
+  "topic": "Python",
+  "difficulty": "Senior",
+  "question_text": "Design a reusable data-validation layer for incoming training data in Python. What would you check and how would failures surface?",
+  "expected_points": [
+   "Schema checks: columns, dtypes, and required fields",
+   "Statistical checks against a reference profile (ranges, null rates, distribution drift)",
+   "Uniqueness and referential-integrity constraints",
+   "Quarantine bad batches and alert with actionable context rather than failing silently",
+   "Leverage frameworks like pandera or Great Expectations instead of ad-hoc asserts"
+  ],
+  "followups": [
+   "How do you keep distribution-drift checks from generating alert fatigue?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "תכנן שכבת data-validation רב-פעמית עבור נתוני אימון נכנסים ב-Python. מה היית בודק ואיך כשלים היו צפים?",
+  "expected_points_he": [
+   "בדיקות סכימה: עמודות, dtypes, ושדות חובה",
+   "בדיקות סטטיסטיות מול פרופיל ייחוס (טווחים, שיעורי null, distribution drift)",
+   "אילוצי ייחודיות (uniqueness) ושלמות יחסיות (referential-integrity)",
+   "הכנס אצוות פגומות להסגר והתריע עם קונטקסט שניתן לפעול לפיו, במקום להיכשל בשקט",
+   "השתמש בפריימוורקים כמו pandera או Great Expectations במקום ב-asserts אד-הוק"
+  ],
+  "followups_he": [
+   "איך מונעים מבדיקות distribution-drift לייצר עייפות התראות (alert fatigue)?"
+  ]
+ },
+ {
+  "id": "ds-sql-001",
+  "role": "Data Scientist",
+  "topic": "SQL",
+  "difficulty": "Junior",
+  "question_text": "Explain the difference between INNER JOIN, LEFT JOIN, and FULL OUTER JOIN, and what happens to non-matching rows in each case.",
+  "expected_points": [
+   "INNER JOIN keeps only rows with matches in both tables",
+   "LEFT JOIN keeps all left-side rows, filling right-side columns with NULL",
+   "FULL OUTER JOIN keeps all rows from both sides with NULLs where unmatched",
+   "Filters on the right table in the WHERE clause can silently turn a LEFT JOIN into an INNER JOIN"
+  ],
+  "followups": [
+   "Why can putting a right-table condition in WHERE instead of ON change the result?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "הסבר את ההבדל בין INNER JOIN, LEFT JOIN, ו-FULL OUTER JOIN, ומה קורה לשורות ללא התאמה בכל מקרה.",
+  "expected_points_he": [
+   "INNER JOIN שומר רק שורות עם התאמות בשתי הטבלאות",
+   "LEFT JOIN שומר את כל השורות מהצד השמאלי, וממלא עמודות מהצד הימני ב-NULL",
+   "FULL OUTER JOIN שומר את כל השורות משני הצדדים עם NULLs במקומות ללא התאמה",
+   "פילטרים על הטבלה הימנית ב-WHERE clause יכולים להפוך LEFT JOIN ל-INNER JOIN בשקט"
+  ],
+  "followups_he": [
+   "מדוע הצבת תנאי על הטבלה הימנית ב-WHERE במקום ב-ON יכולה לשנות את התוצאה?"
+  ]
+ },
+ {
+  "id": "ds-sql-002",
+  "role": "Data Scientist",
+  "topic": "SQL",
+  "difficulty": "Mid-level",
+  "question_text": "Given an events table (user_id, ts, event_type), compute the daily conversion rate from 'view' to 'purchase' within 24 hours. How do you avoid double counting?",
+  "expected_points": [
+   "Pair each view with subsequent purchases via a window function or self-join",
+   "Enforce the 24-hour window condition on timestamps",
+   "Deduplicate so each view (or user-day) converts at most once",
+   "Define the denominator explicitly as distinct viewers per day",
+   "Attribute the conversion to the view date cohort"
+  ],
+  "followups": [
+   "How would the query change for a strict first-touch attribution model?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "בהינתן טבלת אירועים (user_id, ts, event_type), חשב את שיעור ההמרה היומי מ-'view' ל-'purchase' בתוך 24 שעות. איך נמנעים מספירה כפולה?",
+  "expected_points_he": [
+   "התאם כל view לרכישות עוקבות באמצעות window function או self-join",
+   "אכוף את תנאי חלון ה-24 שעות על ה-timestamps",
+   "בטל כפילויות כך שכל view (או user-day) יומר לכל היותר פעם אחת",
+   "הגדר את המכנה במפורש כ-distinct viewers ליום",
+   "יחס את ההמרה לקוהורט של תאריך ה-view"
+  ],
+  "followups_he": [
+   "איך תשתנה השאילתה עבור מודל ייחוס first-touch קפדני?"
+  ]
+ },
+ {
+  "id": "ds-sql-003",
+  "role": "Data Scientist",
+  "topic": "SQL",
+  "difficulty": "Senior",
+  "question_text": "Write and explain a query computing each user's 7-day rolling revenue and flagging the first day it crosses $1000. What performance concerns arise on a billion-row table?",
+  "expected_points": [
+   "Window function with PARTITION BY user ORDER BY date and a ROWS/RANGE frame",
+   "RANGE vs ROWS matters when days are missing or duplicated",
+   "Find the first crossing with MIN(date) over qualifying days or QUALIFY",
+   "At scale: partitioning/clustering on user and date, avoiding shuffles",
+   "Pre-aggregating to user-day grain before applying the window"
+  ],
+  "followups": [
+   "How does RANGE differ from ROWS when there are gaps in the dates?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "כתוב והסבר שאילתה המחשבת את ההכנסה המתגלגלת (rolling revenue) של כל משתמש ב-7 ימים, ומסמנת את היום הראשון שבו היא עוברת את ה-$1000. אילו חששות ביצועים עולים בטבלה של מיליארד שורות?",
+  "expected_points_he": [
+   "Window function עם PARTITION BY user ORDER BY date ו-frame מסוג ROWS/RANGE",
+   "ההבדל בין RANGE ל-ROWS חשוב כאשר ימים חסרים או כפולים",
+   "מצא את החצייה הראשונה עם MIN(date) על פני ימים מתאימים או QUALIFY",
+   "בסקייל: partitioning/clustering על user ו-date, הימנעות מ-shuffles",
+   "ביצוע pre-aggregation לרמת user-day לפני יישום ה-window"
+  ],
+  "followups_he": [
+   "במה RANGE שונה מ-ROWS כאשר יש פערים בתאריכים?"
+  ]
+ },
+ {
+  "id": "ds-stat-001",
+  "role": "Data Scientist",
+  "topic": "Statistics",
+  "difficulty": "Mid-level",
+  "question_text": "Explain what a p-value is, and describe two common misinterpretations you have seen in practice.",
+  "expected_points": [
+   "Probability of results at least as extreme as observed, assuming the null hypothesis",
+   "It is not the probability that the null hypothesis is true",
+   "It says nothing about effect size or practical significance",
+   "Multiple testing inflates false positives if uncorrected"
+  ],
+  "followups": [
+   "What does a 95% confidence interval actually guarantee?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "הסבר מהו p-value, ותאר שתי פרשנויות שגויות נפוצות שראית בפועל.",
+  "expected_points_he": [
+   "ההסתברות לתוצאות קיצוניות לפחות כמו שנצפו, בהנחת השערת האפס (null hypothesis)",
+   "זו אינה ההסתברות שהשערת האפס נכונה",
+   "הוא אינו אומר דבר על גודל האפקט (effect size) או משמעות מעשית (practical significance)",
+   "ריבוי בדיקות (multiple testing) מנפח false positives אם לא מתוקן"
+  ],
+  "followups_he": [
+   "מהו למעשה הערבות של 95% confidence interval?"
+  ]
+ },
+ {
+  "id": "ds-stat-002",
+  "role": "Data Scientist",
+  "topic": "Statistics",
+  "difficulty": "Senior",
+  "question_text": "Your regression model's residuals are heteroscedastic. What does that mean, why does it matter, and what would you do about it?",
+  "expected_points": [
+   "Error variance is not constant across the range of predictions",
+   "Coefficient estimates stay unbiased but standard errors and inference become invalid",
+   "Use robust (sandwich) standard errors or weighted least squares",
+   "Transform the target, e.g. log transform, when variance grows with the mean",
+   "Model the variance explicitly if it carries signal"
+  ],
+  "followups": [
+   "How would you detect heteroscedasticity beyond eyeballing a residual plot?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "שאריות (residuals) של מודל הרגרסיה שלך הן הטרוסקדסטיות (heteroscedastic). מה זה אומר, מדוע זה חשוב, ומה היית עושה בנידון?",
+  "expected_points_he": [
+   "שונות השגיאה (error variance) אינה קבועה לאורך טווח החיזויים",
+   "אומדני המקדמים (coefficient estimates) נשארים חסרי הטיה (unbiased) אך שגיאות התקן (standard errors) וההסקה (inference) הופכות לבלתי תקפות",
+   "השתמש בשגיאות תקן רובסטיות (robust/sandwich standard errors) או ב-weighted least squares",
+   "בצע טרנספורמציה למשתנה התלוי (target), למשל log transform, כאשר השונות גדלה עם הממוצע",
+   "מדול את השונות במפורש אם היא נושאת מידע (signal)"
+  ],
+  "followups_he": [
+   "איך היית מזהה הטרוסקדסטיות מעבר לבדיקה ויזואלית של residual plot?"
+  ]
+ },
+ {
+  "id": "ds-stat-003",
+  "role": "Data Scientist",
+  "topic": "Statistics",
+  "difficulty": "Research-level",
+  "question_text": "State the bias-variance decomposition formally and explain how it guides model selection when data is limited.",
+  "expected_points": [
+   "Expected squared error decomposes into bias squared plus variance plus irreducible noise",
+   "The expectation is taken over resampled training sets",
+   "Regularization trades increased bias for reduced variance",
+   "Cross-validation estimates the combined error, not the components",
+   "Modern overparameterized models complicate the classic U-curve (double descent)"
+  ],
+  "followups": [
+   "How would you empirically estimate the bias and variance components separately?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "ציין את פירוק הטיה-שונות (bias-variance decomposition) באופן פורמלי והסבר כיצד הוא מנחה בחירת מודל כאשר הנתונים מוגבלים.",
+  "expected_points_he": [
+   "השגיאה הריבועית הצפויה (expected squared error) מתפרקת לריבוע ההטיה (bias squared) בתוספת שונות (variance) בתוספת רעש בלתי ניתן להפחתה (irreducible noise)",
+   "התוחלת נלקחת על פני מערכי אימון שנדגמו מחדש (resampled training sets)",
+   "רגולריזציה (regularization) מחליפה הטיה מוגברת בשונות מופחתת",
+   "Cross-validation אומד את השגיאה המשולבת, לא את הרכיבים",
+   "מודלים מודרניים עם פרמטרים רבים (overparameterized models) מסבכים את עקומת ה-U הקלאסית (double descent)"
+  ],
+  "followups_he": [
+   "איך היית אומד אמפירית את רכיבי ההטיה והשונות בנפרד?"
+  ]
+ },
+ {
+  "id": "ds-prob-001",
+  "role": "Data Scientist",
+  "topic": "Probability",
+  "difficulty": "Junior",
+  "question_text": "A disease affects 1 in 1000 people. A test has 99% sensitivity and 95% specificity, and you test positive. What is the probability you actually have the disease? Walk through the reasoning.",
+  "expected_points": [
+   "Set up Bayes' theorem with prior 0.001",
+   "False positives from the healthy majority dominate true positives",
+   "Posterior is roughly 2%, far below the test accuracy",
+   "Distinguish sensitivity (true positive rate) from specificity (true negative rate)"
+  ],
+  "followups": [
+   "How does the answer change if the tested population is pre-screened to a 5% base rate?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "מחלה משפיעה על 1 מכל 1000 אנשים. לבדיקה יש 99% רגישות (sensitivity) ו-95% ספציפיות (specificity), ונבדקת חיובי. מה ההסתברות שאתה באמת חולה במחלה? תאר את דרך החשיבה.",
+  "expected_points_he": [
+   "הגדר את משפט בייס (Bayes' theorem) עם prior של 0.001",
+   "False positives מהרוב הבריא שולטים על true positives",
+   "ה-posterior הוא בערך 2%, הרבה מתחת לדיוק הבדיקה",
+   "הבחן בין רגישות (sensitivity / true positive rate) לבין ספציפיות (specificity / true negative rate)"
+  ],
+  "followups_he": [
+   "איך התשובה משתנה אם האוכלוסייה הנבדקת עברה סינון מקדים ל-base rate של 5%?"
+  ]
+ },
+ {
+  "id": "ds-prob-002",
+  "role": "Data Scientist",
+  "topic": "Probability",
+  "difficulty": "Senior",
+  "question_text": "Explain the difference between independence and conditional independence with a concrete example, and why the distinction matters when modeling features.",
+  "expected_points": [
+   "Independence: joint factorizes unconditionally; conditional independence: only given a third variable",
+   "Conditioning can create dependence (collider) or remove it (confounder)",
+   "Naive Bayes assumes conditional independence given the class",
+   "Ignoring the distinction causes double counting of correlated evidence and leakage-like errors"
+  ],
+  "followups": [
+   "Give an example where two features are independent but conditionally dependent."
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "הסבר את ההבדל בין אי-תלות (independence) לאי-תלות מותנית (conditional independence) עם דוגמה קונקרטית, ומדוע ההבחנה חשובה בעת מידול פיצ'רים.",
+  "expected_points_he": [
+   "אי-תלות: ההתפלגות המשותפת מתפרקת באופן בלתי מותנה; אי-תלות מותנית: רק בהינתן משתנה שלישי",
+   "התניה יכולה ליצור תלות (collider) או להסיר אותה (con-founder)",
+   "Naive Bayes מניח אי-תלות מותנית בהינתן המחלקה (class)",
+   "התעלמות מההבחנה גורמת לספירה כפולה של ראיות מתואמות ולשגיאות דמויות leakage"
+  ],
+  "followups_he": [
+   "תן דוגמה שבה שני פיצ'רים הם בלתי תלויים אך תלויים מותנית."
+  ]
+ },
+ {
+  "id": "ds-prob-003",
+  "role": "Data Scientist",
+  "topic": "Probability",
+  "difficulty": "Staff/Lead-level",
+  "question_text": "Roughly how many users must you observe to measure a rare event with true rate around 0.1% to within ±10% relative error? Sketch the calculation and its assumptions.",
+  "expected_points": [
+   "Binomial variance p(1-p)/n drives the standard error",
+   "Translate ±10% relative error into an absolute interval half-width of 0.0001",
+   "Normal approximation gives n on the order of z^2(1-p)/(p e^2), i.e. millions of observations",
+   "Assumes independent observations and a stable underlying rate",
+   "Sequential or Bayesian approaches can reduce the required commitment"
+  ],
+  "followups": [
+   "What breaks if events are clustered within a small set of heavy users?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "בקירוב, כמה משתמשים עליך לצפות כדי למדוד אירוע נדיר עם שיעור אמיתי של כ-0.1% בטווח שגיאה יחסית של ±10%? שרטט את החישוב וההנחות שלו.",
+  "expected_points_he": [
+   "שונות בינומית p(1-p)/n מניעה את שגיאת התקן (standard error)",
+   "תרגם שגיאה יחסית של ±10% לחצי רוחב מרווח אבסולוטי של 0.0001",
+   "קירוב נורמלי נותן n בסדר גודל של z^2(1-p)/(p e^2), כלומר מיליוני תצפיות",
+   "מניח תצפיות בלתי תלויות ושיעור בסיסי יציב",
+   "גישות סדרתיות (sequential) או בייסיאניות (Bayesian) יכולות להפחית את המחויבות הנדרשת"
+  ],
+  "followups_he": [
+   "מה משתבש אם אירועים מקובצים בתוך קבוצה קטנה של משתמשים כבדים?"
+  ]
+ },
+ {
+  "id": "ds-prob-004",
+  "role": "Data Scientist",
+  "topic": "Probability",
+  "difficulty": "Research-level",
+  "question_text": "Explain exchangeability and why it underpins permutation tests and the bootstrap.",
+  "expected_points": [
+   "Exchangeable sequences have distributions invariant to reordering",
+   "Permutation tests are exact only when labels are exchangeable under the null",
+   "The bootstrap assumes iid (a stronger condition) to approximate the sampling distribution",
+   "Time series and clustered data violate exchangeability",
+   "Block bootstrap and restricted permutations are the standard remedies"
+  ],
+  "followups": [
+   "How would you build a valid permutation test when data is clustered by user?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "הסבר exchangeability ומדוע היא עומדת בבסיס permutation tests וה-bootstrap.",
+  "expected_points_he": [
+   "לסדרות exchangeable יש התפלגויות שאינן משתנות בשינוי סדר",
+   "Permutation tests מדויקים רק כאשר ה-labels הם exchangeable תחת השערת האפס",
+   "ה-bootstrap מניח iid (תנאי חזק יותר) כדי לקרב את התפלגות הדגימה (sampling distribution)",
+   "סדרות זמן ונתונים מקובצים מפרים exchangeability",
+   "Block bootstrap ו-restricted permutations הם הפתרונות הסטנדרטיים"
+  ],
+  "followups_he": [
+   "איך היית בונה permutation test תקף כאשר הנתונים מקובצים לפי משתמש?"
+  ]
+ },
+ {
+  "id": "ds-ab-001",
+  "role": "Data Scientist",
+  "topic": "A/B testing",
+  "difficulty": "Senior",
+  "question_text": "How would you design an A/B test for a recommendation system?",
+  "expected_points": [
+   "Define a primary metric (e.g. engagement/CTR) plus guardrail metrics",
+   "Randomize at the user level and consider interference between units",
+   "Run a power analysis to set sample size and duration before starting",
+   "Account for novelty effects with a burn-in period",
+   "Watch for feedback loops if the model retrains on treatment data"
+  ],
+  "followups": [
+   "How would you handle a novelty effect inflating early treatment results?",
+   "What if the recommender retrains on data influenced by the experiment itself?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "איך היית מתכנן A/B test למערכת המלצות?",
+  "expected_points_he": [
+   "הגדר מדד ראשי (למשל engagement/CTR) בתוספת מדדי guardrail",
+   "בצע רנדומיזציה ברמת המשתמש ושקול הפרעות בין יחידות (interference between units)",
+   "בצע power analysis כדי לקבוע גודל מדגם ומשך לפני התחלה",
+   "קח בחשבון novelty effects עם תקופת burn-in",
+   "שים לב ל-feedback loops אם המודל מתאמן מחדש על נתוני הטיפול (treatment data)"
+  ],
+  "followups_he": [
+   "איך היית מטפל ב-novelty effect שמנפח תוצאות טיפול מוקדמות?",
+   "מה אם מערכת ההמלצות מתאמנת מחדש על נתונים שהושפעו מהניסוי עצמו?"
+  ]
+ },
+ {
+  "id": "ds-ab-002",
+  "role": "Data Scientist",
+  "topic": "A/B testing",
+  "difficulty": "Mid-level",
+  "question_text": "Halfway through an A/B test the p-value dips below 0.05 and the PM wants to ship immediately. What do you tell them?",
+  "expected_points": [
+   "Peeking at interim results inflates the type I error rate",
+   "Fixed-horizon tests are only valid at the planned end point",
+   "Sequential methods (alpha spending, mSPRT) permit continuous monitoring",
+   "Frame the decision in terms of business risk of a false positive",
+   "Pre-register the stopping rule for future tests"
+  ],
+  "followups": [
+   "When would you deliberately choose a sequential test design upfront?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "באמצע A/B test, ה-p-value יורד מתחת ל-0.05 וה-PM רוצה לשלוח את השינוי מיד. מה תגיד לו/לה?",
+  "expected_points_he": [
+   "הצצה לתוצאות ביניים מנפחת את שיעור שגיאה מסוג I (type I error rate)",
+   "בדיקות עם אופק קבוע (fixed-horizon tests) תקפות רק בנקודת הסיום המתוכננת",
+   "שיטות סדרתיות (sequential methods) כמו alpha spending, mSPRT מאפשרות ניטור רציף",
+   "מסגר את ההחלטה במונחים של סיכון עסקי של false positive",
+   "רשום מראש את כלל העצירה (stopping rule) לבדיקות עתידיות"
+  ],
+  "followups_he": [
+   "מתי היית בוחר במכוון בעיצוב sequential test מראש?"
+  ]
+ },
+ {
+  "id": "ds-ab-003",
+  "role": "Data Scientist",
+  "topic": "A/B testing",
+  "difficulty": "Staff/Lead-level",
+  "question_text": "Your company runs hundreds of concurrent experiments. What systemic problems arise and how would you design the experimentation platform around them?",
+  "expected_points": [
+   "Interactions between overlapping experiments; use layers or orthogonal hash-based assignment",
+   "Portfolio-level multiple testing and winner's curse in shipped effects",
+   "Standardized, trustworthy metric definitions and pipelines",
+   "Long-term holdouts to validate cumulative impact",
+   "Automatic guardrail monitoring with governance for breaches"
+  ],
+  "followups": [
+   "How do you estimate the aggregate impact of all shipped experiments honestly?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "החברה שלך מריצה מאות ניסויים במקביל. אילו בעיות מערכתיות עולות ואיך היית מתכנן את פלטפורמת הניסויים סביבן?",
+  "expected_points_he": [
+   "אינטראקציות בין ניסויים חופפים; השתמש בשכבות (layers) או הקצאה מבוססת hash אורתוגונלית",
+   "ריבוי בדיקות (multiple testing) ברמת הפורטפוליו ו-winner's curse באפקטים שנשלחו",
+   "הגדרות מדדים ו-pipelines סטנדרטיים ואמינים",
+   "holdouts ארוכי טווח לאימות השפעה מצטברת",
+   "ניטור אוטומטי של guardrails עם ממשל (governance) להפרות"
+  ],
+  "followups_he": [
+   "איך אתה אומד בכנות את ההשפעה המצטברת של כל הניסויים שנשלחו?"
+  ]
+ },
+ {
+  "id": "ds-expdes-001",
+  "role": "Data Scientist",
+  "topic": "Experiment design",
+  "difficulty": "Senior",
+  "question_text": "You cannot randomize users individually — for example a marketplace-wide pricing change. How would you still measure the causal effect?",
+  "expected_points": [
+   "Switchback (time-based) randomization for temporal interference",
+   "Cluster or geo-level randomization when spillovers are spatial",
+   "Synthetic control or difference-in-differences with pre-period data",
+   "Account for interference/spillovers explicitly in the design",
+   "Clustered designs lose power; compute the design effect"
+  ],
+  "followups": [
+   "What are the main failure modes of synthetic control methods?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "אינך יכול לבצע רנדומיזציה למשתמשים בודדים — למשל, שינוי תמחור כלל-שוק. איך עדיין היית מודד את האפקט הסיבתי (causal effect)?",
+  "expected_points_he": [
+   "רנדומיזציית switchback (מבוססת זמן) עבור הפרעה זמנית",
+   "רנדומיזציה ברמת אשכול (cluster) או גיאוגרפית כאשר יש spillovers מרחביים",
+   "Synthetic control או difference-in-differences עם נתוני תקופה מקדימה",
+   "קח בחשבון interference/spillovers במפורש בעיצוב",
+   "עיצובים מקובצים מאבדים power; חשב את ה-design effect"
+  ],
+  "followups_he": [
+   "מהם מצבי הכשל העיקריים של שיטות synthetic control?"
+  ]
+ },
+ {
+  "id": "ds-expdes-002",
+  "role": "Data Scientist",
+  "topic": "Experiment design",
+  "difficulty": "Research-level",
+  "question_text": "Explain CUPED or another variance-reduction technique for experiments. When does it help most and what are its failure modes?",
+  "expected_points": [
+   "Uses pre-experiment covariates to remove explainable variance",
+   "Adjustment coefficient theta is cov(pre, post)/var(pre)",
+   "Largest gains when the metric is highly autocorrelated across periods",
+   "Requires stable pre-period data for all units",
+   "Reduces variance only; it cannot repair a biased design"
+  ],
+  "followups": [
+   "How does CUPED relate to regression adjustment with covariates?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "הסבר CUPED או טכניקה אחרת להפחתת שונות (variance-reduction) בניסויים. מתי היא עוזרת ביותר ומהם מצבי הכשל שלה?",
+  "expected_points_he": [
+   "משתמש ב-covariates מלפני הניסוי כדי להסיר שונות ניתנת להסבר",
+   "מקדם ההתאמה (adjustment coefficient) theta הוא cov(pre, post)/var(pre)",
+   "הרווחים הגדולים ביותר כאשר המדד בעל אוטוקורלציה גבוהה בין תקופות",
+   "דורש נתוני pre-period יציבים עבור כל היחידות",
+   "מפחית שונות בלבד; הוא אינו יכול לתקן עיצוב מוטה"
+  ],
+  "followups_he": [
+   "איך CUPED קשור ל-regression adjustment עם covariates?"
+  ]
+ },
+ {
+  "id": "ds-feat-001",
+  "role": "Data Scientist",
+  "topic": "Feature engineering",
+  "difficulty": "Junior",
+  "question_text": "You need to encode a categorical feature with 10,000 distinct values for a gradient-boosted model. Compare your options.",
+  "expected_points": [
+   "One-hot encoding is infeasible at this cardinality",
+   "Target/mean encoding works but needs leakage-safe out-of-fold computation",
+   "Hashing trick trades collisions for bounded dimensionality",
+   "Frequency or count encoding is simple and often strong",
+   "Some libraries (LightGBM, CatBoost) support high-cardinality categoricals natively"
+  ],
+  "followups": [
+   "How exactly does target encoding leak if computed on the full training set?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "עליך לקודד פיצ'ר קטגוריאלי עם 10,000 ערכים ייחודיים עבור מודל gradient-boosted. השווה את האפשרויות שלך.",
+  "expected_points_he": [
+   "One-hot encoding אינו ישים בקרדינליות כזו",
+   "Target/mean encoding עובד אך דורש חישוב out-of-fold בטוח מפני leakage",
+   "Hashing trick מחליף התנגשויות (collisions) בממדיות מוגבלת (bounded dimensionality)",
+   "Frequency או count encoding פשוטים ולרוב חזקים",
+   "ספריות מסוימות (LightGBM, CatBoost) תומכות ב-high-cardinality categoricals באופן מובנה"
+  ],
+  "followups_he": [
+   "איך בדיוק target encoding גורם ל-leakage אם הוא מחושב על כל מערך האימון?"
+  ]
+ },
+ {
+  "id": "ds-feat-002",
+  "role": "Data Scientist",
+  "topic": "Feature engineering",
+  "difficulty": "Mid-level",
+  "question_text": "What is target leakage? Give two subtle examples and explain how you would detect it.",
+  "expected_points": [
+   "A feature contains information unavailable at prediction time",
+   "Example: fields populated after the outcome (e.g. 'account_closed_reason')",
+   "Example: aggregates computed over the whole dataset including the future",
+   "Suspiciously high validation performance is the classic smell",
+   "Time-aware splits and per-feature importance audits expose it"
+  ],
+  "followups": [
+   "Your model's top feature has importance 10x the next one — what do you check first?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "מהו target leakage? תן שתי דוגמאות עדינות והסבר איך היית מזהה אותו.",
+  "expected_points_he": [
+   "פיצ'ר מכיל מידע שאינו זמין בזמן החיזוי",
+   "דוגמה: שדות המאוכלסים לאחר התוצאה (למשל 'account_closed_reason')",
+   "דוגמה: אגרגציות המחושבות על כל הדאטה-סט כולל העתיד",
+   "ביצועי validation גבוהים באופן חשוד הם הסימן הקלאסי",
+   "פיצולים מודעי זמן (time-aware splits) וביקורות חשיבות פיצ'רים (per-feature importance audits) חושפים אותו"
+  ],
+  "followups_he": [
+   "לפיצ'ר המוביל במודל שלך יש חשיבות פי 10 מהבא אחריו — מה תבדוק קודם?"
+  ]
+ },
+ {
+  "id": "ds-feat-003",
+  "role": "Data Scientist",
+  "topic": "Feature engineering",
+  "difficulty": "Senior",
+  "question_text": "How do you engineer features from an event stream for churn prediction while guaranteeing point-in-time correctness?",
+  "expected_points": [
+   "All aggregations must be computed as-of the prediction snapshot date",
+   "Recency, frequency, and monetary style windows (7/30/90 days)",
+   "Snapshotting or a feature store with time-travel prevents future leakage",
+   "Encode seasonality and lifecycle stage explicitly",
+   "Define the label window separately from the feature window"
+  ],
+  "followups": [
+   "How does a feature store enforce point-in-time correctness at training time?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "איך הייתם מבצעים feature engineering מ-event stream עבור churn prediction, תוך הבטחת point-in-time correctness?",
+  "expected_points_he": [
+   "כל האגרגציות חייבות להיות מחושבות נכון לתאריך ה-snapshot של החיזוי.",
+   "חלונות בסגנון Recency, Frequency, Monetary (7/30/90 יום).",
+   "Snapshotting או feature store עם time-travel מונעים leakage עתידי.",
+   "קידוד מפורש של עונתיות ושלבי מחזור חיים.",
+   "הגדרת חלון ה-label בנפרד מחלון ה-feature."
+  ],
+  "followups_he": [
+   "איך feature store אוכף point-in-time correctness בזמן אימון?"
+  ]
+ },
+ {
+  "id": "ds-sup-001",
+  "role": "Data Scientist",
+  "topic": "Supervised learning",
+  "difficulty": "Junior",
+  "question_text": "Explain how gradient boosting works and contrast it with random forests.",
+  "expected_points": [
+   "Boosting fits trees sequentially to the residuals/gradients of the current ensemble",
+   "Random forests average independently trained trees on bootstrapped samples",
+   "Boosting primarily reduces bias; bagging primarily reduces variance",
+   "Learning rate and number of trees jointly control boosting's fit",
+   "Boosting is more prone to overfitting noise and needs careful regularization"
+  ],
+  "followups": [
+   "Why does a small learning rate with more trees usually generalize better?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "הסבירו איך gradient boosting עובד והשוו אותו ל-random forests.",
+  "expected_points_he": [
+   "Boosting מתאים עצים ברצף ל-residuals/gradients של האנסמבל הנוכחי.",
+   "Random forests ממוצעים עצים שאומנו באופן עצמאי על דגימות bootstrapped.",
+   "Boosting מפחית בעיקר bias; bagging מפחית בעיקר variance.",
+   "Learning rate ומספר העצים שולטים יחד בהתאמה של ה-boosting.",
+   "Boosting נוטה יותר ל-overfitting לרעש ודורש regularization זהיר."
+  ],
+  "followups_he": [
+   "למה learning rate קטן עם יותר עצים בדרך כלל מכליל טוב יותר?"
+  ]
+ },
+ {
+  "id": "ds-sup-002",
+  "role": "Data Scientist",
+  "topic": "Supervised learning",
+  "difficulty": "Staff/Lead-level",
+  "question_text": "Your click model's offline AUC is 0.85 but it underperforms in production. Enumerate the likely causes and how to investigate each.",
+  "expected_points": [
+   "Training/serving skew: features computed differently online vs offline",
+   "Temporal drift: offline split not representative of live traffic",
+   "Leakage inflating the offline metric",
+   "Feedback loops: logged data biased by the previous model's decisions",
+   "Metric mismatch: AUC is rank-based and ignores calibration and the decision threshold",
+   "Compare feature distributions and score calibration online vs offline"
+  ],
+  "followups": [
+   "How would you design logging to make offline evaluation trustworthy?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "ה-AUC ה-offline של מודל הקליקים שלכם הוא 0.85, אבל הוא מתפקד פחות טוב ב-production. מנו את הסיבות הסבירות ואיך הייתם חוקרים כל אחת מהן.",
+  "expected_points_he": [
+   "Training/serving skew: features מחושבים באופן שונה ב-online לעומת offline.",
+   "Temporal drift: חלוקת ה-offline אינה מייצגת את התעבורה החיה.",
+   "Leakage שמנפח את המטריקה ה-offline.",
+   "Feedback loops: נתונים שנרשמו מוטים על ידי החלטות המודל הקודם.",
+   "Metric mismatch: AUC מבוסס דירוג ומתעלם מכיול ומסף ההחלטה.",
+   "השוו התפלגויות features וכיול ציונים ב-online לעומת offline."
+  ],
+  "followups_he": [
+   "איך הייתם מתכננים logging כדי להפוך הערכה offline לאמינה?"
+  ]
+ },
+ {
+  "id": "ds-sup-003",
+  "role": "Data Scientist",
+  "topic": "Supervised learning",
+  "difficulty": "Research-level",
+  "question_text": "Interpret L1 and L2 regularization from a Bayesian perspective, and explain when you would prefer each or elastic net.",
+  "expected_points": [
+   "L2 corresponds to a Gaussian prior; L1 to a Laplace prior (MAP estimation)",
+   "L1 induces exact sparsity via the geometry of its penalty contours",
+   "L2 shrinks correlated features together; L1 arbitrarily picks one",
+   "Elastic net combines both to handle correlated groups with selection",
+   "Regularization strength is a prior width and should be tuned by validation"
+  ],
+  "followups": [
+   "Why does L1 produce exact zeros while L2 does not?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "פרשו L1 ו-L2 regularization מפרספקטיבה בייסיאנית, והסבירו מתי הייתם מעדיפים כל אחד מהם או elastic net.",
+  "expected_points_he": [
+   "L2 מתאים ל-Gaussian prior; L1 ל-Laplace prior (אומדן MAP).",
+   "L1 גורם ל-sparsity מדויק באמצעות הגיאומטריה של קווי העונש שלו.",
+   "L2 מכווץ features מתואמים יחד; L1 בוחר באופן שרירותי אחד.",
+   "Elastic net משלב את שניהם כדי לטפל בקבוצות מתואמות עם בחירה.",
+   "חוזק ה-regularization הוא רוחב prior ויש לכוונן אותו באמצעות validation."
+  ],
+  "followups_he": [
+   "למה L1 מייצר אפסים מדויקים בעוד L2 לא?"
+  ]
+ },
+ {
+  "id": "ds-unsup-001",
+  "role": "Data Scientist",
+  "topic": "Unsupervised learning",
+  "difficulty": "Mid-level",
+  "question_text": "How would you choose the number of clusters for k-means, and what are the limitations of the methods you propose?",
+  "expected_points": [
+   "Elbow method on inertia is heuristic and often ambiguous",
+   "Silhouette and gap statistic give more principled comparisons",
+   "Stability analysis: do clusters persist across resamples?",
+   "k-means assumes spherical, similar-sized clusters in Euclidean space",
+   "Business interpretability is a legitimate selection criterion"
+  ],
+  "followups": [
+   "When would DBSCAN or a Gaussian mixture model be more appropriate?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "איך הייתם בוחרים את מספר ה-clusters עבור k-means, ומהן המגבלות של השיטות שאתם מציעים?",
+  "expected_points_he": [
+   "שיטת ה-Elbow על inertia היא היוריסטית ולעתים קרובות מעורפלת.",
+   "Silhouette ו-gap statistic מספקים השוואות מבוססות יותר.",
+   "ניתוח יציבות: האם ה-clusters נשארים עקביים על פני resamples?",
+   "k-means מניח clusters כדוריים, בגודל דומה, במרחב אוקלידי.",
+   "פרשנות עסקית היא קריטריון בחירה לגיטימי."
+  ],
+  "followups_he": [
+   "מתי DBSCAN או Gaussian mixture model יהיו מתאימים יותר?"
+  ]
+ },
+ {
+  "id": "ds-unsup-002",
+  "role": "Data Scientist",
+  "topic": "Unsupervised learning",
+  "difficulty": "Research-level",
+  "question_text": "How would you build and validate a customer segmentation that stakeholders will actually adopt?",
+  "expected_points": [
+   "Select features aligned with actionable business levers",
+   "Careful preprocessing: scaling, skew handling, and correlated feature pruning",
+   "Validate cluster stability across time periods and resamples",
+   "Profile and name segments so they are memorable and distinct",
+   "Prove value by measuring downstream lift of segment-targeted actions"
+  ],
+  "followups": [
+   "How do you detect that a segmentation has gone stale and needs refitting?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "איך הייתם בונים ומאמתים customer segmentation ש-stakeholders יאמצו בפועל?",
+  "expected_points_he": [
+   "בחירת features המתאימים למנופי פעולה עסקיים.",
+   "Preprocessing זהיר: scaling, טיפול ב-skew, וגיזום features מתואמים.",
+   "אימות יציבות ה-clusters על פני תקופות זמן ו-resamples.",
+   "אפיון ומתן שמות ל-segments כך שיהיו קלים לזכירה ומובחנים.",
+   "הוכחת ערך על ידי מדידת lift במורד הזרם של פעולות ממוקדות segment."
+  ],
+  "followups_he": [
+   "איך מזהים ש-segmentation התיישן ודורש refitting?"
+  ]
+ },
+ {
+  "id": "ds-eval-001",
+  "role": "Data Scientist",
+  "topic": "Model evaluation",
+  "difficulty": "Junior",
+  "question_text": "Explain precision, recall, and ROC-AUC.",
+  "expected_points": [
+   "Precision is TP/(TP+FP): of predicted positives, how many are right",
+   "Recall is TP/(TP+FN): of actual positives, how many are found",
+   "The classification threshold trades precision against recall",
+   "ROC-AUC is threshold-free: probability a random positive ranks above a random negative",
+   "Under heavy class imbalance, precision-recall curves are more informative than ROC"
+  ],
+  "followups": [
+   "When is ROC-AUC misleading, and what would you report instead?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "הסבירו precision, recall, ו-ROC-AUC.",
+  "expected_points_he": [
+   "Precision הוא TP/(TP+FP): מתוך החיובים החזויים, כמה נכונים.",
+   "Recall הוא TP/(TP+FN): מתוך החיובים האמיתיים, כמה נמצאו.",
+   "סף הסיווג מאזן בין precision ל-recall.",
+   "ROC-AUC הוא נטול סף: ההסתברות שחיוב אקראי מדורג מעל שלילי אקראי.",
+   "בתנאי class imbalance חמור, עקומות precision-recall אינפורמטיביות יותר מ-ROC."
+  ],
+  "followups_he": [
+   "מתי ROC-AUC מטעה, ומה הייתם מדווחים במקום זאת?"
+  ]
+ },
+ {
+  "id": "ds-eval-002",
+  "role": "Data Scientist",
+  "topic": "Model evaluation",
+  "difficulty": "Senior",
+  "question_text": "How do you evaluate a model whose labels arrive 30 days late while the input distribution drifts weekly?",
+  "expected_points": [
+   "Use proxy/early signals correlated with the delayed label",
+   "Time-based backtesting that replays the delay structure",
+   "Monitor input drift (PSI, KL) as a leading indicator of degradation",
+   "Rolling evaluation windows and cohort-based reporting once labels mature",
+   "Shadow or champion-challenger deployment to compare models on live traffic"
+  ],
+  "followups": [
+   "How would you decide when drift is severe enough to trigger retraining?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "איך הייתם מעריכים מודל שה-labels שלו מגיעים באיחור של 30 יום, בעוד שהתפלגות הקלט משתנה (drifts) מדי שבוע?",
+  "expected_points_he": [
+   "השתמשו ב-proxy/early signals המתואמים עם ה-label המעוכב.",
+   "Backtesting מבוסס זמן המשחזר את מבנה העיכוב.",
+   "ניטור input drift (PSI, KL) כמדד מקדים להתדרדרות.",
+   "חלונות הערכה מתגלגלים ודיווח מבוסס cohorts ברגע שה-labels מבשילים.",
+   "פריסת Shadow או champion-challenger כדי להשוות מודלים על תעבורה חיה."
+  ],
+  "followups_he": [
+   "איך הייתם מחליטים מתי ה-drift חמור מספיק כדי להפעיל אימון מחדש (retraining)?"
+  ]
+ },
+ {
+  "id": "ds-eval-003",
+  "role": "Data Scientist",
+  "topic": "Model evaluation",
+  "difficulty": "Staff/Lead-level",
+  "question_text": "Define an evaluation strategy for a company-wide forecasting system that finance and operations both depend on, with different error tolerances.",
+  "expected_points": [
+   "Different metrics per stakeholder: bias matters for finance, quantile loss for ops capacity",
+   "Hierarchical consistency: forecasts must aggregate coherently across levels",
+   "Cost-weighted error metrics tied to real decisions",
+   "Standardized rolling backtest protocol with locked data vintages",
+   "Track human overrides and measure whether they add value"
+  ],
+  "followups": [
+   "How do you evaluate calibrated uncertainty intervals, not just point forecasts?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "הגדירו אסטרטגיית הערכה עבור מערכת forecasting כלל-חברתית שגם מחלקת הכספים וגם התפעול תלויות בה, עם סבילות שגיאה שונה.",
+  "expected_points_he": [
+   "מטריקות שונות לכל stakeholder: bias חשוב לכספים, quantile loss ליכולת תפעולית.",
+   "Hierarchical consistency: תחזיות חייבות להתאגד באופן קוהרנטי על פני רמות.",
+   "מטריקות שגיאה משוקללות עלות הקשורות להחלטות אמיתיות.",
+   "פרוטוקול backtest מתגלגל סטנדרטי עם data vintages נעולים.",
+   "עקבו אחר התערבויות אנושיות (human overrides) ומדדו אם הן מוסיפות ערך."
+  ],
+  "followups_he": [
+   "איך מעריכים calibrated uncertainty intervals, ולא רק point forecasts?"
+  ]
+ },
+ {
+  "id": "ds-biz-001",
+  "role": "Data Scientist",
+  "topic": "Business case reasoning",
+  "difficulty": "Mid-level",
+  "question_text": "Daily active users dropped 8% week-over-week. Walk me through your investigation.",
+  "expected_points": [
+   "Validate the data and instrumentation before anything else",
+   "Segment by platform, geography, cohort, and acquisition channel",
+   "Check launches, experiments, seasonality, and external events on the timeline",
+   "Quantify each segment's contribution to the total drop",
+   "Form hypotheses and test them; avoid concluding from the first correlation"
+  ],
+  "followups": [
+   "Instrumentation looks fine and the drop is uniform across segments — what next?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "מספר ה-Daily Active Users ירד ב-8% משבוע לשבוע. תארו לי את תהליך החקירה שלכם.",
+  "expected_points_he": [
+   "אמתו את הנתונים וה-instrumentation לפני כל דבר אחר.",
+   "בצעו segmentation לפי פלטפורמה, גאוגרפיה, cohort, וערוץ רכישה.",
+   "בדקו השקות, ניסויים, עונתיות ואירועים חיצוניים על ציר הזמן.",
+   "כמתו את התרומה של כל segment לירידה הכוללת.",
+   "גבשו השערות ובדקו אותן; הימנעו מלהסיק מסקנות מהקורלציה הראשונה."
+  ],
+  "followups_he": [
+   "ה-instrumentation נראה תקין והירידה אחידה בכל ה-segments — מה הלאה?"
+  ]
+ },
+ {
+  "id": "ds-biz-002",
+  "role": "Data Scientist",
+  "topic": "Business case reasoning",
+  "difficulty": "Senior",
+  "question_text": "The CFO asks whether your ML-driven discount program is actually profitable. How do you answer rigorously?",
+  "expected_points": [
+   "Measure incrementality causally with a holdout or geo experiment, not correlations",
+   "Account for margin cannibalization from users who would have bought anyway",
+   "Include full costs: discounts, infrastructure, and operational overhead",
+   "Separate short-term uplift from long-term LTV and habituation effects",
+   "Report uncertainty ranges and a break-even sensitivity analysis"
+  ],
+  "followups": [
+   "How would you design the always-on holdout to keep measuring this over time?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "ה-CFO שואל אם תוכנית ההנחות מבוססת ה-ML שלכם רווחית בפועל. איך תענו באופן קפדני?",
+  "expected_points_he": [
+   "מדדו incrementality באופן סיבתי עם holdout או geo experiment, לא עם קורלציות.",
+   "קחו בחשבון cannibalization של רווח ממשתמשים שהיו קונים בכל מקרה.",
+   "כללו את כל העלויות: הנחות, תשתית, ועלויות תפעוליות (operational overhead).",
+   "הפרידו uplift לטווח קצר מ-LTV לטווח ארוך ואפקטים של התרגלות.",
+   "דווחו על טווחי אי-ודאות וניתוח רגישות לנקודת איזון (break-even)."
+  ],
+  "followups_he": [
+   "איך הייתם מתכננים את ה-always-on holdout כדי להמשיך למדוד זאת לאורך זמן?"
+  ]
+ },
+ {
+  "id": "ds-biz-003",
+  "role": "Data Scientist",
+  "topic": "Business case reasoning",
+  "difficulty": "Staff/Lead-level",
+  "question_text": "You can fund exactly one initiative: +2% model accuracy, halving pipeline latency, or self-serve analytics for PMs. How do you decide?",
+  "expected_points": [
+   "Translate each option into estimated business value with explicit assumptions",
+   "Consider opportunity cost and strategic alignment, not just local ROI",
+   "Assess effort, risk, and reversibility of each investment",
+   "Gather stakeholder input and map dependencies",
+   "Commit to measurable success criteria and a review checkpoint"
+  ],
+  "followups": [
+   "How would you communicate the decision to the two teams whose projects were not chosen?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "אתם יכולים לממן יוזמה אחת בלבד: +2% דיוק מודל, קיצור חצי מ-pipeline latency, או self-serve analytics עבור PMs. איך תחליטו?",
+  "expected_points_he": [
+   "תרגמו כל אפשרות לערך עסקי מוערך עם הנחות מפורשות.",
+   "שקלו עלות הזדמנות (opportunity cost) והתאמה אסטרטגית, לא רק ROI מקומי.",
+   "העריכו מאמץ, סיכון, והפיכות של כל השקעה.",
+   "אספו קלט מ-stakeholders ומפו תלויות.",
+   "התחייבו לקריטריוני הצלחה מדידים ולנקודת ביקורת (review checkpoint)."
+  ],
+  "followups_he": [
+   "איך הייתם מתקשרים את ההחלטה לשתי הצוותים שהפרויקטים שלהם לא נבחרו?"
+  ]
+ },
+ {
+  "id": "ds-clean-001",
+  "role": "Data Scientist",
+  "topic": "Data cleaning",
+  "difficulty": "Mid-level",
+  "question_text": "How would you deal with missing values in production data?",
+  "expected_points": [
+   "Diagnose the missingness mechanism first: MCAR, MAR, or MNAR",
+   "Prefer fixing the upstream cause over patching downstream",
+   "Impute appropriately (mean/median, model-based) and add missingness indicator flags",
+   "Guarantee identical handling at training and serving time",
+   "Monitor missing-rate drift as a data-quality signal"
+  ],
+  "followups": [
+   "When is dropping rows with missing values actually the right call?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "איך הייתם מתמודדים עם ערכים חסרים בנתוני production?",
+  "expected_points_he": [
+   "אבחנו קודם את מנגנון החסר: MCAR, MAR, או MNAR.",
+   "העדיפו לתקן את הגורם במעלה הזרם על פני תיקון במורד הזרם.",
+   "בצעו imputation מתאים (ממוצע/חציון, מבוסס מודל) והוסיפו דגלי אינדיקציה לחסר.",
+   "הבטיחו טיפול זהה בזמן אימון ו-serving.",
+   "נטרו drift בשיעור החסר כאות לאיכות נתונים."
+  ],
+  "followups_he": [
+   "מתי השמטת שורות עם ערכים חסרים היא באמת ההחלטה הנכונה?"
+  ]
+ },
+ {
+  "id": "ds-clean-002",
+  "role": "Data Scientist",
+  "topic": "Data cleaning",
+  "difficulty": "Staff/Lead-level",
+  "question_text": "Design a deduplication pipeline for customer records across three acquired companies with no shared keys.",
+  "expected_points": [
+   "Blocking/candidate generation to avoid comparing all pairs",
+   "Normalize then fuzzy-match on names, addresses, emails, and phones",
+   "Score matches with rules or a trained classifier on labeled pairs",
+   "Human review queue for borderline scores",
+   "Survivorship rules to build the golden record",
+   "Evaluate precision/recall on a labeled sample, not anecdotes"
+  ],
+  "followups": [
+   "How do you keep the entity resolution current as new records stream in?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "תכננו pipeline ל-deduplication של רשומות לקוחות על פני שלוש חברות שנרכשו ללא מפתחות משותפים.",
+  "expected_points_he": [
+   "Blocking/candidate generation כדי להימנע מהשוואת כל הזוגות.",
+   "נרמלו ואז בצעו fuzzy-match על שמות, כתובות, מיילים וטלפונים.",
+   "נקדו התאמות עם כללים או classifier מאומן על זוגות מתויגים.",
+   "תור לבדיקה אנושית עבור ציונים גבוליים.",
+   "כללי survivorship לבניית ה-golden record.",
+   "העריכו precision/recall על מדגם מתויג, לא על אנקדוטות."
+  ],
+  "followups_he": [
+   "איך שומרים על entity resolution עדכני כשרשומות חדשות זורמות פנימה?"
+  ]
+ },
+ {
+  "id": "ds-comm-001",
+  "role": "Data Scientist",
+  "topic": "Communication of insights",
+  "difficulty": "Junior",
+  "question_text": "Your analysis shows the marketing team's favorite campaign has no measurable effect. How do you present this?",
+  "expected_points": [
+   "Lead with the business question and the answer, not the methodology",
+   "Quantify uncertainty honestly, including what effect size you could have detected",
+   "Anticipate objections and alternative explanations in advance",
+   "Frame constructively: what to try or measure next",
+   "Adapt depth and vocabulary to the audience"
+  ],
+  "followups": [
+   "The team pushes back citing anecdotes of success — how do you respond?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "הניתוח שלכם מראה שלקמפיין המועדף על צוות השיווק אין השפעה מדידה. איך תציגו זאת?",
+  "expected_points_he": [
+   "התחילו עם השאלה העסקית והתשובה, לא עם המתודולוגיה.",
+   "כמתו את אי-הוודאות בכנות, כולל איזה גודל אפקט הייתם יכולים לזהות.",
+   "צפו התנגדויות והסברים חלופיים מראש.",
+   "מסגרו באופן בונה: מה לנסות או למדוד הלאה.",
+   "התאימו את העומק ואוצר המילים לקהל."
+  ],
+  "followups_he": [
+   "הצוות מתנגד ומצטט אנקדוטות של הצלחה — איך תגיבו?"
+  ]
+ },
+ {
+  "id": "ds-comm-002",
+  "role": "Data Scientist",
+  "topic": "Communication of insights",
+  "difficulty": "Research-level",
+  "question_text": "How do you communicate uncertainty from a causal analysis to executives without overclaiming or being dismissed?",
+  "expected_points": [
+   "Translate intervals into decision-relevant ranges (best/expected/worst case)",
+   "State assumptions explicitly and what evidence would change the conclusion",
+   "Use visual uncertainty displays rather than tables of coefficients",
+   "Attach a clear recommendation with a stated confidence level",
+   "Distinguish statistical uncertainty from structural/model uncertainty"
+  ],
+  "followups": [
+   "An executive asks for 'just one number' — what do you give them?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "איך אתם מתקשרים אי-ודאות מניתוח סיבתי ל-executives מבלי להפריז בטענות או להידחות?",
+  "expected_points_he": [
+   "תרגמו טווחים לטווחים רלוונטיים להחלטה (המקרה הטוב ביותר/צפוי/הגרוע ביותר).",
+   "ציינו הנחות במפורש ואיזו עדות תשנה את המסקנה.",
+   "השתמשו בתצוגות אי-ודאות ויזואליות במקום טבלאות מקדמים.",
+   "צרפו המלצה ברורה עם רמת ביטחון מוצהרת.",
+   "הבחינו בין אי-ודאות סטטיסטית לאי-ודאות מבנית/מודל."
+  ],
+  "followups_he": [
+   "executive מבקש 'רק מספר אחד' — מה תתנו לו?"
+  ]
+ },
+ {
+  "id": "ds-behav-001",
+  "role": "Data Scientist",
+  "topic": "Behavioral",
+  "difficulty": "Junior",
+  "question_text": "Tell me about a time you had to explain a technical result to a non-technical stakeholder who initially disagreed with it.",
+  "expected_points": [
+   "Specific situation and stakes, not generalities",
+   "Adapted the explanation to the audience's mental model",
+   "Used evidence and empathy rather than authority",
+   "Clear outcome and what they learned about communication"
+  ],
+  "followups": [
+   "What would you do differently in the same situation today?"
+  ],
+  "is_behavioral": true,
+  "source": "seed",
+  "question_text_he": "ספרו לי על מקרה שבו הייתם צריכים להסביר תוצאה טכנית ל-stakeholder לא טכני שבתחילה לא הסכים איתה.",
+  "expected_points_he": [
+   "מצב ספציפי והסיכונים, לא הכללות.",
+   "התאמת ההסבר למודל המנטלי של הקהל.",
+   "שימוש בראיות ואמפתיה במקום סמכות.",
+   "תוצאה ברורה ומה שלמדו על תקשורת."
+  ],
+  "followups_he": [
+   "מה הייתם עושים אחרת באותו מצב היום?"
+  ]
+ },
+ {
+  "id": "ds-behav-002",
+  "role": "Data Scientist",
+  "topic": "Behavioral",
+  "difficulty": "Mid-level",
+  "question_text": "Describe a project where your initial analysis turned out to be wrong. What happened and what did you change afterwards?",
+  "expected_points": [
+   "Owns the mistake without deflecting blame",
+   "Identifies the root cause (data issue, assumption, methodology)",
+   "Describes the concrete correction and communication to affected parties",
+   "Shows a durable process change to prevent recurrence"
+  ],
+  "followups": [
+   "How did you rebuild trust with the stakeholders who acted on the wrong result?"
+  ],
+  "is_behavioral": true,
+  "source": "seed",
+  "question_text_he": "תארו פרויקט שבו הניתוח הראשוני שלכם התברר כשגוי. מה קרה ומה שיניתם לאחר מכן?",
+  "expected_points_he": [
+   "לוקח אחריות על הטעות מבלי להפיל אשמה.",
+   "מזהה את שורש הבעיה (בעיית נתונים, הנחה, מתודולוגיה).",
+   "מתאר את התיקון הקונקרטי והתקשורת לצדדים המושפעים.",
+   "מציג שינוי תהליכי בר-קיימא למניעת הישנות."
+  ],
+  "followups_he": [
+   "איך בניתם מחדש אמון עם ה-stakeholders שפעלו על בסיס התוצאה השגויה?"
+  ]
+ },
+ {
+  "id": "ds-behav-003",
+  "role": "Data Scientist",
+  "topic": "Behavioral",
+  "difficulty": "Senior",
+  "question_text": "Tell me about a time you pushed back on shipping a model or analysis you believed was not ready.",
+  "expected_points": [
+   "Articulated the specific risk clearly and quantitatively",
+   "Balanced business urgency against technical concerns",
+   "Escalated or negotiated constructively rather than blocking silently",
+   "Describes the resolution and the outcome honestly"
+  ],
+  "followups": [
+   "How do you decide when something is 'good enough' to ship?"
+  ],
+  "is_behavioral": true,
+  "source": "seed",
+  "question_text_he": "ספרו לי על מקרה שבו התנגדתם לשלוח (shipping) מודל או ניתוח שלדעתכם לא היה מוכן.",
+  "expected_points_he": [
+   "ניסח את הסיכון הספציפי בבירור ובאופן כמותי.",
+   "איזן בין דחיפות עסקית לחששות טכניים.",
+   "הסלים או ניהל משא ומתן בונה במקום לחסום בשקט.",
+   "מתאר את הפתרון והתוצאה בכנות."
+  ],
+  "followups_he": [
+   "איך מחליטים מתי משהו 'טוב מספיק' כדי לשלוח (ship)?"
+  ]
+ },
+ {
+  "id": "ds-behav-004",
+  "role": "Data Scientist",
+  "topic": "Behavioral",
+  "difficulty": "Senior",
+  "question_text": "Describe a cross-functional conflict over a metric definition and how you resolved it.",
+  "expected_points": [
+   "Understood why each side preferred its definition",
+   "Facilitated toward a shared, documented definition",
+   "Anchored the discussion in the decision the metric supports",
+   "Left a lasting process or artifact (metric catalog, ownership)"
+  ],
+  "followups": [
+   "What is your framework for choosing a north-star metric?"
+  ],
+  "is_behavioral": true,
+  "source": "seed",
+  "question_text_he": "תארו קונפליקט בין-פונקציונלי על הגדרת מטריקה ואיך פתרתם אותו.",
+  "expected_points_he": [
+   "הבין מדוע כל צד העדיף את הגדרתו.",
+   "סייע להגיע להגדרה משותפת ומתועדת.",
+   "עיגן את הדיון בהחלטה שהמטריקה תומכת בה.",
+   "השאיר תהליך או ארטיפקט מתמשך (קטלוג מטריקות, בעלות).",
+   "מהו ה-framework שלכם לבחירת north-star metric?"
+  ],
+  "followups_he": [
+   "מהו ה-framework שלכם לבחירת north-star metric?"
+  ]
+ },
+ {
+  "id": "ds-behav-005",
+  "role": "Data Scientist",
+  "topic": "Behavioral",
+  "difficulty": "Staff/Lead-level",
+  "question_text": "Tell me about mentoring or leveling up other data scientists. What was your approach and what measurable effect did it have?",
+  "expected_points": [
+   "Deliberate mentoring strategy tailored to individuals",
+   "Concrete examples of others' growth attributable to the effort",
+   "Scaled beyond 1:1 via processes, reviews, or tooling",
+   "Feedback loops to check the mentoring actually worked"
+  ],
+  "followups": [
+   "How do you balance mentoring time against your own delivery?"
+  ],
+  "is_behavioral": true,
+  "source": "seed",
+  "question_text_he": "ספר/י לי על חניכה (mentoring) או קידום (leveling up) של מדעני נתונים אחרים. מה הייתה הגישה שלך ואיזו השפעה מדידה הייתה לה?",
+  "expected_points_he": [
+   "אסטרטגיית חניכה מכוונת המותאמת לאנשים פרטיים.",
+   "דוגמאות קונקרטיות לצמיחה של אחרים שניתן לייחס למאמץ.",
+   "התרחבות מעבר לחניכה אישית (1:1) באמצעות תהליכים, סקירות או כלים.",
+   "לולאות משוב כדי לוודא שהחניכה אכן עבדה."
+  ],
+  "followups_he": [
+   "איך אתה/את מאזן/ת את זמן החניכה מול העבודה והתפוקה שלך?"
+  ]
+ },
+ {
+  "id": "ar-alg-001",
+  "role": "Algorithm Researcher",
+  "topic": "Algorithms",
+  "difficulty": "Junior",
+  "question_text": "Explain binary search, its common implementation pitfalls, and how it generalizes to 'searching on the answer'.",
+  "expected_points": [
+   "Maintain a loop invariant on the [lo, hi) interval",
+   "Pitfalls: mid overflow, off-by-one, and termination conditions",
+   "Requires a monotone predicate, not necessarily a sorted array",
+   "Binary search on the answer space solves min-max style problems",
+   "Example: minimize the maximum load/capacity subject to feasibility"
+  ],
+  "followups": [
+   "How do you binary search over real numbers and decide when to stop?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "הסבר/י חיפוש בינארי (binary search), מלכודות היישום הנפוצות שלו, וכיצד הוא מוכלל ל'חיפוש על התשובה' (searching on the answer).",
+  "expected_points_he": [
+   "שמירה על אינווריאנט לולאה (loop invariant) במרווח [lo, hi).",
+   "מלכודות: גלישת mid (mid overflow), טעות באחד (off-by-one), ותנאי סיום.",
+   "דורש פרדיקט מונוטוני (monotone predicate), לא בהכרח מערך ממוין.",
+   "חיפוש בינארי על מרחב התשובות פותר בעיות בסגנון min-max.",
+   "דוגמה: מזעור העומס/קיבולת המקסימליים בכפוף לכדאיות (feasibility)."
+  ],
+  "followups_he": [
+   "איך מבצעים חיפוש בינארי על מספרים ממשיים ומחליטים מתי לעצור?"
+  ]
+ },
+ {
+  "id": "ar-alg-002",
+  "role": "Algorithm Researcher",
+  "topic": "Algorithms",
+  "difficulty": "Mid-level",
+  "question_text": "Design an algorithm to find the k most frequent elements in a stream too large for memory. What guarantees can you give?",
+  "expected_points": [
+   "Exact top-k needs linear space in the number of distinct items",
+   "Misra-Gries or Space-Saving give frequency estimates with bounded error",
+   "Count-Min Sketch: space vs accuracy governed by epsilon and delta",
+   "Combine sketch with a heap to track candidate top-k",
+   "Errors are one-sided (overestimates) for Count-Min"
+  ],
+  "followups": [
+   "How would you merge sketches computed on different shards?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "תכנן/י אלגוריתם למציאת k האיברים הנפוצים ביותר ב-stream גדול מדי עבור הזיכרון. אילו ערבויות אתה/את יכול/ה לתת?",
+  "expected_points_he": [
+   "top-k מדויק דורש מקום לינארי במספר האיברים הייחודיים.",
+   "Misra-Gries או Space-Saving מספקים אומדני תדירות עם שגיאה חסומה.",
+   "Count-Min Sketch: מקום מול דיוק נקבעים על ידי אפסילון ודלתא.",
+   "שילוב sketch עם heap כדי לעקוב אחר מועמדי top-k.",
+   "שגיאות הן חד-צדדיות (הערכות יתר) עבור Count-Min."
+  ],
+  "followups_he": [
+   "איך היית/ה ממזג/ת sketches שחושבו על shards שונים?"
+  ]
+ },
+ {
+  "id": "ar-alg-003",
+  "role": "Algorithm Researcher",
+  "topic": "Algorithms",
+  "difficulty": "Senior",
+  "question_text": "Find the median of two sorted arrays in O(log(min(m,n))). Explain the partition invariant and the edge cases.",
+  "expected_points": [
+   "Binary search the partition point of the shorter array",
+   "Invariant: all left-part elements are <= all right-part elements",
+   "Use +/- infinity sentinels for empty sides",
+   "Handle odd and even total lengths differently",
+   "Correctness follows from the invariant plus count balance"
+  ],
+  "followups": [
+   "Why does binary searching the shorter array matter for both correctness and complexity?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "מצא/י את החציון של שני מערכים ממוינים בסיבוכיות O(log(min(m,n))). הסבר/י את אינווריאנט החלוקה (partition invariant) ואת מקרי הקצה (edge cases).",
+  "expected_points_he": [
+   "בצע/י חיפוש בינארי על נקודת החלוקה של המערך הקצר יותר.",
+   "אינווריאנט: כל האיברים בחלק השמאלי קטנים או שווים לכל האיברים בחלק הימני.",
+   "השתמש/י ב-sentinels של אינסוף חיובי/שלילי עבור צדדים ריקים.",
+   "טפל/י באורכים כוללים אי-זוגיים וזוגיים באופן שונה.",
+   "נכונות נובעת מהאינווריאנט בתוספת איזון ספירה."
+  ],
+  "followups_he": [
+   "מדוע חיפוש בינארי במערך הקצר יותר חשוב הן לנכונות והן לסיבוכיות?"
+  ]
+ },
+ {
+  "id": "ar-alg-004",
+  "role": "Algorithm Researcher",
+  "topic": "Algorithms",
+  "difficulty": "Research-level",
+  "question_text": "Design an algorithm for detecting repeated substructures in a proof tree.",
+  "expected_points": [
+   "Canonical form for subtrees so equal structures serialize identically",
+   "Bottom-up Merkle-style subtree hashing in one traversal",
+   "Handle hash collisions by verification or perfect hashing of canonical strings",
+   "Expected linear time in tree size with hashing",
+   "Applications: common subexpression elimination, proof compression, memoized lemmas"
+  ],
+  "followups": [
+   "How would you make the detection robust to alpha-renaming of bound variables?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "תכנן/י אלגוריתם לזיהוי תת-מבנים חוזרים בעץ הוכחה (proof tree).",
+  "expected_points_he": [
+   "צורה קנונית (canonical form) עבור תת-עצים כך שמבנים שווים יעברו סריאליזציה זהה.",
+   "גיבוב תת-עצים בסגנון Merkle מלמטה למעלה במעבר אחד.",
+   "טפל/י בהתנגשויות hash באמצעות אימות או perfect hashing של מחרוזות קנוניות.",
+   "זמן לינארי צפוי בגודל העץ עם גיבוב.",
+   "יישומים: common subexpression elimination, דחיסת הוכחות, memoized lemmas."
+  ],
+  "followups_he": [
+   "איך היית/ה הופך/ת את הזיהוי לחסין ל-alpha-renaming של משתנים קשורים (bound variables)?"
+  ]
+ },
+ {
+  "id": "ar-dstr-001",
+  "role": "Algorithm Researcher",
+  "topic": "Data structures",
+  "difficulty": "Junior",
+  "question_text": "Compare hash tables and balanced binary search trees: operation costs and when each wins.",
+  "expected_points": [
+   "Hash tables: expected O(1) lookup/insert; trees: O(log n) worst case",
+   "Trees support ordered iteration, predecessor, and range queries",
+   "Adversarial or degenerate hashing degrades hash tables",
+   "Memory layout and cache behavior differ significantly",
+   "Choice depends on required operations, not just big-O"
+  ],
+  "followups": [
+   "When would you pick a trie over either of them?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "השווה/י hash tables ו-balanced binary search trees: עלויות פעולה ומתי כל אחד מהם עדיף.",
+  "expected_points_he": [
+   "Hash tables: חיפוש/הכנסה ב-O(1) צפוי; עצים: O(log n) במקרה הגרוע.",
+   "עצים תומכים באיטרציה ממוינת, קודם (predecessor) ושאילתות טווח (range queries).",
+   "גיבוב עוין או מנוון מדרדר את ביצועי hash tables.",
+   "פריסת זיכרון והתנהגות cache שונות באופן משמעותי.",
+   "הבחירה תלויה בפעולות הנדרשות, לא רק ב-big-O."
+  ],
+  "followups_he": [
+   "מתי היית/ה בוחר/ת ב-trie על פני אחד מהם?"
+  ]
+ },
+ {
+  "id": "ar-dstr-002",
+  "role": "Algorithm Researcher",
+  "topic": "Data structures",
+  "difficulty": "Mid-level",
+  "question_text": "Explain union-find with path compression and union by rank. What is the amortized complexity and where is it used?",
+  "expected_points": [
+   "Forest of trees with representative roots",
+   "Union by rank/size keeps trees shallow; path compression flattens on find",
+   "Amortized inverse-Ackermann time per operation — effectively constant",
+   "Classic uses: Kruskal's MST, dynamic connectivity, equivalence classes",
+   "Neither heuristic alone achieves the near-constant bound"
+  ],
+  "followups": [
+   "Can union-find support deletions or undo? How would you approach that?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "הסבר/י union-find עם path compression ו-union by rank. מהי הסיבוכיות הממוצעת (amortized complexity) והיכן הוא משמש?",
+  "expected_points_he": [
+   "יער של עצים עם שורשים מייצגים.",
+   "Union by rank/size שומר על עצים רדודים; path compression משטח בעת find.",
+   "זמן inverse-Ackermann ממוצע לכל פעולה – למעשה קבוע.",
+   "שימושים קלאסיים: Kruskal's MST, קישוריות דינמית, מחלקות שקילות.",
+   "אף היוריסטיקה לבדה אינה משיגה את החסם הקרוב לקבוע."
+  ],
+  "followups_he": [
+   "האם union-find יכול לתמוך במחיקות או ביטול (undo)? איך היית/ה ניגש/ת לזה?"
+  ]
+ },
+ {
+  "id": "ar-dstr-003",
+  "role": "Algorithm Researcher",
+  "topic": "Data structures",
+  "difficulty": "Senior",
+  "question_text": "Design a data structure supporting insert, delete, and getRandom, all in O(1). Then extend it to allow duplicates.",
+  "expected_points": [
+   "Dynamic array plus hash map from value to index",
+   "Delete via swap-with-last then pop to keep the array dense",
+   "getRandom indexes uniformly into the array",
+   "Duplicates require value -> set of indices",
+   "Argue uniformity of getRandom after arbitrary operation sequences"
+  ],
+  "followups": [
+   "How would you support getRandom weighted by multiplicity in O(1)?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "תכנן/י מבנה נתונים התומך ב-insert, delete ו-getRandom, כולם ב-O(1). לאחר מכן, הרחב/י אותו כדי לאפשר כפילויות.",
+  "expected_points_he": [
+   "מערך דינמי בתוספת hash map מערך לערך לאינדקס.",
+   "מחיקה באמצעות החלפה עם האחרון ולאחר מכן pop כדי לשמור על המערך צפוף.",
+   "getRandom מאנדקס באופן אחיד לתוך המערך.",
+   "כפילויות דורשות ערך -> קבוצת אינדקסים.",
+   "טען/י לאחידות של getRandom לאחר רצפי פעולות שרירותיים."
+  ],
+  "followups_he": [
+   "איך היית/ה תומך/ת ב-getRandom משוקלל לפי ריבוי (multiplicity) ב-O(1)?"
+  ]
+ },
+ {
+  "id": "ar-dstr-004",
+  "role": "Algorithm Researcher",
+  "topic": "Data structures",
+  "difficulty": "Staff/Lead-level",
+  "question_text": "You need an ordered map on the hot path of a latency-critical service: skip list, B-tree, or red-black tree? Argue with the hardware in mind.",
+  "expected_points": [
+   "B-trees exploit cache lines with high fan-out and fewer pointer hops",
+   "Red-black trees suffer pointer chasing and poor locality",
+   "Skip lists are simple and concurrency-friendly but probabilistic",
+   "Consider memory overhead per key and node allocation strategy",
+   "Decide by benchmarking on the real workload and key sizes"
+  ],
+  "followups": [
+   "How does the answer change if 99% of operations are reads?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "אתה/את זקוק/ה ל-ordered map בנתיב הקריטי (hot path) של שירות רגיש ל-latency: skip list, B-tree, או red-black tree? נמק/י תוך התחשבות בחומרה.",
+  "expected_points_he": [
+   "B-trees מנצלים cache lines עם fan-out גבוה ופחות קפיצות מצביעים (pointer hops).",
+   "Red-black trees סובלים מ-pointer chasing ומ-locality ירודה.",
+   "Skip lists פשוטים וידידותיים ל-concurrency אך הסתברותיים.",
+   "שקול/י את תקורה הזיכרון לכל מפתח ואת אסטרטגיית הקצאת הצמתים.",
+   "החלט/י באמצעות benchmarking על עומס העבודה האמיתי וגדלי המפתחות."
+  ],
+  "followups_he": [
+   "איך התשובה משתנה אם 99% מהפעולות הן קריאות?"
+  ]
+ },
+ {
+  "id": "ar-cx-001",
+  "role": "Algorithm Researcher",
+  "topic": "Complexity analysis",
+  "difficulty": "Junior",
+  "question_text": "Explain the difference between O, Omega, and Theta, and why 'my algorithm is O(n^2)' can be an almost vacuous statement.",
+  "expected_points": [
+   "O is an upper bound, Omega a lower bound, Theta a tight bound",
+   "O(n^2) permits the algorithm to actually be linear or constant",
+   "Distinguish worst, average, and best case from the bound type",
+   "Constants and lower-order terms matter in practice",
+   "Amortized analysis differs from per-operation worst case"
+  ],
+  "followups": [
+   "Give an algorithm whose average and worst case complexities genuinely differ."
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "הסבר/י את ההבדל בין O, Omega ו-Theta, ומדוע האמירה 'האלגוריתם שלי הוא O(n^2)' יכולה להיות כמעט ריקה מתוכן.",
+  "expected_points_he": [
+   "O הוא חסם עליון, Omega הוא חסם תחתון, Theta הוא חסם הדוק.",
+   "O(n^2) מאפשר לאלגוריתם להיות למעשה לינארי או קבוע.",
+   "הבדל/י בין המקרה הגרוע, הממוצע והטוב ביותר לבין סוג החסם.",
+   "קבועים ואיברים מסדר נמוך יותר חשובים בפועל.",
+   "ניתוח ממוצע (amortized analysis) שונה מהמקרה הגרוע לכל פעולה."
+  ],
+  "followups_he": [
+   "תן/י אלגוריתם שבו הסיבוכיות במקרה הממוצע והמקרה הגרוע שונות באמת."
+  ]
+ },
+ {
+  "id": "ar-cx-002",
+  "role": "Algorithm Researcher",
+  "topic": "Complexity analysis",
+  "difficulty": "Mid-level",
+  "question_text": "Analyze the amortized cost of appending to a dynamic array that doubles its capacity, and sketch the potential method.",
+  "expected_points": [
+   "Total copy work over n appends is geometric, so O(1) amortized",
+   "Aggregate method: sum the costs and divide",
+   "Potential function e.g. 2*size - capacity charges cheap ops for future copies",
+   "Growth factor trades memory overhead against copy frequency",
+   "Contrast with linked lists: O(1) worst-case append but poor locality"
+  ],
+  "followups": [
+   "Why does growing by a constant amount instead of doubling break the O(1) bound?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "נתח/י את העלות הממוצעת (amortized cost) של הוספה למערך דינמי שמכפיל את קיבולתו, ושרטט/י את שיטת הפוטנציאל (potential method).",
+  "expected_points_he": [
+   "עבודת ההעתקה הכוללת על פני n הוספות היא גיאומטרית, ולכן O(1) ממוצע.",
+   "שיטת האגרגציה: סכם/י את העלויות וחלק/י.",
+   "פונקציית פוטנציאל, למשל 2*size - capacity, מחייבת פעולות זולות עבור העתקות עתידיות.",
+   "גורם הגדילה מאזן תקורה זיכרון מול תדירות העתקה.",
+   "השווה/י לרשימות מקושרות: הוספה ב-O(1) במקרה הגרוע אך locality ירודה."
+  ],
+  "followups_he": [
+   "מדוע גידול בכמות קבועה במקום הכפלה שובר את חסם ה-O(1)?"
+  ]
+ },
+ {
+  "id": "ar-cx-003",
+  "role": "Algorithm Researcher",
+  "topic": "Complexity analysis",
+  "difficulty": "Research-level",
+  "question_text": "Prove that comparison-based sorting requires Omega(n log n) comparisons, and explain how radix sort escapes the bound.",
+  "expected_points": [
+   "Model executions as a binary decision tree over comparisons",
+   "The tree needs at least n! leaves for all permutations",
+   "Height >= log2(n!) = Theta(n log n) by Stirling",
+   "This is an information-theoretic lower bound on the model",
+   "Radix sort uses word/digit operations, not comparisons, so the bound does not apply"
+  ],
+  "followups": [
+   "What assumptions about key size does radix sort's O(n) actually hide?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "הוכח/י שמיון מבוסס השוואות דורש Omega(n log n) השוואות, והסבר/י כיצד radix sort חומק מהחסם.",
+  "expected_points_he": [
+   "מודל/י ביצועים כעץ החלטות בינארי על השוואות.",
+   "העץ זקוק לפחות ל-n! עלים עבור כל התמורות.",
+   "גובה >= log2(n!) = Theta(n log n) לפי נוסחת סטירלינג.",
+   "זהו חסם תחתון תיאורטי-אינפורמטיבי על המודל.",
+   "Radix sort משתמש בפעולות מילים/ספרות, לא בהשוואות, ולכן החסם אינו חל."
+  ],
+  "followups_he": [
+   "אילו הנחות לגבי גודל המפתח מסתיר ה-O(n) של radix sort בפועל?"
+  ]
+ },
+ {
+  "id": "ar-cx-004",
+  "role": "Algorithm Researcher",
+  "topic": "Complexity analysis",
+  "difficulty": "Staff/Lead-level",
+  "question_text": "Asymptotics say your O(n log n) method should win, but production is dominated by constants. Give a systematic approach to reasoning about real performance.",
+  "expected_points": [
+   "Asymptotic model ignores caches, branches, and memory hierarchy",
+   "Use cache-aware/external-memory models when data exceeds cache",
+   "Profile to locate the real bottleneck before optimizing",
+   "Algorithm engineering: iterate between analysis and measurement",
+   "Sometimes a worse-asymptotics algorithm with better constants is correct at your n"
+  ],
+  "followups": [
+   "Describe a concrete case where linear scan beats a logarithmic structure and why."
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "אסימפטוטיקה אומרת ששיטת ה-O(n log n) שלך אמורה לנצח, אך בייצור היא נשלטת על ידי קבועים. תן/י גישה שיטתית לחשיבה על ביצועים אמיתיים.",
+  "expected_points_he": [
+   "מודל אסימפטוטי מתעלם מ-caches, branches והיררכיית זיכרון.",
+   "השתמש/י במודלים מודעי-cache/זיכרון חיצוני כאשר הנתונים חורגים מה-cache.",
+   "בצע/י profiling כדי לאתר את צוואר הבקבוק האמיתי לפני אופטימיזציה.",
+   "הנדסת אלגוריתמים: חזור/י בין ניתוח למדידה.",
+   "לפעמים אלגוריתם עם אסימפטוטיקה גרועה יותר אך עם קבועים טובים יותר נכון עבור ה-n שלך."
+  ],
+  "followups_he": [
+   "תאר/י מקרה קונקרטי שבו סריקה לינארית מנצחת מבנה לוגריתמי ומדוע."
+  ]
+ },
+ {
+  "id": "ar-prob-001",
+  "role": "Algorithm Researcher",
+  "topic": "Probability",
+  "difficulty": "Mid-level",
+  "question_text": "Walk through the expected running time analysis of randomized quicksort.",
+  "expected_points": [
+   "Define indicator variables for comparisons between element pairs",
+   "P(zi and zj compared) = 2/(j-i+1) — one must be the first pivot among them",
+   "Linearity of expectation sums the indicators without independence",
+   "The double sum yields a harmonic series giving O(n log n)",
+   "Randomizing the pivot removes dependence on input order"
+  ],
+  "followups": [
+   "Why does linearity of expectation not require independence here?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "עבר/י על ניתוח זמן הריצה הצפוי של quicksort אקראי (randomized quicksort).",
+  "expected_points_he": [
+   "הגדר/י משתני אינדיקטור להשוואות בין זוגות איברים.",
+   "P(zi ו-zj הושוו) = 2/(j-i+1) — אחד מהם חייב להיות ה-pivot הראשון מביניהם.",
+   "לינאריות התוחלת מסכמת את האינדיקטורים ללא תלות.",
+   "הסכום הכפול מניב סדרה הרמונית שנותנת O(n log n).",
+   "אקראיות ה-pivot מסירה תלות בסדר הקלט."
+  ],
+  "followups_he": [
+   "מדוע לינאריות התוחלת אינה דורשת אי-תלות כאן?"
+  ]
+ },
+ {
+  "id": "ar-prob-002",
+  "role": "Algorithm Researcher",
+  "topic": "Probability",
+  "difficulty": "Senior",
+  "question_text": "What are Chernoff bounds, and how would you use one to reason about the maximum load when hashing n items into n bins?",
+  "expected_points": [
+   "Exponential tail bounds for sums of independent bounded random variables",
+   "Much stronger than Markov or Chebyshev for concentration",
+   "Each bin's load is a sum of independent indicators with mean 1",
+   "Chernoff plus a union bound over bins gives max load O(log n / log log n) w.h.p.",
+   "The same pattern sizes hash tables and load balancers"
+  ],
+  "followups": [
+   "How does the answer change with 'power of two choices' hashing?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "מהם Chernoff bounds, ואיך היית/ה משתמש/ת באחד מהם כדי להסיק על העומס המקסימלי בעת גיבוב n פריטים ל-n תאים (bins)?",
+  "expected_points_he": [
+   "חסמי זנב אקספוננציאליים עבור סכומים של משתנים מקריים בלתי תלויים וחסומים.",
+   "חזקים בהרבה מ-Markov או Chebyshev עבור ריכוז.",
+   "העומס של כל תא הוא סכום של אינדיקטורים בלתי תלויים עם ממוצע 1.",
+   "Chernoff בתוספת union bound על פני התאים נותן עומס מקסימלי O(log n / log log n) בהסתברות גבוהה (w.h.p.).",
+   "אותו דפוס קובע את גודל hash tables ו-load balancers."
+  ],
+  "followups_he": [
+   "איך התשובה משתנה עם גיבוב 'power of two choices'?"
+  ]
+ },
+ {
+  "id": "ar-prob-003",
+  "role": "Algorithm Researcher",
+  "topic": "Probability",
+  "difficulty": "Research-level",
+  "question_text": "Explain the probabilistic method by proving that any graph with m edges contains a cut of size at least m/2.",
+  "expected_points": [
+   "Assign each vertex to a side independently with probability 1/2",
+   "Each edge crosses the cut with probability 1/2",
+   "Linearity of expectation: expected cut size is m/2",
+   "Some outcome must attain at least the expectation, so such a cut exists",
+   "Derandomize with conditional expectations for a deterministic algorithm"
+  ],
+  "followups": [
+   "How does the conditional expectation derandomization actually decide each vertex?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "הסבר/י את השיטה ההסתברותית (probabilistic method) על ידי הוכחה שכל גרף עם m קשתות מכיל חתך (cut) בגודל של לפחות m/2.",
+  "expected_points_he": [
+   "הקצה/י כל קודקוד לצד באופן בלתי תלוי בהסתברות 1/2.",
+   "כל קשת חוצה את החתך בהסתברות 1/2.",
+   "לינאריות התוחלת: גודל החתך הצפוי הוא m/2.",
+   "תוצאה כלשהי חייבת להשיג לפחות את התוחלת, ולכן חתך כזה קיים.",
+   "בצע/י derandomization עם תוחלות מותנות (conditional expectations) עבור אלגוריתם דטרמיניסטי."
+  ],
+  "followups_he": [
+   "איך ה-derandomization של תוחלת מותנית מחליט בפועל על כל קודקוד?"
+  ]
+ },
+ {
+  "id": "ar-opt-001",
+  "role": "Algorithm Researcher",
+  "topic": "Optimization",
+  "difficulty": "Mid-level",
+  "question_text": "Compare gradient descent, Newton's method, and quasi-Newton methods: per-step cost, convergence rate, and when each is appropriate.",
+  "expected_points": [
+   "Gradient descent: first-order, cheap steps, linear convergence sensitive to conditioning",
+   "Newton: quadratic convergence near optimum but Hessian solve is O(n^3)",
+   "Quasi-Newton (BFGS/L-BFGS) approximates curvature from gradients",
+   "L-BFGS suits high dimensions with limited memory",
+   "Stochastic settings favor first-order methods with adaptive step sizes"
+  ],
+  "followups": [
+   "Why is Newton's method rarely used for deep networks?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "השווה/י gradient descent, Newton's method ו-quasi-Newton methods: עלות לכל צעד, קצב התכנסות, ומתי כל אחד מהם מתאים.",
+  "expected_points_he": [
+   "Gradient descent: סדר ראשון, צעדים זולים, התכנסות לינארית רגישה ל-conditioning.",
+   "Newton: התכנסות ריבועית ליד האופטימום אך פתרון Hessian הוא O(n^3).",
+   "Quasi-Newton (BFGS/L-BFGS) מקרב עקמומיות מגרדיאנטים.",
+   "L-BFGS מתאים לממדים גבוהים עם זיכרון מוגבל.",
+   "הגדרות סטוכסטיות מעדיפות שיטות מסדר ראשון עם גודלי צעד אדפטיביים."
+  ],
+  "followups_he": [
+   "מדוע Newton's method כמעט ואינו משמש עבור רשתות עמוקות?"
+  ]
+ },
+ {
+  "id": "ar-opt-002",
+  "role": "Algorithm Researcher",
+  "topic": "Optimization",
+  "difficulty": "Senior",
+  "question_text": "Explain convexity: why it matters, how to verify it, and what fundamentally changes in the non-convex case.",
+  "expected_points": [
+   "Definition: f(tx+(1-t)y) <= tf(x)+(1-t)f(y) on a convex domain",
+   "Every local minimum is global for convex problems",
+   "Verify via second-order condition (PSD Hessian) or composition rules",
+   "Convex duality provides certificates and bounds",
+   "Non-convex: saddle points, initialization sensitivity, only local guarantees"
+  ],
+  "followups": [
+   "Give an example of a problem that looks non-convex but has a convex reformulation."
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "הסבר/י קמירות (convexity): מדוע היא חשובה, איך לוודא אותה, ומה משתנה באופן מהותי במקרה הלא-קמור (non-convex).",
+  "expected_points_he": [
+   "הגדרה: f(tx+(1-t)y) <= tf(x)+(1-t)f(y) על תחום קמור.",
+   "כל מינימום מקומי הוא גלובלי עבור בעיות קמורות.",
+   "ודא/י באמצעות תנאי סדר שני (PSD Hessian) או כללי קומפוזיציה.",
+   "דואליות קמורה מספקת אישורים וחסמים.",
+   "לא-קמור: נקודות אוכף (saddle points), רגישות לאתחול, רק ערבויות מקומיות."
+  ],
+  "followups_he": [
+   "תן/י דוגמה לבעיה שנראית לא-קמורה אך יש לה ניסוח מחדש קמור."
+  ]
+ },
+ {
+  "id": "ar-opt-003",
+  "role": "Algorithm Researcher",
+  "topic": "Optimization",
+  "difficulty": "Staff/Lead-level",
+  "question_text": "You must schedule thousands of jobs daily under precedence and resource constraints, and exact solvers time out. Design your approach.",
+  "expected_points": [
+   "Recognize NP-hardness and stop chasing exact optimality at scale",
+   "MIP with a time budget, warm starts, and good formulations still helps",
+   "Decomposition: rolling horizon, Lagrangian, or column generation",
+   "Local search/metaheuristics with constraint repair for feasibility",
+   "Use LP relaxation bounds to report an optimality gap",
+   "Design for re-solving quickly when inputs change"
+  ],
+  "followups": [
+   "How do you convince stakeholders a 3% optimality gap is acceptable?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "עליך/עלייך לתזמן אלפי משימות מדי יום תחת אילוצי קדימות ומשאבים, ופתרונות מדויקים חורגים מזמן. תכנן/י את הגישה שלך.",
+  "expected_points_he": [
+   "הכר/י ב-NP-hardness והפסק/י לרדוף אחרי אופטימליות מדויקת בקנה מידה גדול.",
+   "MIP עם תקציב זמן, warm starts וניסוחים טובים עדיין עוזר.",
+   "פירוק: rolling horizon, Lagrangian, או column generation.",
+   "חיפוש מקומי/מטה-היוריסטיקות עם תיקון אילוצים עבור כדאיות.",
+   "השתמש/י בחסמי רלקסציית LP כדי לדווח על פער אופטימליות.",
+   "תכנן/י לפתרון מחדש מהיר כאשר הקלטים משתנים."
+  ],
+  "followups_he": [
+   "איך אתה/את משכנע/ת בעלי עניין שפער אופטימליות של 3% מקובל?"
+  ]
+ },
+ {
+  "id": "ar-graph-001",
+  "role": "Algorithm Researcher",
+  "topic": "Graph algorithms",
+  "difficulty": "Junior",
+  "question_text": "When do BFS, Dijkstra, and Bellman-Ford each correctly compute shortest paths, and at what complexity?",
+  "expected_points": [
+   "BFS: unweighted graphs, O(V+E)",
+   "Dijkstra: non-negative weights, O((V+E) log V) with a binary heap",
+   "Bellman-Ford: negative weights allowed, detects negative cycles, O(VE)",
+   "Dijkstra's correctness is a greedy argument that fails with negative edges",
+   "A* accelerates Dijkstra with an admissible heuristic"
+  ],
+  "followups": [
+   "Why exactly does Dijkstra fail with negative edge weights?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "מתי BFS, Dijkstra ו-Bellman-Ford מחשבים נתיבים קצרים ביותר באופן נכון, ובאיזו סיבוכיות?",
+  "expected_points_he": [
+   "BFS: גרפים לא משוקללים, O(V+E).",
+   "Dijkstra: משקלים לא שליליים, O((V+E) log V) עם binary heap.",
+   "Bellman-Ford: משקלים שליליים מותרים, מזהה מעגלים שליליים, O(VE).",
+   "נכונותו של Dijkstra היא טיעון חמדני שנכשל עם קשתות שליליות.",
+   "A* מאיץ את Dijkstra עם היוריסטיקה קבילה (admissible heuristic)."
+  ],
+  "followups_he": [
+   "מדוע בדיוק Dijkstra נכשל עם משקלי קשת שליליים?"
+  ]
+ },
+ {
+  "id": "ar-graph-002",
+  "role": "Algorithm Researcher",
+  "topic": "Graph algorithms",
+  "difficulty": "Senior",
+  "question_text": "Design an algorithm to find all bridges in a large graph and explain why it is correct.",
+  "expected_points": [
+   "Single DFS computing discovery times and low-link values",
+   "Edge (u,v) is a bridge iff low[v] > disc[u] for tree edge u->v",
+   "low[v] is the earliest reachable ancestor via back edges in v's subtree",
+   "O(V+E) total; recursion depth requires an iterative DFS at scale",
+   "Relation to 2-edge-connected components"
+  ],
+  "followups": [
+   "How would you adapt the idea to find articulation points instead?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "תכנן אלגוריתם למציאת כל ה-bridges בגרף גדול והסבר מדוע הוא נכון.",
+  "expected_points_he": [
+   "DFS יחיד שמחשב זמני גילוי (discovery times) וערכי low-link",
+   "קשת (u,v) היא bridge אם ורק אם low[v] > disc[u] עבור קשת עץ u->v",
+   "low[v] הוא האב הקדמון המוקדם ביותר הניתן להגעה דרך back edges בתת-העץ של v",
+   "סיבוכיות כוללת O(V+E); עומק הרקורסיה דורש DFS איטרטיבי בקנה מידה גדול",
+   "קשר ל-2-edge-connected components"
+  ],
+  "followups_he": [
+   "כיצד היית מתאים את הרעיון למציאת articulation points במקום זאת?"
+  ]
+ },
+ {
+  "id": "ar-graph-003",
+  "role": "Algorithm Researcher",
+  "topic": "Graph algorithms",
+  "difficulty": "Research-level",
+  "question_text": "How would you detect communities in a billion-edge graph? Compare at least two approaches and their theoretical grounding.",
+  "expected_points": [
+   "Modularity optimization (Louvain/Leiden) and its resolution limit",
+   "Label propagation: near-linear and parallel but unstable",
+   "Spectral clustering grounded in conductance and Cheeger's inequality",
+   "Distributed/streaming implementations and memory constraints",
+   "Evaluation without ground truth: stability, conductance, downstream tasks"
+  ],
+  "followups": [
+   "What does the modularity resolution limit mean in practice for small communities?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "כיצד היית מזהה קהילות בגרף בעל מיליארד קשתות? השווה לפחות שתי גישות ואת הבסיס התיאורטי שלהן.",
+  "expected_points_he": [
+   "אופטימיזציית מודולריות (Louvain/Leiden) ומגבלת הרזולוציה שלה",
+   "Label propagation: כמעט לינארי ומקבילי אך לא יציב",
+   "Spectral clustering מבוסס על conductance ואי-שוויון Cheeger",
+   "מימושים מבוזרים/סטרימינג ואילוצי זיכרון",
+   "הערכה ללא ground truth: יציבות, conductance, משימות המשך (downstream tasks)"
+  ],
+  "followups_he": [
+   "מה המשמעות של מגבלת הרזולוציה של המודולריות בפועל עבור קהילות קטנות?"
+  ]
+ },
+ {
+  "id": "ar-graph-004",
+  "role": "Algorithm Researcher",
+  "topic": "Graph algorithms",
+  "difficulty": "Staff/Lead-level",
+  "question_text": "Design the algorithmic core of a continental-scale route planner with real-time traffic.",
+  "expected_points": [
+   "Plain Dijkstra is far too slow at query time on continent graphs",
+   "Preprocessing-based speedups: contraction hierarchies, ALT, hub labels",
+   "Trade preprocessing time and space against query latency",
+   "Traffic updates require customizable techniques (e.g. CRP) or partial recomputation",
+   "Shortcut correctness must preserve exact shortest paths",
+   "Engineering: memory layout and parallel queries dominate real latency"
+  ],
+  "followups": [
+   "How do you handle time-dependent edge weights like rush hour?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "תכנן את הליבה האלגוריתמית של מתכנן מסלולים בקנה מידה יבשתי עם נתוני תנועה בזמן אמת.",
+  "expected_points_he": [
+   "Dijkstra רגיל איטי מדי בזמן שאילתה בגרפים יבשתיים",
+   "האצות מבוססות Preprocessing: contraction hierarchies, ALT, hub labels",
+   "איזון בין זמן ושטח Preprocessing לבין זמן אחזור של שאילתה (query latency)",
+   "עדכוני תנועה דורשים טכניקות הניתנות להתאמה אישית (למשל CRP) או חישוב מחדש חלקי",
+   "נכונות קיצורי הדרך חייבת לשמר מסלולים קצרים ביותר מדויקים",
+   "הנדסה: מבנה זיכרון (memory layout) ושאילתות מקביליות שולטים בזמן האחזור האמיתי (real latency)"
+  ],
+  "followups_he": [
+   "כיצד מטפלים במשקלי קשתות תלויי זמן כמו שעת העומס (rush hour)?"
+  ]
+ },
+ {
+  "id": "ar-dp-001",
+  "role": "Algorithm Researcher",
+  "topic": "Dynamic programming",
+  "difficulty": "Mid-level",
+  "question_text": "Compare greedy and dynamic programming approaches.",
+  "expected_points": [
+   "Both exploit optimal substructure",
+   "Greedy commits to a local choice; needs the greedy-choice/exchange property to be correct",
+   "DP explores overlapping subproblems and memoizes them",
+   "Greedy is typically faster but requires a correctness proof",
+   "0/1 knapsack: greedy fails, DP succeeds; activity selection: greedy is optimal"
+  ],
+  "followups": [
+   "Give a problem where greedy fails but DP succeeds, and explain exactly why."
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "השווה בין גישות חמדניות (greedy) לתכנון דינמי (dynamic programming).",
+  "expected_points_he": [
+   "שניהם מנצלים תת-מבנה אופטימלי (optimal substructure)",
+   "Greedy מתחייב לבחירה מקומית; דורש את תכונת הבחירה החמדנית/החלפה (greedy-choice/exchange property) כדי להיות נכון",
+   "DP חוקר תת-בעיות חופפות (overlapping subproblems) ומבצע להן memoization",
+   "Greedy בדרך כלל מהיר יותר אך דורש הוכחת נכונות",
+   "בעיית התרמיל 0/1: greedy נכשל, DP מצליח; בחירת פעילויות: greedy אופטימלי"
+  ],
+  "followups_he": [
+   "תן בעיה שבה greedy נכשל אך DP מצליח, והסבר בדיוק מדוע."
+  ]
+ },
+ {
+  "id": "ar-dp-002",
+  "role": "Algorithm Researcher",
+  "topic": "Dynamic programming",
+  "difficulty": "Senior",
+  "question_text": "Count the distinct subsequences of string s equal to string t. Define states, transitions, and optimize space.",
+  "expected_points": [
+   "State dp[i][j]: ways to form t[:j] from s[:i]",
+   "Transition: dp[i][j] = dp[i-1][j] + (s[i-1]==t[j-1]) * dp[i-1][j-1]",
+   "Base case: empty t has exactly one formation",
+   "O(mn) time; roll to a 1-D array iterating j backwards",
+   "Watch for counting overflow on long strings"
+  ],
+  "followups": [
+   "Why must the 1-D space optimization iterate j in decreasing order?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "ספור את תתי-הרצפים (subsequences) הייחודיים של מחרוזת s השווים למחרוזת t. הגדר מצבים (states), מעברים (transitions), ובצע אופטימיזציית מקום.",
+  "expected_points_he": [
+   "מצב dp[i][j]: מספר הדרכים ליצור את t[:j] מתוך s[:i]",
+   "מעבר: dp[i][j] = dp[i-1][j] + (s[i-1]==t[j-1]) * dp[i-1][j-1]",
+   "מקרה בסיס: t ריקה ניתנת ליצירה בדרך אחת בדיוק",
+   "זמן O(mn); צמצם למערך חד-ממדי על ידי איטרציה לאחור על j",
+   "שים לב לגלישת מונה (counting overflow) במחרוזות ארוכות"
+  ],
+  "followups_he": [
+   "מדוע אופטימיזציית המקום החד-ממדית חייבת לבצע איטרציה על j בסדר יורד?"
+  ]
+ },
+ {
+  "id": "ar-dp-003",
+  "role": "Algorithm Researcher",
+  "topic": "Dynamic programming",
+  "difficulty": "Staff/Lead-level",
+  "question_text": "A team's DP for resource allocation is correct but its state space explodes exponentially. Walk through how you attack the state explosion.",
+  "expected_points": [
+   "Look for dominance relations to prune states that can never win",
+   "Exploit monotonicity/exchange arguments to collapse dimensions",
+   "Approximate DP: discretize state with provable error bounds",
+   "Check for reformulations as flow/LP with polynomial structure",
+   "Memoize only reachable states discovered by forward exploration",
+   "Profile the actual state distribution before theorizing"
+  ],
+  "followups": [
+   "When is it acceptable to ship an approximation, and how do you bound its loss?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "DP של צוות להקצאת משאבים נכון, אך מרחב המצבים שלו מתפוצץ אקספוננציאלית. תאר כיצד היית תוקף את פיצוץ המצבים.",
+  "expected_points_he": [
+   "חפש יחסי דומיננטיות כדי לגזום מצבים שלעולם לא יוכלו לנצח",
+   "נצל טיעוני מונוטוניות/החלפה כדי לקרוס ממדים",
+   "DP מקורב: בצע דיסקרטיזציה למצב עם חסמים מוכחים לשגיאה",
+   "בדוק ניסוחים מחדש כ-flow/LP עם מבנה פולינומי",
+   "בצע memoization רק למצבים נגישים שנתגלו על ידי חקירה קדימה",
+   "בצע פרופיילינג להתפלגות המצבים בפועל לפני תיאוריה"
+  ],
+  "followups_he": [
+   "מתי מקובל לשלוח קירוב, וכיצד מגבילים את ההפסד שלו?"
+  ]
+ },
+ {
+  "id": "ar-proof-001",
+  "role": "Algorithm Researcher",
+  "topic": "Mathematical proofs",
+  "difficulty": "Junior",
+  "question_text": "Prove that the square root of 2 is irrational, and name the general proof technique you used.",
+  "expected_points": [
+   "Assume sqrt(2) = p/q in lowest terms toward a contradiction",
+   "Then p^2 = 2q^2 forces p even, hence q even",
+   "Contradicts coprimality, so no such fraction exists",
+   "Technique: proof by contradiction (infinite descent variant)",
+   "Generalizes to square roots of non-perfect squares"
+  ],
+  "followups": [
+   "Where exactly does the same argument break for sqrt(4)?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "הוכח ששורש 2 אינו רציונלי, וציין את טכניקת ההוכחה הכללית שבה השתמשת.",
+  "expected_points_he": [
+   "הנח ש-sqrt(2) = p/q בצורה מצומצמת ביותר (lowest terms) לקראת סתירה",
+   "אז p^2 = 2q^2 מאלץ את p להיות זוגי, ומכאן ש-q זוגי",
+   "סותר את היותם זרים (coprimality), ולכן לא קיים שבר כזה",
+   "טכניקה: הוכחה בדרך השלילה (וריאנט של infinite descent)",
+   "ניתן להכללה לשורשים ריבועיים של מספרים שאינם ריבועים מושלמים"
+  ],
+  "followups_he": [
+   "היכן בדיוק אותו טיעון נשבר עבור sqrt(4)?"
+  ]
+ },
+ {
+  "id": "ar-proof-002",
+  "role": "Algorithm Researcher",
+  "topic": "Mathematical proofs",
+  "difficulty": "Senior",
+  "question_text": "Prove the optimality of a greedy scheduling rule (e.g. shortest processing time first for minimizing total completion time) using an exchange argument.",
+  "expected_points": [
+   "Assume an optimal schedule that differs from greedy's order",
+   "Find an adjacent inverted pair relative to the greedy criterion",
+   "Swapping the pair does not increase (strictly decreases) the objective",
+   "Induction on inversions transforms optimal into greedy without loss",
+   "Handle ties carefully so the induction terminates"
+  ],
+  "followups": [
+   "How does the argument change for weighted completion times?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "הוכח את אופטימליות של כלל תזמון חמדני (לדוגמה, shortest processing time first לצמצום זמן השלמה כולל) באמצעות טיעון החלפה (exchange argument).",
+  "expected_points_he": [
+   "הנח לוח זמנים אופטימלי השונה מהסדר החמדני",
+   "מצא זוג סמוך הפוך ביחס לקריטריון החמדני",
+   "החלפת הזוג אינה מגדילה (מקטינה באופן מובהק) את פונקציית המטרה",
+   "אינדוקציה על היפוכים (inversions) הופכת את האופטימלי לחמדני ללא הפסד",
+   "טפל בקשרים (ties) בזהירות כדי שהאינדוקציה תסתיים"
+  ],
+  "followups_he": [
+   "כיצד משתנה הטיעון עבור זמני השלמה משוקללים (weighted completion times)?"
+  ]
+ },
+ {
+  "id": "ar-proof-003",
+  "role": "Algorithm Researcher",
+  "topic": "Mathematical proofs",
+  "difficulty": "Research-level",
+  "question_text": "Explain the adversary argument technique and use it to lower-bound finding both the max and min of n elements.",
+  "expected_points": [
+   "Adversary answers comparisons consistently while forcing worst-case work",
+   "Count information units: each element must lose once (for max) and win once (for min)",
+   "Pairwise comparisons yield at most two units for the first comparison of two fresh elements",
+   "Lower bound ceil(3n/2) - 2 comparisons; the pairing algorithm matches it",
+   "Adversary arguments complement decision-tree lower bounds"
+  ],
+  "followups": [
+   "Contrast adversary arguments with information-theoretic lower bounds."
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "הסבר את טכניקת טיעון היריב (adversary argument) והשתמש בה כדי למצוא חסם תחתון למציאת המקסימום והמינימום של n איברים.",
+  "expected_points_he": [
+   "היריב עונה על השוואות באופן עקבי תוך כדי כפיית העבודה הגרועה ביותר",
+   "ספור יחידות מידע: כל איבר חייב להפסיד פעם אחת (עבור מקסימום) ולנצח פעם אחת (עבור מינימום)",
+   "השוואות זוגיות מניבות לכל היותר שתי יחידות עבור ההשוואה הראשונה של שני איברים חדשים",
+   "חסם תחתון ceil(3n/2) - 2 השוואות; אלגוריתם הזיווג תואם אותו",
+   "טיעוני יריב משלימים חסמים תחתונים של עץ החלטות (decision-tree lower bounds)"
+  ],
+  "followups_he": [
+   "השווה בין טיעוני יריב לחסמים תחתונים תלויי-אינפורמציה (information-theoretic lower bounds)."
+  ]
+ },
+ {
+  "id": "ar-paper-001",
+  "role": "Algorithm Researcher",
+  "topic": "Research paper understanding",
+  "difficulty": "Mid-level",
+  "question_text": "Walk me through how you would digest a theory-heavy paper and explain it to your engineering team.",
+  "expected_points": [
+   "Identify the core claim, assumptions, and the regime where it applies",
+   "Translate guarantees into practical terms and concrete numbers",
+   "Construct a small worked example to test understanding",
+   "Flag limitations relevant to the team's actual use case",
+   "Be explicit about what you verified versus took on faith"
+  ],
+  "followups": [
+   "How do you decide whether the paper's assumptions hold for your system?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "תאר לי כיצד היית מעבד מאמר עתיר תיאוריה ומסביר אותו לצוות ההנדסה שלך.",
+  "expected_points_he": [
+   "זהה את הטענה המרכזית, ההנחות, והתחום שבו היא חלה",
+   "תרגם הבטחות (guarantees) למונחים מעשיים ולמספרים קונקרטיים",
+   "בנה דוגמה קטנה פתורה כדי לבחון הבנה",
+   "סמן מגבלות הרלוונטיות למקרה השימוש בפועל של הצוות",
+   "היה מפורש לגבי מה שאימתת לעומת מה שקיבלת באמונה"
+  ],
+  "followups_he": [
+   "כיצד אתה מחליט אם הנחות המאמר תקפות עבור המערכת שלך?"
+  ]
+ },
+ {
+  "id": "ar-paper-002",
+  "role": "Algorithm Researcher",
+  "topic": "Research paper understanding",
+  "difficulty": "Research-level",
+  "question_text": "How do you critically read an empirical algorithms paper claiming a 10x speedup over the state of the art?",
+  "expected_points": [
+   "Check whether baselines are tuned as carefully as the new method",
+   "Examine dataset/instance selection for cherry-picking",
+   "Separate algorithmic gains from implementation and hardware differences",
+   "Look for variance across seeds/instances and statistical tests",
+   "Compare measured scaling to claimed complexity",
+   "Check for artifacts/code enabling reproduction"
+  ],
+  "followups": [
+   "The paper has no code release — how does that change your assessment?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "כיצד אתה קורא באופן ביקורתי מאמר אלגוריתמים אמפירי הטוען לשיפור מהירות פי 10 על פני ה-state of the art?",
+  "expected_points_he": [
+   "בדוק אם ה-baselines כווננו בקפידה כמו השיטה החדשה",
+   "בחן את בחירת מערך הנתונים/מופעים (dataset/instance selection) עבור cherry-picking",
+   "הפרד רווחים אלגוריתמיים מהבדלי מימוש וחומרה",
+   "חפש שונות בין seeds/instances ובדיקות סטטיסטיות",
+   "השווה את קנה המידה הנמדד (measured scaling) למורכבות הנטענת",
+   "בדוק אם קיימים artifacts/קוד המאפשרים שחזור"
+  ],
+  "followups_he": [
+   "למאמר אין קוד זמין — כיצד זה משנה את הערכתך?"
+  ]
+ },
+ {
+  "id": "ar-paper-003",
+  "role": "Algorithm Researcher",
+  "topic": "Research paper understanding",
+  "difficulty": "Staff/Lead-level",
+  "question_text": "Your team wants to adopt a technique from a recent paper into a production system. Describe your evaluation and de-risking process.",
+  "expected_points": [
+   "Reproduce the core result before believing it",
+   "Ablate components to learn which parts carry the gain",
+   "Evaluate on internal workloads rather than paper benchmarks",
+   "Analyze failure modes and design fallbacks",
+   "Weigh complexity/maintenance cost against the measured gain",
+   "Stage the rollout with monitoring and rollback"
+  ],
+  "followups": [
+   "The reproduction gets 60% of the claimed gain — what do you do?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "הצוות שלך רוצה לאמץ טכניקה ממאמר עדכני למערכת ייצור. תאר את תהליך ההערכה והפחתת הסיכונים שלך.",
+  "expected_points_he": [
+   "שחזר את התוצאה המרכזית לפני שתאמין בה",
+   "בצע ablate לרכיבים כדי ללמוד אילו חלקים תורמים לשיפור",
+   "הערך על עומסי עבודה פנימיים במקום על benchmark-ים מהמאמר",
+   "נתח מצבי כשל ותכנן מנגנוני גיבוי (fallbacks)",
+   "שקול עלות מורכבות/תחזוקה מול הרווח הנמדד",
+   "בצע השקה מדורגת (stage the rollout) עם ניטור ואפשרות חזרה לאחור (rollback)"
+  ],
+  "followups_he": [
+   "השחזור משיג 60% מהשיפור הנטען — מה תעשה?"
+  ]
+ },
+ {
+  "id": "ar-expd-001",
+  "role": "Algorithm Researcher",
+  "topic": "Experimental design",
+  "difficulty": "Mid-level",
+  "question_text": "Design an offline experiment comparing two ranking algorithms before any live test. What biases worry you?",
+  "expected_points": [
+   "Logged data carries position bias from the deployed ranker",
+   "Selection bias: you only observe outcomes for shown items",
+   "Counterfactual estimators: inverse propensity scoring, doubly robust",
+   "Temporal splits, never random splits over time-dependent data",
+   "Offline metrics (NDCG) may not correlate with online outcomes"
+  ],
+  "followups": [
+   "How would you estimate propensities if they were not logged?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "תכנן ניסוי אופליין המשווה בין שני אלגוריתמי דירוג לפני כל בדיקה חיה. אילו הטיות מדאיגות אותך?",
+  "expected_points_he": [
+   "נתונים מתועדים נושאים הטיית מיקום (position bias) מה-ranker הפרוס",
+   "הטיית בחירה (selection bias): אתה רואה תוצאות רק עבור פריטים שהוצגו",
+   "אומדנים קונטרה-פקטואליים: inverse propensity scoring, doubly robust",
+   "פיצולים זמניים, לעולם לא פיצולים אקראיים על נתונים תלויי זמן",
+   "מדדי אופליין (NDCG) עשויים שלא להתאים לתוצאות אונליין"
+  ],
+  "followups_he": [
+   "כיצד היית אומד propensities אם הם לא תועדו?"
+  ]
+ },
+ {
+  "id": "ar-expd-002",
+  "role": "Algorithm Researcher",
+  "topic": "Experimental design",
+  "difficulty": "Senior",
+  "question_text": "How do you design benchmark experiments for a randomized algorithm so the results are trustworthy?",
+  "expected_points": [
+   "Multiple independent seeds with variance/percentile reporting",
+   "Statistical tests across instances, not single-run comparisons",
+   "Control the environment: hardware, load, compiler flags",
+   "Parameter sensitivity sweeps rather than one tuned point",
+   "Separate algorithmic improvements from implementation tricks"
+  ],
+  "followups": [
+   "How many seeds are enough, and how would you justify the number?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "כיצד אתה מתכנן ניסויי benchmark עבור אלגוריתם אקראי כך שהתוצאות יהיו אמינות?",
+  "expected_points_he": [
+   "מספר seeds עצמאיים עם דיווח שונות/אחוזונים",
+   "בדיקות סטטיסטיות על פני מופעים, לא השוואות של ריצה בודדת",
+   "שלוט בסביבה: חומרה, עומס, דגלי קומפיילר",
+   "סריקות רגישות פרמטרים במקום נקודה מכווננת אחת",
+   "הפרד שיפורים אלגוריתמיים מטריקים של מימוש"
+  ],
+  "followups_he": [
+   "כמה seeds מספיקים, וכיצד היית מצדיק את המספר?"
+  ]
+ },
+ {
+  "id": "ar-bench-001",
+  "role": "Algorithm Researcher",
+  "topic": "Benchmarking",
+  "difficulty": "Junior",
+  "question_text": "What are the common pitfalls when timing code, and how do you benchmark correctly?",
+  "expected_points": [
+   "Warm up to reach steady state (caches, JIT) before measuring",
+   "Repeat runs and report medians/percentiles, never a single run",
+   "Prevent dead-code elimination from optimizing away the workload",
+   "Mind clock resolution and measurement overhead",
+   "Isolate the measured region and control background load"
+  ],
+  "followups": [
+   "Why are percentiles usually more honest than means for latency?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "מהן המלכודות הנפוצות בעת מדידת זמן קוד, וכיצד מבצעים benchmark נכון?",
+  "expected_points_he": [
+   "בצע חימום (warm up) כדי להגיע למצב יציב (caches, JIT) לפני המדידה",
+   "חזור על הרצות ודווח על חציונים/אחוזונים, לעולם לא על ריצה בודדת",
+   "מנע מ-dead-code elimination לבצע אופטימיזציה שתסיר את עומס העבודה",
+   "שים לב לרזולוציית השעון ולתקורה של המדידה",
+   "בודד את האזור הנמדד ושלוט בעומס הרקע"
+  ],
+  "followups_he": [
+   "מדוע אחוזונים בדרך כלל כנים יותר מממוצעים עבור latency?"
+  ]
+ },
+ {
+  "id": "ar-bench-002",
+  "role": "Algorithm Researcher",
+  "topic": "Benchmarking",
+  "difficulty": "Mid-level",
+  "question_text": "Your microbenchmark says algorithm A beats B, but production shows the opposite. What could explain the reversal?",
+  "expected_points": [
+   "Input sizes/distributions differ between benchmark and production",
+   "Cache effects: small benchmark data fits in cache, production data does not",
+   "Warmup/JIT and measurement methodology artifacts",
+   "Concurrency, contention, and allocator behavior under real load",
+   "Branch prediction patterns differ with real data",
+   "Fix: benchmark with production-shaped data and load"
+  ],
+  "followups": [
+   "How would you make the microbenchmark representative without copying production data?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "ה-microbenchmark שלך אומר שאלגוריתם A עדיף על B, אך בייצור המצב הפוך. מה יכול להסביר את ההיפוך?",
+  "expected_points_he": [
+   "גדלי/התפלגויות הקלט שונים בין ה-benchmark לייצור",
+   "אפקטי cache: נתוני benchmark קטנים נכנסים ל-cache, נתוני ייצור לא",
+   "Warmup/JIT וארטיפקטים של מתודולוגיית מדידה",
+   "Concurrency, contention, והתנהגות allocator תחת עומס אמיתי",
+   "דפוסי חיזוי ענפים (branch prediction) שונים עם נתונים אמיתיים",
+   "פתרון: בצע benchmark עם נתונים ועומס בצורת ייצור"
+  ],
+  "followups_he": [
+   "כיצד היית הופך את ה-microbenchmark למייצג מבלי להעתיק נתוני ייצור?"
+  ]
+ },
+ {
+  "id": "ar-bench-003",
+  "role": "Algorithm Researcher",
+  "topic": "Benchmarking",
+  "difficulty": "Senior",
+  "question_text": "How would you evaluate a new algorithmic method against baselines?",
+  "expected_points": [
+   "Strong baselines tuned with the same effort and compute budget",
+   "Representative and adversarial instance sets, not favorable ones",
+   "Multiple metrics: solution quality, time, memory",
+   "Statistical significance across repetitions and instances",
+   "Report scaling curves rather than a single size",
+   "Publish failure cases and limitations honestly"
+  ],
+  "followups": [
+   "How do you prevent your method from being overtuned to the benchmark suite?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "כיצד היית מעריך שיטה אלגוריתמית חדשה מול baselines?",
+  "expected_points_he": [
+   "Baselines חזקים מכווננים באותו מאמץ ותקציב חישוב",
+   "קבוצות מופעים מייצגות ועוינות, לא כאלה שנוחות לשיטה החדשה",
+   "מדדים מרובים: איכות פתרון, זמן, זיכרון",
+   "מובהקות סטטיסטית על פני חזרות ומופעים",
+   "דווח על עקומות קנה מידה (scaling curves) במקום גודל בודד",
+   "פרסם מקרי כשל ומגבלות בכנות"
+  ],
+  "followups_he": [
+   "כיצד אתה מונע מהשיטה שלך להיות מכווננת יתר על המידה (overtuned) לחבילת ה-benchmark?"
+  ]
+ },
+ {
+  "id": "ar-behav-001",
+  "role": "Algorithm Researcher",
+  "topic": "Behavioral",
+  "difficulty": "Junior",
+  "question_text": "Tell me about a time you were stuck on a hard technical problem for weeks. How did you stay productive and eventually make progress?",
+  "expected_points": [
+   "Concrete problem and honest account of being stuck",
+   "Strategies: decomposition, simpler cases, literature, asking for help",
+   "Maintained momentum on parallel work",
+   "What ultimately unlocked it and the takeaway"
+  ],
+  "followups": [
+   "How do you decide when to ask for help versus push on alone?"
+  ],
+  "is_behavioral": true,
+  "source": "seed",
+  "question_text_he": "ספר לי על פעם שבה נתקעת על בעיה טכנית קשה במשך שבועות. כיצד שמרת על פרודוקטיביות ובסופו של דבר התקדמת?",
+  "expected_points_he": [
+   "בעיה קונקרטית ותיאור כנה של מצב התקיעות",
+   "אסטרטגיות: פירוק, מקרים פשוטים יותר, ספרות, בקשת עזרה",
+   "שמר על מומנטום בעבודה מקבילה",
+   "מה בסופו של דבר פתח את הבעיה ומה הלקח"
+  ],
+  "followups_he": [
+   "כיצד אתה מחליט מתי לבקש עזרה לעומת להמשיך לבד?"
+  ]
+ },
+ {
+  "id": "ar-behav-002",
+  "role": "Algorithm Researcher",
+  "topic": "Behavioral",
+  "difficulty": "Mid-level",
+  "question_text": "Describe a time a reviewer or colleague found a serious flaw in your work. How did you respond?",
+  "expected_points": [
+   "Received the critique without defensiveness",
+   "Verified and characterized the flaw's real impact",
+   "Corrected the record transparently",
+   "Changed personal verification practices afterwards"
+  ],
+  "followups": [
+   "How has that changed the way you review others' work?"
+  ],
+  "is_behavioral": true,
+  "source": "seed",
+  "question_text_he": "תאר פעם שבה בודק (reviewer) או עמית מצא פגם רציני בעבודתך. כיצד הגבת?",
+  "expected_points_he": [
+   "קיבל את הביקורת ללא התגוננות",
+   "אימת ואפיין את ההשפעה האמיתית של הפגם",
+   "תיקן את הרישום (record) בשקיפות",
+   "שינה את נוהלי האימות האישיים לאחר מכן"
+  ],
+  "followups_he": [
+   "כיצד זה שינה את הדרך שבה אתה בודק עבודות של אחרים?"
+  ]
+ },
+ {
+  "id": "ar-behav-003",
+  "role": "Algorithm Researcher",
+  "topic": "Behavioral",
+  "difficulty": "Senior",
+  "question_text": "Tell me about a research direction you decided to kill. How did you make and communicate that decision?",
+  "expected_points": [
+   "Clear kill criteria or evidence threshold",
+   "Sunk-cost awareness and intellectual honesty",
+   "Communicated the negative result and lessons to stakeholders",
+   "Salvaged reusable insights or infrastructure"
+  ],
+  "followups": [
+   "How do you set kill criteria at the start of a project?"
+  ],
+  "is_behavioral": true,
+  "source": "seed",
+  "question_text_he": "ספר לי על כיוון מחקר שהחלטת לנטוש. כיצד קיבלת והעברת את ההחלטה הזו?",
+  "expected_points_he": [
+   "קריטריונים ברורים לנטילה או סף ראיות",
+   "מודעות לעלויות שקועות (sunk-cost) ויושרה אינטלקטואלית",
+   "העביר את התוצאה השלילית והלקחים לבעלי העניין",
+   "הציל תובנות או תשתית שניתן לשימוש חוזר"
+  ],
+  "followups_he": [
+   "כיצד אתה קובע קריטריונים לנטילה בתחילת פרויקט?"
+  ]
+ },
+ {
+  "id": "ar-behav-004",
+  "role": "Algorithm Researcher",
+  "topic": "Behavioral",
+  "difficulty": "Senior",
+  "question_text": "Describe working with engineers to move your research into production. What friction arose and how did you handle it?",
+  "expected_points": [
+   "Respected production constraints (latency, maintainability) as real requirements",
+   "Translated research artifacts into engineering language and tests",
+   "Compromised on elegance for robustness where warranted",
+   "Built a lasting collaboration pattern, not a one-off handoff"
+  ],
+  "followups": [
+   "What do researchers most often get wrong about production code?"
+  ],
+  "is_behavioral": true,
+  "source": "seed",
+  "question_text_he": "תאר עבודה עם מהנדסים כדי להעביר את המחקר שלך לפרודקשן. אילו חיכוכים עלו ואיך טיפלת בהם?",
+  "expected_points_he": [
+   "כיבדתי אילוצי פרודקשן (latency, maintainability) כדרישות אמיתיות",
+   "תרגמתי תוצרי מחקר לשפה הנדסית ולבדיקות",
+   "התפשרתי על אלגנטיות לטובת רובסטיות כשנדרש",
+   "בניתי דפוס שיתוף פעולה מתמשך, לא העברה חד-פעמית"
+  ],
+  "followups_he": [
+   "מה חוקרים נוטים לטעות בו לרוב לגבי קוד פרודקשן?"
+  ]
+ },
+ {
+  "id": "ar-behav-005",
+  "role": "Algorithm Researcher",
+  "topic": "Behavioral",
+  "difficulty": "Staff/Lead-level",
+  "question_text": "Tell me about setting a research agenda for a team under high ambiguity. How did you balance exploration against delivery?",
+  "expected_points": [
+   "Portfolio framing: mix of safe bets and high-risk exploration",
+   "Clear milestones and review cadence for exploratory work",
+   "Protected the team from thrash while staying responsive",
+   "Measured outcomes and adjusted the agenda honestly"
+  ],
+  "followups": [
+   "How do you evaluate researchers on work that mostly 'failed'?"
+  ],
+  "is_behavioral": true,
+  "source": "seed",
+  "question_text_he": "ספר לי על קביעת אג'נדת מחקר לצוות תחת עמימות גבוהה. איך איזנת בין חקירה (exploration) לבין אספקה (delivery)?",
+  "expected_points_he": [
+   "מסגור כפורטפוליו: שילוב של הימורים בטוחים וחקירה בסיכון גבוה",
+   "אבני דרך ברורות ותדירות סקירה לעבודה מחקרית",
+   "הגנתי על הצוות מפני תנודתיות יתר (thrash) תוך שמירה על היענות",
+   "מדדתי תוצאות והתאמתי את האג'נדה בכנות"
+  ],
+  "followups_he": [
+   "איך אתה מעריך חוקרים על עבודה שבעיקר 'נכשלה'?"
+  ]
+ },
+ {
+  "id": "ai-dl-001",
+  "role": "AI Engineer",
+  "topic": "Deep learning",
+  "difficulty": "Junior",
+  "question_text": "Explain backpropagation conceptually. Why do vanishing gradients occur, and which architectural choices mitigate them?",
+  "expected_points": [
+   "Chain rule applied over the computation graph, reusing intermediate values",
+   "Repeated multiplication of small Jacobians shrinks gradients in deep stacks",
+   "Saturating activations (sigmoid/tanh) are a primary cause",
+   "Mitigations: ReLU-family activations, residual connections, normalization layers",
+   "Careful initialization keeps activation variance stable"
+  ],
+  "followups": [
+   "Why do residual connections specifically help gradients flow?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "הסבר את backpropagation באופן קונספטואלי. מדוע מתרחשים vanishing gradients, ואילו בחירות ארכיטקטוניות מפחיתות אותם?",
+  "expected_points_he": [
+   "כלל השרשרת (chain rule) מיושם על גרף החישוב, תוך שימוש חוזר בערכי ביניים",
+   "הכפלה חוזרת של Jacobians קטנים מכווצת גרדיאנטים בערימות עמוקות",
+   "פונקציות אקטיבציה רוויות (sigmoid/tanh) הן גורם עיקרי",
+   "פתרונות: פונקציות אקטיבציה ממשפחת ReLU, חיבורים רזידואליים (residual connections), שכבות נורמליזציה",
+   "אתחול זהיר שומר על יציבות שונות האקטיבציה"
+  ],
+  "followups_he": [
+   "מדוע residual connections עוזרים במיוחד לזרימת הגרדיאנטים?"
+  ]
+ },
+ {
+  "id": "ai-dl-002",
+  "role": "AI Engineer",
+  "topic": "Deep learning",
+  "difficulty": "Junior",
+  "question_text": "Training loss keeps decreasing but validation loss starts rising after epoch 3. Diagnose and fix.",
+  "expected_points": [
+   "Classic overfitting: model memorizes training data",
+   "Regularize: dropout, weight decay, data augmentation",
+   "Early stopping on validation metric",
+   "Check for leakage or label noise if the gap is extreme",
+   "Consider model capacity relative to dataset size"
+  ],
+  "followups": [
+   "How would you distinguish overfitting from a train/validation distribution mismatch?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "ה-training loss ממשיך לרדת אבל ה-validation loss מתחיל לעלות אחרי epoch 3. אבחן ותקן.",
+  "expected_points_he": [
+   "overfitting קלאסי: המודל משנן את נתוני האימון",
+   "בצע רגולריזציה: dropout, weight decay, data augmentation",
+   "עצירה מוקדמת (early stopping) על מדד ה-validation",
+   "בדוק אם יש leakage או רעש בתוויות (label noise) אם הפער קיצוני",
+   "שקול את קיבולת המודל ביחס לגודל הדאטה-סט"
+  ],
+  "followups_he": [
+   "איך תבחין בין overfitting לבין חוסר התאמה בהתפלגות בין train ל-validation?"
+  ]
+ },
+ {
+  "id": "ai-dl-003",
+  "role": "AI Engineer",
+  "topic": "Deep learning",
+  "difficulty": "Senior",
+  "question_text": "Compare batch normalization and layer normalization: mechanics, why transformers use layer norm, and inference-time behavior.",
+  "expected_points": [
+   "BN normalizes across the batch per channel; LN across features per token/sample",
+   "BN depends on batch statistics — fragile with small or variable batches",
+   "Sequence models prefer LN: independent of batch composition and length",
+   "BN needs running statistics at inference; LN behaves identically train/test",
+   "Pre-norm vs post-norm placement affects deep transformer stability"
+  ],
+  "followups": [
+   "What goes wrong with batch norm in distributed training with small per-device batches?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "השווה בין batch normalization ל-layer normalization: המכניקה, מדוע transformers משתמשים ב-layer norm, והתנהגות בזמן inference.",
+  "expected_points_he": [
+   "BN מבצע נורמליזציה על פני הבאץ' לכל ערוץ; LN על פני פיצ'רים לכל טוקן/דוגמה",
+   "BN תלוי בסטטיסטיקות הבאץ' — שביר עם באצ'ים קטנים או משתנים",
+   "מודלי סדרות מעדיפים LN: בלתי תלוי בהרכב הבאץ' ובאורכו",
+   "BN דורש סטטיסטיקות רצות (running statistics) בזמן inference; LN מתנהג באופן זהה ב-train/test",
+   "מיקום pre-norm לעומת post-norm משפיע על יציבות transformer עמוק"
+  ],
+  "followups_he": [
+   "מה משתבש עם batch norm באימון מבוזר עם באצ'ים קטנים לכל מכשיר?"
+  ]
+ },
+ {
+  "id": "ai-tfm-001",
+  "role": "AI Engineer",
+  "topic": "Transformers",
+  "difficulty": "Mid-level",
+  "question_text": "Walk me through self-attention: the Q/K/V computation, the scaling factor, and why multiple heads help. What is the complexity in sequence length?",
+  "expected_points": [
+   "Attention(Q,K,V) = softmax(QK^T / sqrt(d_k)) V",
+   "Scaling by sqrt(d_k) prevents softmax saturation for large dimensions",
+   "Multiple heads attend to different relations in different subspaces",
+   "Time O(n^2 d) and memory O(n^2) in sequence length",
+   "Causal masking restricts decoders to past positions"
+  ],
+  "followups": [
+   "What approaches reduce the quadratic cost, and what do they trade away?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "הסבר לי את self-attention: חישוב ה-Q/K/V, גורם הסקאלה (scaling factor), ומדוע multiple heads עוזרים. מהי הסיבוכיות באורך הסדרה?",
+  "expected_points_he": [
+   "Attention(Q,K,V) = softmax(QK^T / sqrt(d_k)) V",
+   "סקאלה על ידי sqrt(d_k) מונעת רוויה של softmax עבור ממדים גדולים",
+   "Multiple heads מתייחסים ליחסים שונים בתתי-מרחבים שונים",
+   "סיבוכיות זמן O(n^2 d) וזיכרון O(n^2) באורך הסדרה",
+   "Causal masking מגביל decoders לעמדות קודמות"
+  ],
+  "followups_he": [
+   "אילו גישות מפחיתות את העלות הריבועית, ומה הן מקריבות בתמורה?"
+  ]
+ },
+ {
+  "id": "ai-tfm-002",
+  "role": "AI Engineer",
+  "topic": "Transformers",
+  "difficulty": "Senior",
+  "question_text": "Explain the KV cache in autoregressive decoding: why it exists, its memory footprint, and how to shrink it.",
+  "expected_points": [
+   "Caches keys/values of past tokens so each step is O(n) not O(n^2)",
+   "Memory = layers x heads x seq_len x head_dim x 2 x bytes per element",
+   "Grows linearly with context and batch — often the serving bottleneck",
+   "Multi-query/grouped-query attention share K/V across heads",
+   "KV quantization and paged attention reduce and manage the footprint"
+  ],
+  "followups": [
+   "How does grouped-query attention trade quality for memory versus full multi-head?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "הסבר את ה-KV cache ב-autoregressive decoding: מדוע הוא קיים, טביעת הרגל שלו בזיכרון, ואיך לצמצם אותו.",
+  "expected_points_he": [
+   "שומר במטמון (caches) keys/values של טוקנים קודמים כך שכל צעד הוא O(n) ולא O(n^2)",
+   "זיכרון = layers x heads x seq_len x head_dim x 2 x bytes per element",
+   "גדל ליניארית עם הקונטקסט והבאץ' — לעיתים קרובות צוואר הבקבוק ב-serving",
+   "Multi-query/grouped-query attention משתפים K/V בין heads",
+   "KV quantization ו-paged attention מפחיתים ומנהלים את טביעת הרגל"
+  ],
+  "followups_he": [
+   "איך grouped-query attention מבצע trade-off בין איכות לזיכרון לעומת multi-head מלא?"
+  ]
+ },
+ {
+  "id": "ai-tfm-003",
+  "role": "AI Engineer",
+  "topic": "Transformers",
+  "difficulty": "Research-level",
+  "question_text": "Compare positional encoding schemes — learned absolute, sinusoidal, RoPE, ALiBi — and their length-extrapolation behavior.",
+  "expected_points": [
+   "Learned absolute embeddings cannot extrapolate beyond trained length",
+   "Sinusoidal encodings are deterministic but extrapolate poorly in practice",
+   "RoPE rotates Q/K pairs, encoding relative positions in dot products",
+   "RoPE supports context extension via interpolation/NTK-aware scaling",
+   "ALiBi adds distance-linear attention bias and extrapolates naturally",
+   "Empirically all schemes degrade beyond trained lengths without adaptation"
+  ],
+  "followups": [
+   "Why does position interpolation work better than naive extrapolation for RoPE?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "השווה בין סכמות positional encoding — learned absolute, sinusoidal, RoPE, ALiBi — והתנהגותן בהרחבת אורך (length-extrapolation).",
+  "expected_points_he": [
+   "Learned absolute embeddings אינם יכולים לבצע אקסטרפולציה מעבר לאורך שאומנו עליו",
+   "Sinusoidal encodings הם דטרמיניסטיים אך מבצעים אקסטרפולציה גרועה בפועל",
+   "RoPE מסובב זוגות Q/K, ומקודד מיקומים יחסיים במכפלות נקודה (dot products)",
+   "RoPE תומך בהרחבת קונטקסט באמצעות אינטרפולציה/NTK-aware scaling",
+   "ALiBi מוסיף הטיית attention ליניארית למרחק ומבצע אקסטרפולציה באופן טבעי",
+   "אמפירית, כל הסכמות מתדרדרות מעבר לאורכים שאומנו עליהם ללא התאמה"
+  ],
+  "followups_he": [
+   "מדוע אינטרפולציית מיקום עובדת טוב יותר מאקסטרפולציה נאיבית עבור RoPE?"
+  ]
+ },
+ {
+  "id": "ai-llm-001",
+  "role": "AI Engineer",
+  "topic": "LLMs",
+  "difficulty": "Junior",
+  "question_text": "Explain the difference between pretraining, supervised fine-tuning, and preference tuning (RLHF/DPO) in producing an assistant LLM.",
+  "expected_points": [
+   "Pretraining: next-token prediction over web-scale corpora builds capabilities",
+   "SFT: instruction-response demonstrations teach the assistant format",
+   "Preference tuning optimizes against human preference comparisons (RLHF/DPO)",
+   "Each stage differs in data type, scale, and objective",
+   "Base models are not assistants: they merely continue text"
+  ],
+  "followups": [
+   "What behaviors come specifically from the preference-tuning stage?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "הסבר את ההבדל בין pretraining, supervised fine-tuning, ו-preference tuning (RLHF/DPO) בהפקת LLM עוזר.",
+  "expected_points_he": [
+   "Pretraining: חיזוי הטוקן הבא על פני קורפוסים בקנה מידה ווב בונה יכולות",
+   "SFT: הדגמות של instruction-response מלמדות את פורמט העוזר",
+   "Preference tuning מבצע אופטימיזציה מול השוואות העדפות אנושיות (RLHF/DPO)",
+   "כל שלב שונה בסוג הנתונים, בקנה המידה וביעד",
+   "מודלי בסיס אינם עוזרים: הם פשוט ממשיכים טקסט"
+  ],
+  "followups_he": [
+   "אילו התנהגויות נובעות במיוחד משלב ה-preference-tuning?"
+  ]
+ },
+ {
+  "id": "ai-llm-002",
+  "role": "AI Engineer",
+  "topic": "LLMs",
+  "difficulty": "Senior",
+  "question_text": "Why do LLMs hallucinate, and which system-level mitigations actually work?",
+  "expected_points": [
+   "The training objective rewards plausible continuation, not factual truth",
+   "No grounding: parametric knowledge is lossy and has a cutoff",
+   "Retrieval grounding with citation requirements reduces fabrication",
+   "Uncertainty expression and refusal training help calibration",
+   "Output validation layers (fact-check passes, constrained decoding) catch errors",
+   "Measure hallucination rates with dedicated evals rather than assuming"
+  ],
+  "followups": [
+   "Why does RAG reduce but not eliminate hallucination?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "מדוע LLMs מבצעים 'הזיות' (hallucinate), ואילו פתרונות ברמת המערכת באמת עובדים?",
+  "expected_points_he": [
+   "מטרת האימון מתגמלת המשך סביר, לא אמת עובדתית",
+   "אין grounding: ידע פרמטרי הוא מאבד מידע ויש לו נקודת חיתוך",
+   "Retrieval grounding עם דרישות ציטוט מפחית ייצור מידע שגוי (fabrication)",
+   "ביטוי אי-ודאות ואימון סירוב (refusal training) עוזרים בכיול",
+   "שכבות אימות פלט (בדיקות עובדתיות, constrained decoding) תופסות שגיאות",
+   "מדוד שיעורי hallucination עם evals ייעודיים במקום להניח"
+  ],
+  "followups_he": [
+   "מדוע RAG מפחית אך לא מבטל hallucination?"
+  ]
+ },
+ {
+  "id": "ai-llm-003",
+  "role": "AI Engineer",
+  "topic": "LLMs",
+  "difficulty": "Staff/Lead-level",
+  "question_text": "Choose between a hosted frontier model and self-hosted open-weights for an enterprise product. Give your decision framework.",
+  "expected_points": [
+   "Measure quality on your own evals, not public benchmarks",
+   "Data privacy, residency, and compliance constraints may force the choice",
+   "Full cost model: per-token API vs GPUs, ops, and engineering time",
+   "Latency, throughput, rate limits, and fine-tuning control",
+   "Vendor lock-in and fallback/multi-provider strategy",
+   "Hybrid routing: cheap/local for easy traffic, frontier for hard cases"
+  ],
+  "followups": [
+   "What eval evidence would make you switch this decision later?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "בחר בין hosted frontier model לבין self-hosted open-weights עבור מוצר ארגוני. הצג את מסגרת קבלת ההחלטות שלך.",
+  "expected_points_he": [
+   "מדוד איכות על ה-evals שלך, לא על בנצ'מרקים ציבוריים",
+   "אילוצי פרטיות נתונים, מיקום נתונים (residency) ותאימות (compliance) עשויים לכפות את הבחירה",
+   "מודל עלות מלא: API לפי טוקן לעומת GPUs, תפעול (ops) וזמן הנדסה",
+   "Latency, throughput, rate limits, ושליטה ב-fine-tuning",
+   "Vendor lock-in ואסטרטגיית גיבוי/ריבוי ספקים",
+   "ניתוב היברידי: זול/מקומי לתעבורה קלה, frontier למקרים קשים"
+  ],
+  "followups_he": [
+   "איזו עדות מ-evals תגרום לך לשנות החלטה זו מאוחר יותר?"
+  ]
+ },
+ {
+  "id": "ai-rag-001",
+  "role": "AI Engineer",
+  "topic": "RAG",
+  "difficulty": "Senior",
+  "question_text": "How would you build a RAG system over a private technical wiki?",
+  "expected_points": [
+   "Chunk documents respecting structure (headings/sections) with overlap",
+   "Choose an embedding model and vector index; normalize and store metadata",
+   "Hybrid retrieval (BM25 + dense) with reranking improves precision",
+   "Assemble prompts with citations and instruct grounded answering",
+   "Evaluate retrieval recall and answer faithfulness separately",
+   "Handle freshness with incremental indexing and access control on retrieval"
+  ],
+  "followups": [
+   "How would you determine whether retrieval or generation is your quality bottleneck?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "איך היית בונה מערכת RAG מעל ויקי טכני פרטי?",
+  "expected_points_he": [
+   "חלק מסמכים ל-chunks תוך כיבוד מבנה (כותרות/סעיפים) עם חפיפה",
+   "בחר מודל embedding ואינדקס וקטורי; בצע נורמליזציה ואחסן מטא-דאטה",
+   "Retrieval היברידי (BM25 + dense) עם reranking משפר דיוק",
+   "הרכב פרומפטים עם ציטוטים והנחה למתן תשובות מבוססות (grounded answering)",
+   "הערך את recall ה-retrieval ואת נאמנות התשובה (answer faithfulness) בנפרד",
+   "טפל ברעננות (freshness) באמצעות אינדוקס אינקרמנטלי ובקרת גישה ב-retrieval"
+  ],
+  "followups_he": [
+   "איך היית קובע אם ה-retrieval או ה-generation הוא צוואר הבקבוק באיכות שלך?"
+  ]
+ },
+ {
+  "id": "ai-rag-002",
+  "role": "AI Engineer",
+  "topic": "RAG",
+  "difficulty": "Mid-level",
+  "question_text": "Your RAG system keeps retrieving irrelevant chunks. Enumerate likely causes and fixes.",
+  "expected_points": [
+   "Chunking splits concepts across boundaries — revisit size/overlap/structure",
+   "Embedding model mismatched to domain jargon",
+   "Query-document phrasing gap: add query rewriting or HyDE",
+   "k and similarity thresholds tuned blindly",
+   "Missing metadata filters scope the search too broadly",
+   "Build a labeled retrieval eval set before tweaking anything"
+  ],
+  "followups": [
+   "Retrieval metrics look fine but answers are still wrong — what do you inspect next?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "מערכת ה-RAG שלך ממשיכה לשלוף chunks לא רלוונטיים. מנה סיבות ופתרונות סבירים.",
+  "expected_points_he": [
+   "Chunking מפצל מושגים על פני גבולות — שקול מחדש גודל/חפיפה/מבנה",
+   "מודל ה-embedding אינו תואם לז'רגון התחום",
+   "פער ניסוח בין שאילתה למסמך: הוסף query rewriting או HyDE",
+   "k וסף הדמיון (similarity thresholds) כוילו באופן עיוור",
+   "מסנני מטא-דאטה חסרים מרחיבים את היקף החיפוש יתר על המידה",
+   "בנה סט eval מתויג ל-retrieval לפני שינוי כלשהו"
+  ],
+  "followups_he": [
+   "מדדי ה-retrieval נראים בסדר אבל התשובות עדיין שגויות — מה תבדוק הלאה?"
+  ]
+ },
+ {
+  "id": "ai-rag-003",
+  "role": "AI Engineer",
+  "topic": "RAG",
+  "difficulty": "Research-level",
+  "question_text": "Compare dense bi-encoder, sparse lexical, and late-interaction retrieval (ColBERT-style) for a production RAG stack.",
+  "expected_points": [
+   "Bi-encoders compress passages to one vector — fast but lossy for details",
+   "Sparse (BM25/SPLADE) excels at exact terms, rare tokens, and OOV jargon",
+   "Late interaction keeps token-level vectors: higher quality, much larger index",
+   "Latency and storage tradeoffs differ by orders of magnitude",
+   "Hybrid fusion (e.g. reciprocal rank fusion) is a strong default",
+   "A cross-encoder reranker often closes most of the quality gap cheaply"
+  ],
+  "followups": [
+   "When does late interaction justify its storage cost over hybrid + rerank?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "השווה בין dense bi-encoder, sparse lexical, ו-late-interaction retrieval (בסגנון ColBERT) עבור RAG stack בפרודקשן.",
+  "expected_points_he": [
+   "Bi-encoders דוחסים קטעים לווקטור אחד — מהיר אך מאבד פרטים",
+   "Sparse (BM25/SPLADE) מצטיין במונחים מדויקים, טוקנים נדירים וז'רגון OOV",
+   "Late interaction שומר וקטורים ברמת הטוקן: איכות גבוהה יותר, אינדקס גדול בהרבה",
+   "פשרות ב-latency ובאחסון שונות בסדרי גודל",
+   "איחוד היברידי (לדוגמה reciprocal rank fusion) הוא ברירת מחדל חזקה",
+   "Cross-encoder reranker לרוב סוגר את רוב פער האיכות בעלות נמוכה"
+  ],
+  "followups_he": [
+   "מתי late interaction מצדיק את עלות האחסון שלו על פני hybrid + rerank?"
+  ]
+ },
+ {
+  "id": "ai-emb-001",
+  "role": "AI Engineer",
+  "topic": "Embeddings",
+  "difficulty": "Junior",
+  "question_text": "What are text embeddings, and how does cosine-similarity search work? Why are vectors normalized?",
+  "expected_points": [
+   "Dense vectors placing semantically similar text near each other",
+   "Produced by trained encoders (contrastive objectives)",
+   "Cosine similarity measures angle; on normalized vectors it equals dot product",
+   "Normalization makes inner-product indexes implement cosine search",
+   "Limitations: domain shift, polysemy, and no exact-match guarantees"
+  ],
+  "followups": [
+   "Why can two texts with opposite meanings still embed near each other?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "מהם text embeddings, ואיך עובד חיפוש cosine-similarity? מדוע וקטורים מנורמלים?",
+  "expected_points_he": [
+   "וקטורים דחוסים הממקמים טקסטים דומים סמנטית קרוב זה לזה",
+   "מיוצרים על ידי encoders מאומנים (מטרות קונטרסטיביות)",
+   "Cosine similarity מודד זווית; על וקטורים מנורמלים הוא שווה למכפלה וקטורית (dot product)",
+   "נורמליזציה גורמת לאינדקסי מכפלה פנימית ליישם חיפוש cosine",
+   "מגבלות: domain shift, פוליסמיה, ואין הבטחות להתאמה מדויקת"
+  ],
+  "followups_he": [
+   "מדוע שני טקסטים בעלי משמעויות הפוכות עדיין יכולים להיות מוטמעים קרוב זה לזה?"
+  ]
+ },
+ {
+  "id": "ai-emb-002",
+  "role": "AI Engineer",
+  "topic": "Embeddings",
+  "difficulty": "Senior",
+  "question_text": "Embedding search quality degrades on your domain's jargon. Diagnose and improve without a large labeled dataset.",
+  "expected_points": [
+   "Build a small gold set of query-document pairs to quantify the problem",
+   "Add lexical/hybrid fallback for exact jargon matches",
+   "Fine-tune the embedder contrastively with pairs mined from structure/clicks",
+   "Hard negatives matter more than more positives",
+   "Generate synthetic queries with an LLM to bootstrap training data",
+   "Consider a stronger general model before custom training"
+  ],
+  "followups": [
+   "How would you mine hard negatives without human labeling?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "איכות חיפוש ה-embedding מתדרדרת על ז'רגון התחום שלך. אבחן ושפר ללא דאטה-סט מתויג גדול.",
+  "expected_points_he": [
+   "בנה סט זהב קטן של זוגות שאילתה-מסמך כדי לכמת את הבעיה",
+   "הוסף fallback לקסיקלי/היברידי להתאמות ז'רגון מדויקות",
+   "בצע fine-tune ל-embedder באופן קונטרסטיבי עם זוגות שנכרו ממבנה/קליקים",
+   "Hard negatives חשובים יותר מ-positives רבים יותר",
+   "צור שאילתות סינתטיות עם LLM כדי לאתחל נתוני אימון",
+   "שקול מודל כללי חזק יותר לפני אימון מותאם אישית"
+  ],
+  "followups_he": [
+   "איך היית כורה hard negatives ללא תיוג אנושי?"
+  ]
+ },
+ {
+  "id": "ai-ft-001",
+  "role": "AI Engineer",
+  "topic": "Fine-tuning",
+  "difficulty": "Mid-level",
+  "question_text": "Compare full fine-tuning, LoRA, and prompt engineering for adapting an LLM. What are LoRA's key hyperparameters?",
+  "expected_points": [
+   "Prompting first: zero marginal training cost, fastest iteration",
+   "LoRA trains low-rank updates on frozen weights — a fraction of the memory",
+   "Key hyperparameters: rank r, alpha scaling, target modules, learning rate",
+   "Full fine-tuning risks catastrophic forgetting and costs the most",
+   "Fine-tuning suits style/format/skills, not knowledge injection",
+   "Adapters can be merged into weights for zero-overhead serving"
+  ],
+  "followups": [
+   "When does LoRA underperform full fine-tuning meaningfully?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "השווה בין full fine-tuning, LoRA, ו-prompt engineering להתאמת LLM. מהם ה-hyperparameters המרכזיים של LoRA?",
+  "expected_points_he": [
+   "Prompting קודם: עלות אימון שולית אפסית, איטרציה מהירה ביותר",
+   "LoRA מאמן עדכוני low-rank על משקלים קפואים — חלק קטן מהזיכרון",
+   "Hyperparameters מרכזיים: rank r, alpha scaling, target modules, learning rate",
+   "Full fine-tuning מסכן catastrophic forgetting ועולה הכי הרבה",
+   "Fine-tuning מתאים לסגנון/פורמט/כישורים, לא להזרקת ידע",
+   "מתאמים (adapters) ניתנים למיזוג לתוך המשקלים עבור serving ללא תקורה"
+  ],
+  "followups_he": [
+   "מתי LoRA מפגר משמעותית אחרי full fine-tuning?"
+  ]
+ },
+ {
+  "id": "ai-ft-002",
+  "role": "AI Engineer",
+  "topic": "Fine-tuning",
+  "difficulty": "Staff/Lead-level",
+  "question_text": "A team wants to fine-tune an LLM on 2,000 support tickets to 'make it smarter'. How do you evaluate whether fine-tuning is justified and run it safely?",
+  "expected_points": [
+   "Define target behavior and build the eval set before any training",
+   "Baseline prompting and RAG first; they usually win at this scale",
+   "2,000 examples teach style/format, not new knowledge",
+   "Guard against regressions on general capability with a broad eval suite",
+   "Clean the data: PII, errors, and inconsistent answers poison training",
+   "Gate deployment on held-out and regression evals"
+  ],
+  "followups": [
+   "What result would convince you fine-tuning was the wrong tool here?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "צוות רוצה לבצע fine-tune ל-LLM על 2,000 קריאות שירות כדי 'להפוך אותו לחכם יותר'. איך אתה מעריך אם fine-tuning מוצדק ומריץ אותו בבטחה?",
+  "expected_points_he": [
+   "הגדר התנהגות יעד ובנה את סט ה-eval לפני כל אימון",
+   "בצע baseline עם prompting ו-RAG קודם; הם לרוב מנצחים בקנה מידה זה",
+   "2,000 דוגמאות מלמדות סגנון/פורמט, לא ידע חדש",
+   "הגן מפני רגרסיות על יכולת כללית עם חבילת eval רחבה",
+   "נקה את הנתונים: PII, שגיאות ותשובות לא עקביות מרעילים את האימון",
+   "אפשר פריסה רק לאחר עמידה ב-evals על נתונים שלא נראו וב-regression evals"
+  ],
+  "followups_he": [
+   "איזו תוצאה תשכנע אותך ש-fine-tuning היה הכלי הלא נכון כאן?"
+  ]
+ },
+ {
+  "id": "ai-aieval-001",
+  "role": "AI Engineer",
+  "topic": "Evaluation",
+  "difficulty": "Senior",
+  "question_text": "How do you evaluate an LLM agent?",
+  "expected_points": [
+   "End-to-end task success rate on realistic scenario suites",
+   "Step-level checks: tool-call correctness and argument validity",
+   "LLM-as-judge with a rubric, calibrated against human labels",
+   "Efficiency: cost, latency, and turns per completed task",
+   "Robustness: perturbed inputs and adversarial/injection scenarios",
+   "Regression suite wired into CI so changes are gated"
+  ],
+  "followups": [
+   "How do you keep an LLM-as-judge from drifting or being gamed?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "איך אתה מעריך LLM agent?",
+  "expected_points_he": [
+   "שיעור הצלחת משימות מקצה לקצה על חבילות תרחישים ריאליסטיים",
+   "בדיקות ברמת הצעד: נכונות קריאת כלי (tool-call) ותקינות ארגומנטים",
+   "LLM כשופט עם רובריקה, מכויל מול תיוגים אנושיים",
+   "יעילות: עלות, latency, ומספר פניות (turns) למשימה שהושלמה",
+   "רובסטיות: קלטים מופרעים ותרחישי adversarial/injection",
+   "חבילת רגרסיה משולבת ב-CI כך ששינויים מאושרים רק לאחר בדיקה"
+  ],
+  "followups_he": [
+   "איך אתה מונע מ-LLM כשופט לסטות (drift) או להיות מנוצל (gamed)?"
+  ]
+ },
+ {
+  "id": "ai-aieval-002",
+  "role": "AI Engineer",
+  "topic": "Evaluation",
+  "difficulty": "Mid-level",
+  "question_text": "Design an offline evaluation suite for a summarization feature. Which metrics, and what are their failure modes?",
+  "expected_points": [
+   "Reference metrics (ROUGE/BERTScore) correlate weakly for abstractive output",
+   "LLM-judge rubrics for faithfulness, coverage, and concision",
+   "Dedicated hallucination checks, e.g. NLI/entailment against the source",
+   "Small calibrated human evaluation protocol as ground truth",
+   "Representative input sampling incl. long and messy documents",
+   "Significance testing across prompt versions"
+  ],
+  "followups": [
+   "Your LLM judge prefers longer summaries — how do you detect and correct that bias?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "תכנן חבילת הערכה אופליין עבור פיצ'ר סיכום. אילו מדדים, ומהם מצבי הכשל שלהם?",
+  "expected_points_he": [
+   "מדדי ייחוס (ROUGE/BERTScore) מתואמים חלש עבור פלט אבסטרקטיבי",
+   "רובריקות LLM-judge עבור נאמנות (faithfulness), כיסוי (coverage) ותמציתיות (concision)",
+   "בדיקות hallucination ייעודיות, לדוגמה NLI/entailment מול המקור",
+   "פרוטוקול הערכה אנושית מכויל קטן כ-ground truth",
+   "דגימת קלט מייצגת כולל מסמכים ארוכים ומבולגנים",
+   "בדיקת מובהקות (significance testing) בין גרסאות פרומפט"
+  ],
+  "followups_he": [
+   "ה-LLM judge שלך מעדיף סיכומים ארוכים יותר — איך אתה מזהה ומתקן הטיה זו?"
+  ]
+ },
+ {
+  "id": "ai-aieval-003",
+  "role": "AI Engineer",
+  "topic": "Evaluation",
+  "difficulty": "Research-level",
+  "question_text": "How does benchmark contamination corrupt LLM evaluation, and how would you build evals robust to it?",
+  "expected_points": [
+   "Test data seen in pretraining inflates scores without real capability",
+   "Detection: n-gram overlap scans, canary strings, memorization probes",
+   "Private, rotating, or freshly generated eval sets",
+   "Functional/compositional tasks are harder to memorize than fixed QA pairs",
+   "Report contamination analysis alongside scores",
+   "Dynamic benchmarks trade comparability for robustness"
+  ],
+  "followups": [
+   "A vendor reports 95% on a public benchmark — what questions do you ask?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "איך זיהום בנצ'מרקים (benchmark contamination) פוגע בהערכת LLM, ואיך היית בונה הערכות עמידות בפניו?",
+  "expected_points_he": [
+   "נתוני אימון שנראו ב-pretraining מנפחים ציונים ללא יכולת אמיתית.",
+   "זיהוי: סריקות חפיפת n-gram, מחרוזות קנריות (canary strings), בדיקות שינון (memorization probes).",
+   "סטים פרטיים, מתחלפים, או שנוצרו טריים של הערכה (eval sets).",
+   "משימות פונקציונליות/קומפוזיציונליות קשות יותר לשינון מאשר זוגות קבועים של שאלות-תשובות (QA pairs).",
+   "דווח על ניתוח זיהום לצד הציונים.",
+   "בנצ'מרקים דינמיים מחליפים השוואתיות בעמידות."
+  ],
+  "followups_he": [
+   "ספק מדווח על 95% בבנצ'מרק ציבורי – אילו שאלות היית שואל?"
+  ]
+ },
+ {
+  "id": "ai-agent-001",
+  "role": "AI Engineer",
+  "topic": "Agents",
+  "difficulty": "Junior",
+  "question_text": "Describe the loop of a tool-using LLM agent and where failures typically occur.",
+  "expected_points": [
+   "Loop: model reasons, emits a tool call, receives the observation, iterates",
+   "Tool schemas and descriptions steer correct usage",
+   "Failures: malformed arguments, hallucinated tools, wrong tool choice",
+   "Context growth requires truncation/summarization strategies",
+   "Termination conditions and max-step limits prevent runaway loops",
+   "Feed errors back so the model can self-correct"
+  ],
+  "followups": [
+   "How would you debug an agent that intermittently loops forever?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "תאר את הלולאה של סוכן LLM המשתמש בכלים (tool-using LLM agent) והיכן בדרך כלל מתרחשות תקלות.",
+  "expected_points_he": [
+   "לולאה: המודל מסיק, מפיק קריאת כלי (tool call), מקבל את התצפית, וממשיך בלולאה.",
+   "סכמות ותיאורי כלים מכוונים לשימוש נכון.",
+   "כשלים: ארגומנטים שגויים (malformed arguments), כלים מומצאים (hallucinated tools), בחירת כלי שגויה.",
+   "גידול הקונטקסט דורש אסטרטגיות קיטוע/סיכום (truncation/summarization).",
+   "תנאי סיום ומגבלות צעדים מקסימליים מונעים לולאות בלתי נשלטות.",
+   "הזן שגיאות בחזרה כדי שהמודל יוכל לתקן את עצמו."
+  ],
+  "followups_he": [
+   "איך היית מתחקר (debug) סוכן שנכנס ללולאה אינסופית לסירוגין?"
+  ]
+ },
+ {
+  "id": "ai-agent-002",
+  "role": "AI Engineer",
+  "topic": "Agents",
+  "difficulty": "Senior",
+  "question_text": "Design guardrails for an agent that can take actions with side effects, such as sending emails or modifying records.",
+  "expected_points": [
+   "Least-privilege, narrowly scoped tools per task",
+   "Human approval gates for irreversible or high-blast-radius actions",
+   "Dry-run/sandbox modes to preview effects",
+   "Treat all external content as untrusted; defend against prompt injection",
+   "Complete audit logging of tool calls and decisions",
+   "Rate limits and anomaly detection to bound damage"
+  ],
+  "followups": [
+   "Which actions would you never allow an agent to take autonomously, and why?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "תכנן 'מעקות בטיחות' (guardrails) עבור סוכן שיכול לבצע פעולות עם תופעות לוואי, כמו שליחת מיילים או שינוי רשומות.",
+  "expected_points_he": [
+   "כלים בעלי הרשאות מינימליות (least-privilege), עם היקף מוגבל לכל משימה.",
+   "שערי אישור אנושיים לפעולות בלתי הפיכות או בעלות 'רדיוס פיצוץ' גבוה (high-blast-radius).",
+   "מצבי 'ריצה יבשה' (dry-run) או סנדבוקס (sandbox) לצפייה מקדימה בהשפעות.",
+   "התייחס לכל תוכן חיצוני כבלתי מהימן; הגן מפני prompt injection.",
+   "תיעוד ביקורת מלא (audit logging) של קריאות כלים והחלטות.",
+   "מגבלות קצב (rate limits) וזיהוי חריגות (anomaly detection) להגבלת נזקים."
+  ],
+  "followups_he": [
+   "אילו פעולות לעולם לא היית מאפשר לסוכן לבצע באופן אוטונומי, ומדוע?"
+  ]
+ },
+ {
+  "id": "ai-agent-003",
+  "role": "AI Engineer",
+  "topic": "Agents",
+  "difficulty": "Staff/Lead-level",
+  "question_text": "When would you choose a multi-agent architecture over a single agent with more tools? Argue both sides with production concerns.",
+  "expected_points": [
+   "Multi-agent wins for decomposable workflows, specialization, and parallelism",
+   "Context isolation prevents one concern from polluting another",
+   "Costs multiply: tokens, latency, and orchestration complexity",
+   "Failure modes compound; debugging across agents is much harder",
+   "Observability and state management become first-class problems",
+   "Default to a single agent with good tools until evidence demands more"
+  ],
+  "followups": [
+   "What evidence in production would trigger the move to multi-agent?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "מתי היית בוחר בארכיטקטורת ריבוי סוכנים (multi-agent architecture) על פני סוכן יחיד עם יותר כלים? הצג את שני הצדדים תוך התייחסות לשיקולי פרודקשן.",
+  "expected_points_he": [
+   "ריבוי סוכנים מנצח עבור תהליכי עבודה ניתנים לפירוק (decomposable workflows), התמחות ומקביליות (parallelism).",
+   "בידוד קונטקסט מונע מדאגה אחת לזהם אחרת.",
+   "העלויות מתרבות: טוקנים, לייטנסי, ומורכבות התזמור (orchestration complexity).",
+   "מצבי כשלים מצטברים; דיבוג בין סוכנים קשה הרבה יותר.",
+   "נראות (observability) וניהול מצב (state management) הופכים לבעיות מהמעלה הראשונה.",
+   "ברירת המחדל היא סוכן יחיד עם כלים טובים עד שהראיות דורשות יותר."
+  ],
+  "followups_he": [
+   "אילו ראיות בפרודקשן יגרמו למעבר לארכיטקטורת ריבוי סוכנים?"
+  ]
+ },
+ {
+  "id": "ai-mlops-001",
+  "role": "AI Engineer",
+  "topic": "MLOps",
+  "difficulty": "Mid-level",
+  "question_text": "Describe a CI/CD pipeline for an ML service. What do you test and gate beyond normal software checks?",
+  "expected_points": [
+   "Data validation: schemas, distributions, and freshness",
+   "Model quality gates on held-out and slice metrics before promotion",
+   "Reproducibility: pinned data snapshots, code, and config",
+   "Canary/shadow deployment comparing against the champion",
+   "Model registry with versioning and instant rollback",
+   "Monitoring hooks wired in at deploy time"
+  ],
+  "followups": [
+   "How do you gate on slices without an explosion of flaky checks?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "תאר pipeline של CI/CD עבור שירות ML. מה אתה בודק ו'שומר' (gate) מעבר לבדיקות תוכנה רגילות?",
+  "expected_points_he": [
+   "ולידציית נתונים: סכמות, התפלגויות ורעננות.",
+   "שערי איכות מודל (model quality gates) על מדדים מנותקים (held-out) ומדדי פרוסות (slice metrics) לפני קידום.",
+   "שחזוריות (reproducibility): תמונות מצב (snapshots) של נתונים מקובעים, קוד ותצורה.",
+   "פריסת קנרי (canary) / צל (shadow deployment) בהשוואה למודל המנצח (champion).",
+   "רישום מודלים (model registry) עם גרסאות ו-rollback מיידי.",
+   "חיבורי ניטור (monitoring hooks) המחוברים בזמן הפריסה."
+  ],
+  "followups_he": [
+   "איך אתה 'שומר' על פרוסות (slices) ללא פיצוץ של בדיקות לא יציבות (flaky checks)?"
+  ]
+ },
+ {
+  "id": "ai-mlops-002",
+  "role": "AI Engineer",
+  "topic": "MLOps",
+  "difficulty": "Senior",
+  "question_text": "A production model's performance decayed slowly over three months with no code changes. Diagnose it and design defenses.",
+  "expected_points": [
+   "Data drift vs concept drift: compare input distributions and label relationships",
+   "Silent upstream changes: schema, semantics, units",
+   "Feedback loops where the model shapes its own future data",
+   "Defenses: drift monitors (PSI/KL), data contracts, retraining cadence",
+   "Backtest to date the decay onset and correlate with events",
+   "Proxy metrics for early warning when labels lag"
+  ],
+  "followups": [
+   "When is automatic retraining more dangerous than helpful?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "ביצועי מודל בפרודקשן ירדו באיטיות במשך שלושה חודשים ללא שינויים בקוד. אבחן זאת ותכנן הגנות.",
+  "expected_points_he": [
+   "Data drift לעומת concept drift: השווה התפלגויות קלט ויחסי לייבלים.",
+   "שינויים שקטים במעלה הזרם (upstream): סכמה, סמנטיקה, יחידות.",
+   "לולאות פידבק שבהן המודל מעצב את נתוני העתיד שלו.",
+   "הגנות: ניטורי drift (PSI/KL), חוזי נתונים (data contracts), תדירות אימון מחדש (retraining cadence).",
+   "בצע backtest כדי לתארך את תחילת הירידה ולקשר אותה לאירועים.",
+   "מדדי פרוקסי (proxy metrics) לאזהרה מוקדמת כאשר לייבלים מפגרים."
+  ],
+  "followups_he": [
+   "מתי אימון מחדש אוטומטי מסוכן יותר ממועיל?"
+  ]
+ },
+ {
+  "id": "ai-serve-001",
+  "role": "AI Engineer",
+  "topic": "Model serving",
+  "difficulty": "Junior",
+  "question_text": "A model server receives more requests than it can handle. Compare queueing, load shedding, and scaling as responses.",
+  "expected_points": [
+   "Unbounded queues convert overload into latency blowup for everyone",
+   "Backpressure and timeouts keep the system responsive",
+   "Load shedding / graceful degradation (e.g. smaller model) preserves core traffic",
+   "Horizontal scaling of GPU services is slow and expensive — plan capacity",
+   "Admission control tied to SLOs beats best-effort chaos"
+  ],
+  "followups": [
+   "How do you decide which requests to shed first?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "שרת מודלים מקבל יותר בקשות ממה שהוא יכול לטפל. השווה תורים (queueing), השלת עומס (load shedding) וסקיילינג (scaling) כתגובות.",
+  "expected_points_he": [
+   "תורים בלתי מוגבלים הופכים עומס יתר לפיצוץ לייטנסי לכולם.",
+   "Backpressure ו-timeouts שומרים על המערכת מגיבה.",
+   "השלת עומס (load shedding) / ירידה הדרגתית בביצועים (graceful degradation) (לדוגמה, מודל קטן יותר) שומרת על תעבורת הליבה.",
+   "סקיילינג אופקי (horizontal scaling) של שירותי GPU איטי ויקר – תכנן קיבולת.",
+   "בקרת קבלה (admission control) הקשורה ל-SLOs עדיפה על כאוס של 'מאמץ מיטבי' (best-effort)."
+  ],
+  "followups_he": [
+   "איך אתה מחליט אילו בקשות להשיל קודם?"
+  ]
+ },
+ {
+  "id": "ai-serve-002",
+  "role": "AI Engineer",
+  "topic": "Model serving",
+  "difficulty": "Staff/Lead-level",
+  "question_text": "Design a serving stack for an LLM application: batching, streaming, autoscaling, and the key throughput/latency tradeoffs.",
+  "expected_points": [
+   "Continuous/in-flight batching maximizes GPU utilization",
+   "Bigger batches raise throughput but hurt time-to-first-token",
+   "Streaming tokens transforms perceived latency",
+   "Autoscale on queue depth/GPU utilization; mind cold-start of model loads",
+   "Quantization fits more replicas per GPU at some quality cost",
+   "Admission control, timeouts, and priority classes for SLO protection"
+  ],
+  "followups": [
+   "How would you serve both an interactive chat SLO and a batch pipeline on the same fleet?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "תכנן ערימת שירות (serving stack) עבור יישום LLM: batching, streaming, autoscaling, והפשרות המרכזיות בין תפוקה (throughput) ללייטנסי.",
+  "expected_points_he": [
+   "Batching רציף/בזמן אמת (in-flight batching) ממקסם את ניצול ה-GPU.",
+   "באצ'ים גדולים יותר מעלים את התפוקה אך פוגעים בזמן לטוקן ראשון (time-to-first-token).",
+   "הזרמת טוקנים (streaming tokens) משנה את הלייטנסי הנתפס.",
+   "בצע autoscaling על עומק תור/ניצול GPU; שים לב ל-cold-start של טעינות מודל.",
+   "קוונטיזציה (quantization) מאפשרת להתאים יותר רפליקות לכל GPU במחיר מסוים של איכות.",
+   "בקרת קבלה (admission control), timeouts, ומחלקות עדיפות להגנת SLO."
+  ],
+  "followups_he": [
+   "איך היית משרת גם SLO של צ'אט אינטראקטיבי וגם pipeline של באצ'ים על אותו צי שרתים (fleet)?"
+  ]
+ },
+ {
+  "id": "ai-lat-001",
+  "role": "AI Engineer",
+  "topic": "Latency optimization",
+  "difficulty": "Senior",
+  "question_text": "How would you reduce inference latency for a transformer model?",
+  "expected_points": [
+   "Profile first: know whether you are compute-, memory-, or queue-bound",
+   "Quantization (INT8/FP8/4-bit) with measured quality tradeoffs",
+   "KV caching with paged attention; optimized kernels like FlashAttention",
+   "Distillation or a smaller model where quality budget allows",
+   "Speculative decoding for memory-bound autoregressive generation",
+   "Batching strategy balanced against tail latency"
+  ],
+  "followups": [
+   "Which of these improve time-to-first-token versus per-token latency?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "איך היית מפחית את לייטנסי ה-inference עבור מודל טרנספורמר?",
+  "expected_points_he": [
+   "בצע פרופיילינג קודם: דע אם אתה מוגבל בחישוב (compute-bound), בזיכרון (memory-bound) או בתור (queue-bound).",
+   "קוונטיזציה (INT8/FP8/4-bit) עם פשרות איכות מדודות.",
+   "KV caching עם paged attention; קרנלים ממוטבים כמו FlashAttention.",
+   "דיסטילציה (distillation) או מודל קטן יותר כאשר תקציב האיכות מאפשר.",
+   "Speculative decoding עבור יצירה אוטורגרסיבית מוגבלת זיכרון (memory-bound).",
+   "אסטרטגיית batching מאוזנת מול tail latency."
+  ],
+  "followups_he": [
+   "אילו מהם משפרים את time-to-first-token לעומת per-token latency?"
+  ]
+ },
+ {
+  "id": "ai-lat-002",
+  "role": "AI Engineer",
+  "topic": "Latency optimization",
+  "difficulty": "Mid-level",
+  "question_text": "Users say the chatbot 'feels slow' although average latency looks fine. How do you investigate and fix perceived latency?",
+  "expected_points": [
+   "Look at tail latencies (p95/p99), not the mean",
+   "Time-to-first-token dominates perception — stream tokens immediately",
+   "Stage-level tracing: queueing, retrieval, model, network",
+   "Queue spikes under load create bimodal experience",
+   "Warm-up, prefetching, and connection reuse",
+   "UX affordances (typing indicator) buy tolerance"
+  ],
+  "followups": [
+   "Your p50 is 400ms and p99 is 12s — what are the usual suspects?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "משתמשים אומרים שהצ'אטבוט 'מרגיש איטי' למרות שהלייטנסי הממוצע נראה בסדר. איך היית חוקר ומתקן לייטנסי נתפס?",
+  "expected_points_he": [
+   "הסתכל על tail latencies (p95/p99), לא על הממוצע.",
+   "Time-to-first-token שולט בתפיסה – הזרם טוקנים באופן מיידי.",
+   "מעקב ברמת שלבים (stage-level tracing): תורים (queueing), אחזור (retrieval), מודל, רשת.",
+   "קפיצות בתור תחת עומס יוצרות חוויה דו-מודאלית (bimodal experience).",
+   "חימום (warm-up), טעינה מוקדמת (prefetching) ושימוש חוזר בחיבורים.",
+   "אפשרויות UX (כגון אינדיקטור הקלדה) קונות סובלנות."
+  ],
+  "followups_he": [
+   "ה-p50 שלך הוא 400ms וה-p99 הוא 12s – מהם החשודים הרגילים?"
+  ]
+ },
+ {
+  "id": "ai-lat-003",
+  "role": "AI Engineer",
+  "topic": "Latency optimization",
+  "difficulty": "Research-level",
+  "question_text": "Explain speculative decoding: the mechanics, the acceptance rule, and when speedups fail to materialize.",
+  "expected_points": [
+   "A cheap draft model proposes k tokens; the target verifies them in one parallel pass",
+   "Rejection-sampling acceptance preserves the target distribution exactly",
+   "Speedup scales with acceptance rate, i.e. draft/target agreement",
+   "Helps in memory-bound decoding; little gain when compute-bound or batched heavily",
+   "Draft model cost and scheduling complexity eat into gains",
+   "Variants: Medusa/EAGLE heads instead of a separate draft model"
+  ],
+  "followups": [
+   "Why does speculative decoding not change the output distribution at all?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "הסבר speculative decoding: המכניקה, כלל הקבלה, ומתי שיפורי מהירות לא מתממשים.",
+  "expected_points_he": [
+   "מודל טיוטה זול (cheap draft model) מציע k טוקנים; מודל היעד מאמת אותם במעבר מקבילי אחד.",
+   "כלל קבלה מבוסס rejection-sampling משמר את התפלגות היעד באופן מדויק.",
+   "שיפור המהירות עולה עם קצב הקבלה, כלומר, הסכמת טיוטה/יעד.",
+   "עוזר ב-decoding מוגבל זיכרון (memory-bound); מעט רווח כאשר מוגבל חישוב (compute-bound) או ב-batching כבד.",
+   "עלות מודל הטיוטה ומורכבות התזמון פוגעות ברווחים.",
+   "וריאנטים: ראשי Medusa/EAGLE במקום מודל טיוטה נפרד."
+  ],
+  "followups_he": [
+   "מדוע speculative decoding אינו משנה כלל את התפלגות הפלט?"
+  ]
+ },
+ {
+  "id": "ai-dist-001",
+  "role": "AI Engineer",
+  "topic": "Distributed training",
+  "difficulty": "Research-level",
+  "question_text": "Compare data, tensor, and pipeline parallelism. How would you combine them to train a 70B-parameter model on a GPU cluster?",
+  "expected_points": [
+   "Data parallelism replicates the model; gradients all-reduced each step",
+   "Tensor parallelism splits matmuls; needs high-bandwidth intra-node links",
+   "Pipeline parallelism splits layers; bubbles mitigated by micro-batching",
+   "ZeRO/FSDP shard optimizer states, gradients, and parameters",
+   "3D parallelism maps TP within node, PP across nodes, DP across replicas",
+   "Interconnect topology dictates the viable configuration"
+  ],
+  "followups": [
+   "Where do you place tensor vs pipeline parallelism relative to NVLink and InfiniBand, and why?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "השווה data parallelism, tensor parallelism ו-pipeline parallelism. איך היית משלב אותם כדי לאמן מודל עם 70 מיליארד פרמטרים על אשכול GPU?",
+  "expected_points_he": [
+   "Data parallelism משכפל את המודל; גרדיאנטים עוברים all-reduce בכל צעד.",
+   "Tensor parallelism מפצל פעולות כפל מטריצות (matmuls); דורש קישורי רוחב פס גבוהים בתוך הצומת (intra-node).",
+   "Pipeline parallelism מפצל שכבות; 'בועות' (bubbles) מופחתות על ידי micro-batching.",
+   "ZeRO/FSDP מפצלים (shard) מצבי אופטימייזר, גרדיאנטים ופרמטרים.",
+   "3D parallelism ממפה TP בתוך צומת, PP בין צמתים, DP בין רפליקות.",
+   "טופולוגיית האינטרקונקט (interconnect topology) מכתיבה את התצורה האפשרית."
+  ],
+  "followups_he": [
+   "היכן היית ממקם tensor parallelism לעומת pipeline parallelism ביחס ל-NVLink ו-InfiniBand, ומדוע?"
+  ]
+ },
+ {
+  "id": "ai-dist-002",
+  "role": "AI Engineer",
+  "topic": "Distributed training",
+  "difficulty": "Research-level",
+  "question_text": "Your training run scales poorly beyond 64 GPUs. Walk through a systematic investigation.",
+  "expected_points": [
+   "Measure communication/computation overlap and ratio first",
+   "All-reduce bandwidth saturation: bucket sizes, compression, hierarchical reduce",
+   "Stragglers: data loading, storage throughput, slow nodes",
+   "Overlap communication with backward pass computation",
+   "Larger global batch may change convergence — separate systems from optimization effects",
+   "Check network topology and NCCL configuration"
+  ],
+  "followups": [
+   "How do you distinguish a systems bottleneck from an optimization (convergence) problem?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "ריצת האימון שלך אינה עושה סקיילינג טוב מעבר ל-64 GPUs. תאר חקירה שיטתית.",
+  "expected_points_he": [
+   "מדוד קודם כל את החפיפה והיחס בין תקשורת לחישוב (communication/computation overlap and ratio).",
+   "רווית רוחב פס של all-reduce: גודלי bucket, דחיסה, hierarchical reduce.",
+   "Stragglers: טעינת נתונים, תפוקת אחסון, צמתים איטיים.",
+   "חפוף תקשורת עם חישוב ה-backward pass.",
+   "באצ' גלובלי גדול יותר עשוי לשנות התכנסות – הפרד אפקטים של מערכות מאפקטים של אופטימיזציה.",
+   "בדוק את טופולוגיית הרשת ותצורת NCCL."
+  ],
+  "followups_he": [
+   "איך אתה מבחין בין צוואר בקבוק מערכתי לבעיית אופטימיזציה (התכנסות)?"
+  ]
+ },
+ {
+  "id": "ai-gpu-001",
+  "role": "AI Engineer",
+  "topic": "GPU memory",
+  "difficulty": "Mid-level",
+  "question_text": "Break down where GPU memory goes when training a transformer, and the main techniques to reduce each component.",
+  "expected_points": [
+   "Weights, gradients, and optimizer states (Adam doubles state) scale with parameters",
+   "Activations dominate at long sequence lengths and large batches",
+   "Activation checkpointing trades recompute for memory",
+   "Mixed precision (bf16) halves most tensors",
+   "ZeRO/FSDP shard states across devices; offloading as last resort",
+   "At inference the KV cache replaces activations as the main consumer"
+  ],
+  "followups": [
+   "Estimate the memory to fine-tune a 7B model with Adam in bf16."
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "פרט לאן הולך זיכרון ה-GPU בעת אימון טרנספורמר, ואת הטכניקות העיקריות להפחתת כל רכיב.",
+  "expected_points_he": [
+   "משקלים (weights), גרדיאנטים ומצבי אופטימייזר (Adam מכפיל מצב) גדלים עם הפרמטרים.",
+   "אקטיבציות (activations) שולטות באורכי רצף ארוכים ובבאצ'ים גדולים.",
+   "Activation checkpointing מחליף חישוב מחדש (recompute) בזיכרון.",
+   "Mixed precision (bf16) חותך את רוב הטנסורים בחצי.",
+   "ZeRO/FSDP מפצלים (shard) מצבים בין התקנים; offloading כמוצא אחרון.",
+   "ב-inference, ה-KV cache מחליף את האקטיבציות כצרכן העיקרי."
+  ],
+  "followups_he": [
+   "הערך את הזיכרון הנדרש ל-fine-tune של מודל 7B עם Adam ב-bf16."
+  ]
+ },
+ {
+  "id": "ai-gpu-002",
+  "role": "AI Engineer",
+  "topic": "GPU memory",
+  "difficulty": "Staff/Lead-level",
+  "question_text": "Inference servers hit CUDA OOM during traffic spikes. Diagnose the causes and design fixes without buying bigger GPUs.",
+  "expected_points": [
+   "KV cache growth with concurrent long-context requests is the usual culprit",
+   "Fragmentation vs true allocation: paged/pooled allocators help",
+   "Admission control on total token budget, not request count",
+   "Quantize weights and KV cache",
+   "Context-length limits and eviction/truncation policies",
+   "Continuous profiling of memory per request class"
+  ],
+  "followups": [
+   "How does paged attention specifically address fragmentation?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "שרתי Inference נתקלים ב-CUDA OOM (Out Of Memory) במהלך עליות תנועה חדות. אבחן את הסיבות ותכנן תיקונים מבלי לקנות GPUs גדולים יותר.",
+  "expected_points_he": [
+   "גידול ה-KV cache עם בקשות קונטקסט ארוכות בו-זמניות הוא האשם הרגיל.",
+   "פרגמנטציה לעומת הקצאה אמיתית: מקצי זיכרון מבוססי עמודים/מאגרים (paged/pooled allocators) עוזרים.",
+   "בקרת קבלה (admission control) על תקציב טוקנים כולל, לא על ספירת בקשות.",
+   "בצע קוונטיזציה (quantize) למשקלים ול-KV cache.",
+   "מגבלות אורך קונטקסט ומדיניות פינוי/קיטוע (eviction/truncation).",
+   "פרופיילינג רציף של זיכרון לכל מחלקת בקשות."
+  ],
+  "followups_he": [
+   "איך paged attention מטפל ספציפית בפרגמנטציה?"
+  ]
+ },
+ {
+  "id": "ai-safe-001",
+  "role": "AI Engineer",
+  "topic": "Safety and monitoring",
+  "difficulty": "Mid-level",
+  "question_text": "What would you monitor for a deployed LLM feature, and how do you detect quality regressions without ground-truth labels?",
+  "expected_points": [
+   "Operational: latency, error rates, token cost per request",
+   "Behavioral proxies: refusal rate, output length/format validity, tool-call failures",
+   "Sampled LLM-as-judge audits against a rubric",
+   "Input distribution drift: topics, languages, prompt lengths",
+   "User signals: thumbs, retries, abandonment",
+   "Canary comparisons when models or prompts change"
+  ],
+  "followups": [
+   "Which single metric would you alert on first, and why?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "מה היית מנטר עבור פיצ'ר LLM פרוס (deployed), ואיך היית מזהה ירידות באיכות (quality regressions) ללא לייבלים אמיתיים (ground-truth labels)?",
+  "expected_points_he": [
+   "תפעולי: לייטנסי, שיעורי שגיאות, עלות טוקן לבקשה.",
+   "מדדי פרוקסי התנהגותיים: שיעור סירוב, אורך פלט/תקינות פורמט, כשלים בקריאת כלים.",
+   "ביקורות LLM-as-judge מדגמיות מול רובריקה.",
+   "Data drift בהתפלגות הקלט: נושאים, שפות, אורכי פרומפטים.",
+   "אותות משתמש: לייקים/דיסלייקים, ניסיונות חוזרים, נטישה.",
+   "השוואות קנריות כאשר מודלים או פרומפטים משתנים."
+  ],
+  "followups_he": [
+   "על איזה מדד יחיד היית מתריע קודם, ומדוע?"
+  ]
+ },
+ {
+  "id": "ai-safe-002",
+  "role": "AI Engineer",
+  "topic": "Safety and monitoring",
+  "difficulty": "Senior",
+  "question_text": "Design defenses against prompt injection for an LLM app that processes user documents and can call tools.",
+  "expected_points": [
+   "Treat retrieved/user content strictly as data: delimiters and instruction hierarchy",
+   "Allowlisted tools with parameter validation and least privilege",
+   "Privilege separation between planning and execution contexts",
+   "Detection: pattern filters and classifiers on untrusted content",
+   "Output filtering and action confirmation for sensitive operations",
+   "Red-team evals for injection in CI, not just at launch"
+  ],
+  "followups": [
+   "Why is prompt injection fundamentally unsolved by better prompts alone?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "תכנן הגנות מפני prompt injection עבור אפליקציית LLM המעבדת מסמכי משתמש ויכולה לקרוא לכלים.",
+  "expected_points_he": [
+   "התייחס לתוכן מאוחזר/משתמש אך ורק כנתונים: מפרידים (delimiters) והיררכיית הוראות.",
+   "כלים ברשימה לבנה (allowlisted) עם ולידציית פרמטרים והרשאות מינימליות (least privilege).",
+   "הפרדת הרשאות בין הקשרי תכנון וביצוע.",
+   "זיהוי: מסנני תבניות ומסווגים על תוכן בלתי מהימן.",
+   "סינון פלט ואישור פעולה עבור פעולות רגישות.",
+   "הערכות red-team להזרקה ב-CI, לא רק בהשקה."
+  ],
+  "followups_he": [
+   "מדוע prompt injection אינו נפתר באופן מהותי על ידי פרומפטים טובים יותר בלבד?"
+  ]
+ },
+ {
+  "id": "ai-safe-003",
+  "role": "AI Engineer",
+  "topic": "Safety and monitoring",
+  "difficulty": "Staff/Lead-level",
+  "question_text": "You are accountable for an AI feature in a regulated industry. Design the safety case: evaluation, monitoring, incident response, and governance.",
+  "expected_points": [
+   "Risk taxonomy: failure modes, misuse, and affected parties",
+   "Pre-launch eval battery incl. adversarial and fairness testing",
+   "Human oversight at defined decision points",
+   "Monitoring with incident playbooks, rollback, and kill switches",
+   "Audit trails and documentation sufficient for regulators",
+   "Scheduled re-assessment as models, data, and regulations change"
+  ],
+  "followups": [
+   "A regulator asks 'how do you know it is safe?' — what artifacts do you produce?"
+  ],
+  "is_behavioral": false,
+  "source": "seed",
+  "question_text_he": "אתה אחראי על פיצ'ר AI בתעשייה מפוקחת. תכנן את 'תיק הבטיחות' (safety case): הערכה, ניטור, תגובה לאירועים וממשל (governance).",
+  "expected_points_he": [
+   "טקסונומיית סיכונים: מצבי כשל, שימוש לרעה וצדדים מושפעים.",
+   "סוללת הערכה לפני השקה, כולל בדיקות adversarial ו-fairness.",
+   "פיקוח אנושי בנקודות החלטה מוגדרות.",
+   "ניטור עם ספרי נהלים לאירועים (incident playbooks), rollback ומתגי השבתה (kill switches).",
+   "שבילי ביקורת (audit trails) ותיעוד מספיקים עבור רגולטורים.",
+   "הערכה מחדש מתוזמנת ככל שמודלים, נתונים ותקנות משתנים."
+  ],
+  "followups_he": [
+   "רגולטור שואל 'איך אתה יודע שזה בטוח?' – אילו ארטיפקטים היית מציג?"
+  ]
+ },
+ {
+  "id": "ai-behav-001",
+  "role": "AI Engineer",
+  "topic": "Behavioral",
+  "difficulty": "Junior",
+  "question_text": "Tell me about a time you had to learn a new technology quickly to deliver under a deadline.",
+  "expected_points": [
+   "Concrete stakes and timeline",
+   "Deliberate learning strategy: docs, examples, small experiments",
+   "Scoped the work to what mattered for delivery",
+   "Outcome plus how the knowledge was retained/shared"
+  ],
+  "followups": [
+   "How do you decide what to skip when learning under time pressure?"
+  ],
+  "is_behavioral": true,
+  "source": "seed",
+  "question_text_he": "ספר לי על מקרה שבו היית צריך ללמוד טכנולוגיה חדשה במהירות כדי לספק תוצר תחת דדליין.",
+  "expected_points_he": [
+   "הימור ותאריך יעד קונקרטיים.",
+   "אסטרטגיית למידה מכוונת: תיעוד, דוגמאות, ניסויים קטנים.",
+   "תיחום העבודה למה שחשוב לאספקה.",
+   "תוצאה בתוספת איך הידע נשמר/שותף."
+  ],
+  "followups_he": [
+   "איך אתה מחליט מה לדלג כשאתה לומד תחת לחץ זמן?"
+  ]
+ },
+ {
+  "id": "ai-behav-002",
+  "role": "AI Engineer",
+  "topic": "Behavioral",
+  "difficulty": "Mid-level",
+  "question_text": "Describe a production incident caused by a system you built. How did you handle it, and what changed afterwards?",
+  "expected_points": [
+   "Owns the incident and communicates during it",
+   "Root-cause analysis beyond the surface trigger",
+   "Blameless postmortem with concrete action items",
+   "Durable prevention: tests, alarms, process changes"
+  ],
+  "followups": [
+   "What did the incident teach you about monitoring gaps?"
+  ],
+  "is_behavioral": true,
+  "source": "seed",
+  "question_text_he": "תאר אירוע פרודקשן שנגרם על ידי מערכת שבנית. איך טיפלת בו, ומה השתנה לאחר מכן?",
+  "expected_points_he": [
+   "לוקח אחריות על האירוע ומתקשר במהלכו.",
+   "ניתוח שורש הבעיה (root-cause analysis) מעבר לטריגר השטחי.",
+   "פוסטמורטם ללא האשמה (blameless postmortem) עם פריטי פעולה קונקרטיים.",
+   "מניעה עמידה: בדיקות, התרעות, שינויים בתהליכים."
+  ],
+  "followups_he": [
+   "מה האירוע לימד אותך על פערי ניטור?"
+  ]
+ },
+ {
+  "id": "ai-behav-003",
+  "role": "AI Engineer",
+  "topic": "Behavioral",
+  "difficulty": "Senior",
+  "question_text": "Tell me about a disagreement with leadership over shipping an AI feature with known failure modes. How did you handle it?",
+  "expected_points": [
+   "Quantified the risk and its user/business impact",
+   "Presented options with tradeoffs rather than a veto",
+   "Escalated through the right channels professionally",
+   "Committed to the decision while instrumenting for early warning"
+  ],
+  "followups": [
+   "Where is your personal line for refusing to ship?"
+  ],
+  "is_behavioral": true,
+  "source": "seed",
+  "question_text_he": "ספר לי על חילוקי דעות עם ההנהלה לגבי השקת פיצ'ר AI עם מצבי כשל ידועים. איך טיפלת בזה?",
+  "expected_points_he": [
+   "כימת את הסיכון וההשפעה שלו על המשתמשים/העסק.",
+   "הצגת אפשרויות עם פשרות במקום הטלת וטו.",
+   "הסלמת את הנושא בערוצים הנכונים ובאופן מקצועי.",
+   "התחייבת להחלטה תוך כדי הטמעת כלים להתראה מוקדמת."
+  ],
+  "followups_he": [
+   "איפה עובר הגבול האישי שלך לסירוב להשיק?"
+  ]
+ },
+ {
+  "id": "ai-behav-004",
+  "role": "AI Engineer",
+  "topic": "Behavioral",
+  "difficulty": "Senior",
+  "question_text": "Describe a time you balanced platform/tech-debt work against feature delivery on an ML system.",
+  "expected_points": [
+   "Made the cost of debt visible and quantified",
+   "Negotiated capacity with product stakeholders",
+   "Sequenced debt paydown to unblock future features",
+   "Measured the payoff after the fact"
+  ],
+  "followups": [
+   "How do you keep debt from silently accumulating again?"
+  ],
+  "is_behavioral": true,
+  "source": "seed",
+  "question_text_he": "תאר מצב שבו איזנת בין עבודת פלטפורמה/חוב טכני לבין אספקת פיצ'רים במערכת ML.",
+  "expected_points_he": [
+   "הפכת את עלות החוב לברורה וכימתת אותה.",
+   "ניהלת משא ומתן על הקצאת משאבים עם בעלי עניין מה-product.",
+   "תכננת את פריסת החוב כדי לאפשר פיצ'רים עתידיים.",
+   "מדדת את התועלת לאחר מכן."
+  ],
+  "followups_he": [
+   "איך אתה מונע מהחוב להצטבר שוב בשקט?"
+  ]
+ },
+ {
+  "id": "ai-behav-005",
+  "role": "AI Engineer",
+  "topic": "Behavioral",
+  "difficulty": "Staff/Lead-level",
+  "question_text": "Tell me about leading the adoption of LLM technology across multiple teams amid both hype and skepticism.",
+  "expected_points": [
+   "Separated real use cases from hype with evidence",
+   "Built enablement: guidelines, shared infra, evals",
+   "Managed skeptics with pilots and measurable wins",
+   "Set guardrails so teams could move fast safely"
+  ],
+  "followups": [
+   "Which anti-patterns did you see teams fall into, and how did you correct them?"
+  ],
+  "is_behavioral": true,
+  "source": "seed",
+  "question_text_he": "ספר לי על הובלת הטמעת טכנולוגיית LLM על פני מספר צוותים, בתוך סביבה של הייפ וסקפטיות כאחד.",
+  "expected_points_he": [
+   "הפרדת מקרי שימוש אמיתיים מההייפ באמצעות ראיות.",
+   "בנית יכולות תומכות: הנחיות, תשתית משותפת, הערכות.",
+   "ניהלת סקפטים באמצעות פיילוטים וניצחונות מדידים.",
+   "קבעת גדרות בטיחות כדי שהצוותים יוכלו להתקדם במהירות ובבטחה."
+  ],
+  "followups_he": [
+   "לאילו אנטי-דפוסים ראית צוותים נופלים, ואיך תיקנת אותם?"
+  ]
+ }
+]
