@@ -18,6 +18,7 @@ HeadTTS REST contract (see voice/headtts/README.md, Appendix A):
 """
 from __future__ import annotations
 
+import json
 import logging
 import time
 from typing import Tuple
@@ -26,6 +27,7 @@ import httpx
 from fastapi import APIRouter, HTTPException, Request, Response
 
 from ..config import settings
+from .. import voice_cloud
 
 logger = logging.getLogger(__name__)
 
@@ -72,6 +74,30 @@ async def voice_tts(request: Request) -> Response:
     clear detail message when the sidecar is down.
     """
     body = await request.body()
+
+    # Non-English (Hebrew) can't use the English-only Kokoro sidecar: route it to
+    # Google Cloud TTS (gendered, real audio) so voice gender matches the
+    # character and the audio has real duration. English falls through to Kokoro.
+    try:
+        parsed = json.loads(body or b"{}")
+    except Exception:
+        parsed = None
+    if isinstance(parsed, dict):
+        lang = str(parsed.get("language") or "")
+        if lang.lower().startswith("he"):
+            voice = str(parsed.get("voice") or "")
+            gender = str(parsed.get("gender") or "") or (
+                "female" if voice.lower().startswith("af") else "male")
+            try:
+                result = voice_cloud.synthesize(
+                    str(parsed.get("input") or ""), "he-IL", gender,
+                    float(parsed.get("speed") or 1.0))
+                return Response(content=json.dumps(result), media_type="application/json")
+            except Exception as exc:  # noqa: BLE001
+                logger.warning("Cloud TTS (he) failed: %s", exc)
+                raise HTTPException(
+                    status_code=503, detail="Hebrew cloud TTS failed") from exc
+
     url = f"{settings.voice_server_url}/v1/synthesize"
     try:
         async with httpx.AsyncClient(timeout=TTS_TIMEOUT_SECONDS) as client:

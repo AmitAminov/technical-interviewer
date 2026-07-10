@@ -24,7 +24,7 @@ import { getSessionCharacter, type Character } from '../lib/characters';
 import { createRecognizer, speechRecognitionSupported, type Recognizer } from '../lib/speech';
 import { useInterviewStore } from '../lib/store';
 import { languageOption } from '../lib/types';
-import type { InterviewerStyle, Role, ServerMessage, WsStatus } from '../lib/types';
+import type { InterviewerStyle, ServerMessage, WsStatus } from '../lib/types';
 import {
   STYLE_VOICES,
   visemeToMouthShape,
@@ -48,6 +48,33 @@ const STT_ECHO_GUARD_MS = 800;
  * ponytail: word-count heuristic; raise it or add a confidence/energy gate if
  * false barge-ins show up in real use. */
 const BARGE_IN_MIN_WORDS = 3;
+
+/** Unicode-aware word split (works for English and Hebrew). */
+const tokenizeWords = (s: string): string[] =>
+  s
+    .toLowerCase()
+    .split(/\s+/)
+    .map((w) => w.replace(/[^\p{L}\p{N}']/gu, ''))
+    .filter(Boolean);
+
+/** A partial heard while the interviewer is speaking is almost always the mic
+ * catching the interviewer's own voice through the speakers. Treat it as echo
+ * (not a barge-in) when most of the heard words already appear in the line the
+ * interviewer is currently saying — only genuinely different speech interrupts.
+ * This stops false barge-ins from cutting the interviewer off mid-sentence
+ * (which left the full caption on screen with the speech "too quick"). */
+function looksLikeInterviewerEcho(heardText: string): boolean {
+  const entries = useInterviewStore.getState().entries;
+  for (let i = entries.length - 1; i >= 0; i -= 1) {
+    if (entries[i].speaker !== 'interviewer') continue;
+    const said = new Set(tokenizeWords(entries[i].text));
+    const heard = tokenizeWords(heardText);
+    if (!heard.length) return false;
+    const overlap = heard.filter((w) => said.has(w)).length / heard.length;
+    return overlap >= 0.5;
+  }
+  return false;
+}
 
 const WS_STATUS_META: Record<WsStatus, { label: string; dot: string }> = {
   idle: { label: 'Connecting', dot: 'bg-slate-500' },
@@ -194,13 +221,9 @@ export default function InterviewPage() {
     getSession(id)
       .then((session) => {
         useInterviewStore.getState().setSession(session);
-        // Sample the photorealistic interviewer character for this session
-        // (stable per session id, matched to role + voice gender).
-        void getSessionCharacter(
-          id,
-          session.role as Role,
-          session.interviewer_style as InterviewerStyle,
-        ).then(setCharacter);
+        // The interviewer character is fixed per interviewer style (gender
+        // always matches the style's voice), so voice and face agree.
+        void getSessionCharacter(session.interviewer_style as InterviewerStyle).then(setCharacter);
       })
       .catch(() =>
         useInterviewStore.getState().setError('Could not load this session. Does it exist?'),
@@ -341,7 +364,8 @@ export default function InterviewPage() {
           // While the interviewer is speaking, a sustained utterance is a
           // barge-in; a short one is ignored (likely residual echo).
           if (state.speaking) {
-            if (text.trim().split(/\s+/).filter(Boolean).length >= BARGE_IN_MIN_WORDS) {
+            const words = text.trim().split(/\s+/).filter(Boolean);
+            if (words.length >= BARGE_IN_MIN_WORDS && !looksLikeInterviewerEcho(text)) {
               bargeIn(text);
             }
             return;

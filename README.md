@@ -16,6 +16,36 @@ TypeScript frontend, WebSocket interview loop, local FAISS RAG, and an optional 
 sidecar. Designed so that **every external dependency is optional and every failure has a
 working fallback** — the app runs fully offline with no API key.
 
+## Demo — bilingual live interview with barge-in
+
+![Live mock interview in English — the interviewer asks a Data-Scientist question aloud; you can talk over it (barge-in) and it stops to listen](docs/demo/en.gif)
+
+*A live interview in **English**: the interviewer speaks the question with a lip-synced
+character, and you can **barge in** — start answering mid-question and it stops to listen
+(an echo guard keeps it from hearing its own voice).*
+
+![Same interview in Hebrew — the question is spoken and rendered right-to-left, with real gendered Hebrew audio via Google Cloud TTS](docs/demo/he.gif)
+
+*The same experience in **Hebrew** (RTL): questions are spoken with real, gendered Hebrew
+audio via Google Cloud TTS, and the transcript renders right-to-left. English falls back to
+the browser's built-in speech synthesis, so bilingual voice works with zero setup.*
+
+**New in this build**
+
+- **Bilingual voice (English + Hebrew).** English uses the browser's `speechSynthesis`; Hebrew
+  is synthesized as real, gendered audio through **Google Cloud Text-to-Speech** (`he-IL`,
+  authenticated with project ADC — no API key printed or stored). The interviewer's voice
+  gender always matches the chosen character (see *style-based characters* below).
+- **Barge-in.** You can interrupt the interviewer mid-sentence: speaking flushes the TTS
+  queue and hands the floor to your mic, with an echo guard so the recognizer never picks up
+  the interviewer's own audio.
+- **AI interviewee (both-AI mock interviews).** An optional simulated candidate *hears* the
+  interviewer through local speech-to-text (`faster-whisper`) and answers with **Gemini
+  conditioned on a CV** — with a structural "no backdoor" guarantee: the candidate only ever
+  receives the interviewer's *audio*, never its source text (`backend/app/sim/`).
+- **Style-based characters.** The interviewer character is fixed per interviewer *style* and is
+  always gender-consistent with that style's voice, so face and voice agree in every language.
+
 ![Interview setup — role, mode, difficulty, duration, hint policy, interviewer style](docs/screenshots/setup.png)
 
 *The setup page (frontend running standalone, no backend): role, mode, difficulty, duration,
@@ -197,7 +227,10 @@ All settings are environment variables with working defaults (`backend/app/confi
 3. **Live interview** — video-call UI: talking avatar, your camera preview, live transcript,
    timer, section indicator. Answer by voice (partial transcripts in real time) or by typing.
    Follow-ups, style-consistent phrasing, silence check-ins, hints on request or adaptively
-   (hints cost score), pause/resume/skip/end.
+   (hints cost score), pause/resume/skip/end. Voice is **bilingual** (English via the browser,
+   Hebrew via Google Cloud TTS) and supports **barge-in** — talk over the interviewer and it
+   stops to listen. An optional **AI interviewee** can play the candidate for both-AI mock runs
+   (`backend/app/sim/`).
 4. **Report** — overall score and role-readiness (0–100), per-topic scores, best/weakest
    answers, missing concepts, communication + technical feedback, a study plan, and a
    recommended next interview.

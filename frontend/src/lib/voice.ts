@@ -390,19 +390,24 @@ export class VoiceEngine {
   }
 
   private async run(utterance: Utterance, text: string, opts: VoiceStyleOpts): Promise<void> {
-    // Kokoro only speaks English; anything else (e.g. Hebrew) goes straight to
-    // the browser voice, which may have a matching language installed.
-    const nonEnglish = !!opts.lang && !opts.lang.toLowerCase().startsWith('en');
-    if (nonEnglish) {
-      this.speakViaBrowser(utterance, text, opts.lang);
-      return;
+    // Hebrew uses Google Cloud TTS (gendered, real audio) via /api/voice/tts;
+    // English uses the local Kokoro sidecar; any other language has no cloud
+    // voice here, so it falls back to the browser's built-in speech.
+    const lang = (opts.lang || 'en-us').toLowerCase();
+    const isHebrew = lang.startsWith('he');
+    if (!isHebrew) {
+      if (!lang.startsWith('en')) {
+        this.speakViaBrowser(utterance, text, opts.lang);
+        return;
+      }
+      const engine = await this.probe();
+      if (this.isStale(utterance)) return;
+      if (engine !== 'kokoro') {
+        this.speakViaBrowser(utterance, text);
+        return;
+      }
     }
-    const engine = await this.probe();
-    if (this.isStale(utterance)) return;
-    if (engine !== 'kokoro') {
-      this.speakViaBrowser(utterance, text);
-      return;
-    }
+    const ttsLang = isHebrew ? 'he-IL' : 'en-us';
 
     const chunks = chunkText(text);
     if (chunks.length === 0) {
@@ -410,7 +415,7 @@ export class VoiceEngine {
       return;
     }
 
-    let next: Promise<TtsChunk> | null = this.fetchChunk(utterance, chunks[0], opts);
+    let next: Promise<TtsChunk> | null = this.fetchChunk(utterance, chunks[0], opts, ttsLang);
     for (let i = 0; i < chunks.length; i += 1) {
       let chunk: TtsChunk;
       try {
@@ -429,8 +434,8 @@ export class VoiceEngine {
       // Kokoro audio is confirmed flowing for this utterance: make the
       // reported engine match the audio source (a transient earlier failure
       // may have left it on 'browser' while the cached probe said kokoro).
-      this.setEngine('kokoro');
-      next = i + 1 < chunks.length ? this.fetchChunk(utterance, chunks[i + 1], opts) : null;
+      if (!isHebrew) this.setEngine('kokoro');
+      next = i + 1 < chunks.length ? this.fetchChunk(utterance, chunks[i + 1], opts, ttsLang) : null;
       // Swallow prefetch rejection here; it is re-awaited (and handled) on
       // the next loop iteration.
       next?.catch(() => undefined);
@@ -449,6 +454,7 @@ export class VoiceEngine {
     utterance: Utterance,
     input: string,
     opts: VoiceStyleOpts,
+    ttsLang: string,
   ): Promise<TtsChunk> {
     const aborter = new AbortController();
     utterance.aborters.add(aborter);
@@ -460,7 +466,7 @@ export class VoiceEngine {
         body: JSON.stringify({
           input: input.slice(0, CHUNK_HARD_MAX_CHARS),
           voice: opts.voice,
-          language: 'en-us',
+          language: ttsLang,
           speed: opts.speed,
           audioEncoding: 'wav',
         }),
