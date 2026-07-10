@@ -1,22 +1,26 @@
 # 3D avatar asset licenses
 
-All GLB files were copied from the
-[met4citizen/TalkingHead](https://github.com/met4citizen/TalkingHead)
-repository (repo code is MIT). The avatar model files themselves carry their
-own licenses, recorded verbatim from the repo README ("Licenses, attributions
-and notes"):
+The default avatars are from the **VALID** (Validated Avatar Library for
+Inclusion and Diversity) set, converted to glTF by
+[c-frame/valid-avatars-glb](https://github.com/c-frame/valid-avatars-glb)
+(**MIT License** — freely redistributable). Original research library:
+[xrtlab/Validated-Avatar-Library-for-Inclusion-and-Diversity---VALID](https://github.com/xrtlab/Validated-Avatar-Library-for-Inclusion-and-Diversity---VALID).
 
-| File | Origin | License |
+| File | Source avatar | License |
 | --- | --- | --- |
-| `avaturn.glb` | Created at [Avaturn](https://avaturn.me) | For **non-commercial use** (per the TalkingHead README attribution) |
-| `avatarsdk.glb` | Created at [Avatar SDK](https://avatarsdk.com/) | For **non-commercial use** (per the TalkingHead README attribution) |
-| `brunette.glb` | Created at [Ready Player Me](https://readyplayer.me/) | Free to all developers for **non-commercial use** under [CC BY-NC 4.0 DEED](https://creativecommons.org/licenses/by-nc/4.0/) — retired from the default set, kept only for the classic-renderer fallback path |
+| `valid_female_business.glb` | VALID `AIAN_F_1_Busi` | MIT (via c-frame/valid-avatars-glb) |
+| `valid_male_business.glb`   | VALID `Asian_M_1_Busi` | MIT (via c-frame/valid-avatars-glb) |
 
-`avaturn.glb` and `avatarsdk.glb` are the two photo-realistic faces used by
-default (matched to the female/male interviewer voices); both carry the full
-Oculus viseme + ARKit blendshape sets required for lip-sync.
+## Lip-sync note
 
-This project is a personal-use, non-commercial mock-interview app, which is
-compatible with the terms above. If this app is ever commercialized, replace
-these models (e.g. with your own Ready Player Me avatar or a CC0 model such
-as the repo's `mpfb.glb`).
+These VALID models carry SALSA-style phoneme morph targets (e.g. `AE_AA_h`,
+`FV_h`, `KG_h`, `Kiss_h`), **not** the Oculus-viseme / ARKit blendshape names
+the TalkingHead renderer drives. The avatars therefore **display correctly but
+do not lip-sync out of the box**. To restore full lip-sync, either drop in an
+avatar that carries Oculus visemes + ARKit blendshapes (e.g. your own
+[Ready Player Me](https://readyplayer.me/) export) at the same paths, or add a
+viseme→VALID morph-target mapping in the renderer.
+
+The previous default models (Avaturn / Avatar SDK / Ready Player Me) were
+licensed for non-commercial use only and were removed so this repository can be
+MIT-clean and publicly redistributable.

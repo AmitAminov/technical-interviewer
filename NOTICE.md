@@ -20,11 +20,13 @@ attribution beyond a dependency line.
 - **[@met4citizen/talkinghead](https://github.com/met4citizen/TalkingHead)** — MIT License.
   npm dependency that renders the lip-synced 3D interviewer (with
   [three.js](https://threejs.org/), MIT).
-- **Avatar models** (`frontend/public/avatars/*.glb`) — copied from the TalkingHead repository;
-  created with [Ready Player Me](https://readyplayer.me/) (CC BY-NC 4.0) and
-  [Avaturn](https://avaturn.me) (non-commercial use). **These models are licensed for
-  non-commercial use only** — see `frontend/public/avatars/LICENSES.md` and replace them
-  before any commercial use.
+- **Avatar models** (`frontend/public/avatars/*.glb`) — from the **VALID** (Validated
+  Avatar Library for Inclusion and Diversity) set, converted to glTF by
+  [c-frame/valid-avatars-glb](https://github.com/c-frame/valid-avatars-glb) under the
+  **MIT License** (original library:
+  [xrtlab/VALID](https://github.com/xrtlab/Validated-Avatar-Library-for-Inclusion-and-Diversity---VALID)).
+  Freely redistributable. See `frontend/public/avatars/LICENSES.md` for the per-file
+  mapping and a note on lip-sync morph targets.
 
 ## RAG / embeddings
 
