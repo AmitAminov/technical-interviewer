@@ -1,5 +1,7 @@
 # Technical Interviewer
 
+[![CI](https://github.com/AmitAminov/technical-interviewer/actions/workflows/ci.yml/badge.svg)](https://github.com/AmitAminov/technical-interviewer/actions/workflows/ci.yml)
+
 An adaptive, voice-driven mock-interview platform for **Data Scientist**, **Algorithm
 Researcher**, and **AI Engineer** roles: a lip-synced 3D interviewer asks questions planned
 for your target role and difficulty, listens to your spoken answers, asks follow-ups, offers
