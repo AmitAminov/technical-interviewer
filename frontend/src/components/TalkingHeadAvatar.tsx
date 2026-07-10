@@ -14,18 +14,18 @@
  *   supported).
  *
  * Two photo-realistic GLBs ship offline (see public/avatars/LICENSES.md):
- * valid_female_business.glb (female, Avaturn) and valid_male_business.glb (male, Avatar SDK). Both
+ * avaturn.glb (female, Avaturn) and avatarsdk.glb (male, Avatar SDK). Both
  * carry the full Oculus viseme set + ARKit blendshapes, so lip-sync works on
  * either. Faces are matched to the voice gender in lib/voice.ts (af_bella →
  * avaturn, am_fenrir → avatarsdk) and personas are differentiated by mood,
  * camera framing and photographic (soft-fill + directional key) lighting. The
- * stylised Ready-Player-Me valid_female_business.glb is retired from the defaults — it read
+ * stylised Ready-Player-Me brunette.glb is retired from the defaults — it read
  * as too cartoony — but stays in the repo for the classic toggle / legacy.
- *   Friendly             valid_female_business.glb    F  mood happy    upper  warm key
- *   Research professor   valid_female_business.glb    F  mood neutral  head   warm dim
- *   Big-tech interviewer valid_female_business.glb    F  mood neutral  upper  cool corporate
- *   Strict               valid_male_business.glb  M  mood neutral  head   steel key
- *   Startup CTO          valid_male_business.glb  M  mood happy    upper  warm teal
+ *   Friendly             avaturn.glb    F  mood happy    upper  warm key
+ *   Research professor   avaturn.glb    F  mood neutral  head   warm dim
+ *   Big-tech interviewer avaturn.glb    F  mood neutral  upper  cool corporate
+ *   Strict               avatarsdk.glb  M  mood neutral  head   steel key
+ *   Startup CTO          avatarsdk.glb  M  mood happy    upper  warm teal
  */
 import { useEffect, useRef, useState } from 'react';
 
@@ -81,7 +81,7 @@ const AVATURN_EXTRAS = {
 const STYLE_3D: Record<InterviewerStyle, Style3dConfig> = {
   // Female voice (af_bella) → Avaturn photo-realistic face.
   Friendly: {
-    url: '/avatars/valid_female_business.glb',
+    url: '/avatars/avaturn.glb',
     body: 'F',
     mood: 'happy',
     cameraView: 'upper',
@@ -92,7 +92,7 @@ const STYLE_3D: Record<InterviewerStyle, Style3dConfig> = {
     ...AVATURN_EXTRAS,
   },
   'Research professor': {
-    url: '/avatars/valid_female_business.glb',
+    url: '/avatars/avaturn.glb',
     body: 'F',
     mood: 'neutral',
     cameraView: 'head',
@@ -103,7 +103,7 @@ const STYLE_3D: Record<InterviewerStyle, Style3dConfig> = {
     ...AVATURN_EXTRAS,
   },
   'Big-tech interviewer': {
-    url: '/avatars/valid_female_business.glb',
+    url: '/avatars/avaturn.glb',
     body: 'F',
     mood: 'neutral',
     cameraView: 'upper',
@@ -116,7 +116,7 @@ const STYLE_3D: Record<InterviewerStyle, Style3dConfig> = {
   // Male voice (am_fenrir) → Avatar SDK photo-realistic face. Standard RPM
   // skeleton + Oculus visemes, so no retarget needed (verified from the GLB).
   Strict: {
-    url: '/avatars/valid_male_business.glb',
+    url: '/avatars/avatarsdk.glb',
     body: 'M',
     mood: 'neutral',
     cameraView: 'head',
@@ -126,7 +126,7 @@ const STYLE_3D: Record<InterviewerStyle, Style3dConfig> = {
     lightDirectIntensity: 30,
   },
   'Startup CTO': {
-    url: '/avatars/valid_male_business.glb',
+    url: '/avatars/avatarsdk.glb',
     body: 'M',
     mood: 'happy',
     cameraView: 'upper',

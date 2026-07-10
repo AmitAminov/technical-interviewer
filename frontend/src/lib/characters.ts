@@ -1,12 +1,15 @@
 /**
- * Interviewer character pool (photorealistic faces generated with Imagen 4,
- * bundled under public/interviewers/). A character is sampled once per session
- * at interview initialization, matched to the interview's role and to the
- * gender of the chosen interviewer style's voice (so face and voice agree).
- * The choice is persisted per session id in localStorage so it stays stable
- * across reloads.
+ * Interviewer character — one fixed photorealistic face per interviewer STYLE
+ * (not sampled by role). The style you choose determines the interviewer you
+ * get, and that face's gender always matches the style's voice gender
+ * (STYLE_VOICES), so the voice and the character agree in every language.
+ *
+ * Faces live under public/interviewers/ with a manifest.json. A deploy with
+ * differently-licensed images (e.g. the public GitHub repo) ships its own files
+ * + manifest and sets its own STYLE_CHARACTER ids; unknown ids fall back to any
+ * gender-matched face, so the interview still shows a consistent character.
  */
-import type { InterviewerStyle, Role } from './types';
+import type { InterviewerStyle } from './types';
 import { STYLE_VOICES } from './voice';
 
 /** Normalized (0..1 of image) box for a face feature. */
@@ -22,11 +25,8 @@ export interface Character {
   role: string;
   gender: 'male' | 'female';
   file: string;
-  /** Mouth centre/size, from offline MediaPipe FaceMesh — positions the
-   *  viseme-driven lip animation. */
   mouth?: FeatureBox;
   eyes?: { l: FeatureBox; r: FeatureBox };
-  /** Sampled colours so overlays blend with the photo. */
   skin?: string;
   lip?: string;
 }
@@ -36,16 +36,24 @@ interface Manifest {
   characters: Character[];
 }
 
-const ROLE_SLUG: Record<Role, string> = {
-  'Data Scientist': 'data-scientist',
-  'Algorithm Researcher': 'algorithm-researcher',
-  'AI Engineer': 'ai-engineer',
-};
-
 /** Voice gender for a style — mirrors STYLE_VOICES (af_* = female, am_* = male). */
 export function genderForStyle(style: InterviewerStyle): 'male' | 'female' {
   return STYLE_VOICES[style]?.voice.startsWith('af_') ? 'female' : 'male';
 }
+
+/**
+ * Each interviewer style → the manifest character id to show for it. Ids must be
+ * gender-consistent with genderForStyle (3 female styles, 2 male). These are the
+ * local asset ids; a differently-licensed deploy overrides them, and any id not
+ * in the manifest falls back to a gender-matched face below.
+ */
+const STYLE_CHARACTER: Record<InterviewerStyle, string> = {
+  Friendly: 'data-scientist-0', // female
+  'Research professor': 'algorithm-researcher-0', // female
+  'Big-tech interviewer': 'ai-engineer-0', // female
+  Strict: 'algorithm-researcher-2', // male
+  'Startup CTO': 'ai-engineer-2', // male
+};
 
 const EMPTY: Manifest = { model: '', characters: [] };
 
@@ -68,62 +76,25 @@ export function __resetCharacterCacheForTests(): void {
   manifestCache = null;
 }
 
-const STORE_KEY = 'ti_interviewer_char';
-
-function readStore(): Record<string, string> {
-  try {
-    return JSON.parse(window.localStorage.getItem(STORE_KEY) || '{}');
-  } catch {
-    return {};
-  }
-}
-function writeStore(store: Record<string, string>): void {
-  try {
-    window.localStorage.setItem(STORE_KEY, JSON.stringify(store));
-  } catch {
-    /* storage unavailable — non-fatal, character just re-samples */
-  }
-}
-
-/** Stable string hash → non-negative int, so a session always maps to the
- *  same character even before the choice is persisted. */
-function hash(s: string): number {
-  let h = 0;
-  for (let i = 0; i < s.length; i += 1) h = (h * 31 + s.charCodeAt(i)) >>> 0;
-  return h;
-}
-
 export const characterImageUrl = (c: Character): string => `/interviewers/${c.file}`;
 
 /**
- * Return the character for a session, sampling (and persisting) one on first
- * call. Falls back gracefully (gender-only, then any) if a role pool is empty,
- * and returns null if the pool couldn't load — callers then use the 3D/SVG
- * avatar instead.
+ * The interviewer character for the chosen style: the face assigned to that
+ * style, guaranteed to match its voice gender. Falls back to any gender-matched
+ * face (then any face) when the assigned id isn't in the manifest, and returns
+ * null only if the pool couldn't load — callers then use the 3D/SVG head.
  */
-export async function getSessionCharacter(
-  sessionId: string,
-  role: Role,
-  style: InterviewerStyle,
-): Promise<Character | null> {
+export async function getSessionCharacter(style: InterviewerStyle): Promise<Character | null> {
   const manifest = await loadManifest();
   if (!manifest.characters.length) return null;
 
-  const store = readStore();
-  const pinnedId = store[sessionId];
-  if (pinnedId) {
-    const found = manifest.characters.find((c) => c.id === pinnedId);
-    if (found) return found;
-  }
-
   const gender = genderForStyle(style);
-  const slug = ROLE_SLUG[role];
-  const byRoleAndGender = manifest.characters.filter((c) => c.role === slug && c.gender === gender);
-  const byGender = manifest.characters.filter((c) => c.gender === gender);
-  const pool = byRoleAndGender.length ? byRoleAndGender : byGender.length ? byGender : manifest.characters;
-
-  const pick = pool[hash(sessionId) % pool.length];
-  store[sessionId] = pick.id;
-  writeStore(store);
-  return pick;
+  const wantId = STYLE_CHARACTER[style];
+  return (
+    manifest.characters.find((c) => c.id === wantId && c.gender === gender) ??
+    manifest.characters.find((c) => c.id === wantId) ??
+    manifest.characters.find((c) => c.gender === gender) ??
+    manifest.characters[0] ??
+    null
+  );
 }
