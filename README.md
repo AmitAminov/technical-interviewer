@@ -3,7 +3,7 @@
 [![CI](https://github.com/AmitAminov/technical-interviewer/actions/workflows/ci.yml/badge.svg)](https://github.com/AmitAminov/technical-interviewer/actions/workflows/ci.yml)
 
 An adaptive, voice-driven mock-interview platform for **Data Scientist**, **Algorithm
-Researcher**, and **AI Engineer** roles: a lip-synced 3D interviewer asks questions planned
+Researcher**, and **AI Engineer** roles: an animated 3D interviewer asks questions planned
 for your target role and difficulty, listens to your spoken answers, asks follow-ups, offers
 hints, scores every answer on an 8-metric rubric, and produces a full readiness report with a
 study curriculum that tracks your progress across sessions.
@@ -30,7 +30,7 @@ working fallback** — the app runs fully offline with no API key.
 
 ![Live mock interview in English — the interviewer asks a Data-Scientist question aloud; you can talk over it (barge-in) and it stops to listen](docs/demo/en.gif)
 
-*A live interview in **English**: the interviewer speaks the question with a lip-synced
+*A live interview in **English**: the interviewer speaks the question with an animated 3D
 character, and you can **barge in** — start answering mid-question and it stops to listen
 (an echo guard keeps it from hearing its own voice).*
 
@@ -196,7 +196,7 @@ By default the interviewer speaks with the browser's `speechSynthesis` and an an
 avatar — no setup needed. For the full experience, a local **HeadTTS** sidecar (MIT) serves
 **Kokoro-82M** (Apache-2.0) TTS on port 8012, fully offline after a one-time model download.
 Each utterance returns word + viseme timelines, so the **real-time 3D talking head**
-(met4citizen/TalkingHead, Three.js) lip-syncs exactly to the audio from the first frame.
+(met4citizen/TalkingHead, Three.js) animates the mouth in exact sync with the audio from the first frame.
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts\setup_voice.ps1   # Windows provisioning
