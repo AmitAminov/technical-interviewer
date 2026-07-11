@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <rect x="0.5" y="0.5" width="31" height="31" rx="7" fill="#0b1020" stroke="#26306a" stroke-width="1"/>
+  <!-- same dialogue bubble, dark tile for the header panel -->
+  <path d="M8 8 H24 A4 4 0 0 1 28 12 V18 A4 4 0 0 1 24 22 H15 L10 26.5 L10.5 22 H8 A4 4 0 0 1 4 18 V12 A4 4 0 0 1 8 8 Z" fill="none" stroke="#818cf8" stroke-width="1.5" stroke-linejoin="round"/>
+  <g stroke-linecap="round">
+    <line x1="10" y1="18" x2="10" y2="13.5" stroke="#a5b4fc" stroke-width="1.7"/>
+    <line x1="14" y1="18" x2="14" y2="10.5" stroke="#c7d2fe" stroke-width="1.7"/>
+    <line x1="18" y1="18" x2="18" y2="12" stroke="#a5b4fc" stroke-width="1.7"/>
+    <line x1="22" y1="18" x2="22" y2="14.5" stroke="#6366f1" stroke-width="1.7"/>
+  </g>
+</svg>
