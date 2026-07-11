@@ -398,36 +398,17 @@ All tests must pass with no network and no API key.
   1-ahead prefetch, gapless AudioContext scheduling, utterance FIFO), rAF word/viseme timeline,
   `interrupt()` aborts fetches+sources, health-gated transparent fallback to speechSynthesis,
   `STYLE_VOICES` style→(voice,speed) map, sink for the 3D head.
-- **Avatar** — four renderer tiers, cycled by a persisted toggle (localStorage `ti_avatar_mode_v2`):
-  The **effective default** is the best available: Deepfake when its sidecar is up, else Photo,
-  else 3D — reactive to the async health probe; an explicit toggle choice overrides it. The
-  interview begins behind a **"Start interview"** gesture (InterviewPage) that unlocks audio/video
-  autoplay (needed for the deepfake `<video>`), requests the **microphone (on by default)**, and
-  warms the deepfake face-detection cache before connecting the WS.
-  0. **Realistic** (default when available, `src/components/DeepfakeAvatar.tsx` + `lib/deepfake.ts`): true Wav2Lip
-     talking-head video per interviewer line. text → Kokoro TTS → Wav2Lip(character image, wav) → MP4
-     (with audio) played in a `<video>`. Runs on a local GPU sidecar (`deepfake/sidecar/service.py`,
-     port 8013, own CUDA venv + `lipsync`/Wav2Lip weights + bundled ffmpeg; started by
-     `scripts/start_deepfake.ps1`). Proxied via `POST /api/lipsync`; auto-detected by
-     `/api/health.lipsync_engine` (`wav2lip`|`unavailable`) — the mode only appears in the toggle when
-     the sidecar is up, and falls back to Photo otherwise. Latency: ~10s first line per character
-     (one-time face detect, cached), then ~2–3s/line on an RTX 3060 Laptop 6GB. Non-commercial
-     Wav2Lip weights (fine for this personal project).
-  1. **Photo** (default) `src/components/PhotoAvatar.tsx`: a Nano-Banana-Pro (gemini-3-pro-image)
-     photorealistic character
-     (`frontend/public/interviewers/`, sampled per session by `lib/characters.ts` — matched to role
-     + voice gender, stable per session id in localStorage). Mouth/eye geometry + skin/lip colours
-     are detected offline with MediaPipe FaceMesh and stored in `manifest.json`; the browser animates
-     a viseme-driven mouth + blink + idle breathing in real time (zero extra deps). Deliberately
-     restrained (no faked phoneme shapes) to avoid uncanny artifacts.
-  2. **3D** `src/components/TalkingHeadAvatar.tsx`: `@met4citizen/talkinghead` (MIT) + three,
-     lazy-loaded; raw HeadTTS payloads via `speakAudio`; two photo-realistic GLBs (Avaturn +
-     Avatar SDK, gender-matched to voices; `frontend/public/avatars/LICENSES.md`).
-  3. **Classic** SVG `Avatar.tsx` (gradient-shaded semi-realistic fallback).
-  Fallback chain: Photo → 3D (WebGL) → SVG. **Full photoreal deepfake lip-sync** (MuseTalk, MIT,
-  local GPU service via the existing `VoiceSink` seam) is the documented upgrade — see
-  `docs/MUSETALK.md`. Research finding: photoreal + true real-time in-browser lip-sync do not
-  coexist in open source, so the shipped default is the real-time viseme-photo tier.
+- **Avatar** — the interview always renders the real-time **3D talking head**
+  (`src/components/TalkingHeadAvatar.tsx`: `@met4citizen/talkinghead` (MIT) + three, lazy-loaded;
+  raw HeadTTS payloads via `speakAudio`; two photo-realistic GLBs — Avaturn + Avatar SDK,
+  gender-matched to voices; `frontend/public/avatars/LICENSES.md`). Built-in idle blink/sway/mood;
+  mouth animation is viseme-driven from the TTS word/viseme timeline (standard 3D morph-target
+  animation). Fallback: the SVG `Avatar.tsx` when WebGL is unavailable or the 3D stack fails to
+  load. The interview begins behind a **"Start interview"** gesture (InterviewPage) that unlocks
+  audio autoplay and requests the **microphone (on by default)** before connecting the WS.
+  A photorealistic still character portrait (`frontend/public/interviewers/`, one fixed face per
+  interviewer style via `lib/characters.ts`, gender always matching the style's voice) is shown on
+  the start gate and loading screens.
 - Character generation: `scripts`/tmp Imagen-4 pipeline (Gemini key from Secret Manager
   `gemini-api-key`); 12 characters (3 roles × 2F/2M), ~60KB JPEG each.
 - Measured: warm idle first-audio ~450ms; ~1.8–2.7s under concurrent LLM CPU load; lip-sync

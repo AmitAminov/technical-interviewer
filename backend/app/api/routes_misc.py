@@ -50,20 +50,12 @@ def health() -> Dict[str, Any]:
         voice_engine = probe_voice_engine()  # cached ~10s, ~0.5s worst case
     except Exception:  # noqa: BLE001
         pass
-    lipsync_engine = "unavailable"
-    try:
-        from .routes_deepfake import probe_lipsync_engine
-
-        lipsync_engine = probe_lipsync_engine()  # cached ~10s
-    except Exception:  # noqa: BLE001
-        pass
     return {
         "status": "ok",
         "version": settings.version,
         "llm_provider": llm_provider,
         "wiki_index_loaded": wiki_index_loaded,
         "voice_engine": voice_engine,
-        "lipsync_engine": lipsync_engine,
     }
 
 

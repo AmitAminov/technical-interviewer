@@ -37,8 +37,6 @@ class Settings:
     )
 
     voice_server_url: str = os.environ.get("TI_VOICE_URL", "http://127.0.0.1:8012")
-    # Optional Wav2Lip deepfake talking-head sidecar (deepfake/sidecar/service.py).
-    lipsync_server_url: str = os.environ.get("TI_LIPSYNC_URL", "http://127.0.0.1:8013")
 
     anthropic_model: str = os.environ.get("TI_ANTHROPIC_MODEL", "claude-sonnet-4-6")
     # Gemini (barge-in reply) runs on Vertex AI, authenticated via the project's

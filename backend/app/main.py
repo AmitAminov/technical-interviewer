@@ -25,7 +25,6 @@ from fastapi.middleware.cors import CORSMiddleware  # noqa: E402
 from fastapi.responses import FileResponse  # noqa: E402
 
 from .api import (  # noqa: E402
-    routes_deepfake,
     routes_misc,
     routes_privacy,
     routes_reports,
@@ -67,7 +66,6 @@ def create_app() -> FastAPI:
     app.include_router(routes_reports.router)
     app.include_router(routes_privacy.router)
     app.include_router(routes_voice.router)
-    app.include_router(routes_deepfake.router)
     # WebSocket.
     app.include_router(interview_ws.router)
 

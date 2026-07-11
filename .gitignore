@@ -32,13 +32,3 @@ wiki/
 Thumbs.db
 .DS_Store
 
-# Deepfake sidecar: track the small service source, ignore the heavy runtime
-# artifacts (own CUDA venv, model weights, bundled ffmpeg, caches).
-/deepfake/.venv/
-/deepfake/bin/
-/deepfake/cache/
-/deepfake/sidecar/cache/
-/deepfake/sidecar/weights/
-/deepfake/sidecar/*.mp4
-/deepfake/sidecar/*.wav
-/deepfake/sidecar/frame_*.png
