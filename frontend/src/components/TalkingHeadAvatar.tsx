@@ -6,7 +6,7 @@
  *   browsers never load three.js) and mounts TalkingHead into a div.
  * - Registers itself as the VoiceEngine sink: decoded HeadTTS chunk payloads
  *   ({audio: AudioBuffer, words/wtimes/wdurations, visemes/vtimes/vdurations})
- *   are streamed straight into head.speakAudio for native lip-sync; queue
+ *   are streamed straight into head.speakAudio for native mouth animation; queue
  *   markers bracket onStart/onEnd. Idle blink/sway/mood come built in.
  * - Robust fallback chain: WebGL unavailable, dynamic import failure or GLB
  *   load failure → the existing SVG <Avatar> renders unchanged. A small
@@ -15,7 +15,7 @@
  *
  * Two photo-realistic GLBs ship offline (see public/avatars/LICENSES.md):
  * avaturn.glb (female, Avaturn) and avatarsdk.glb (male, Avatar SDK). Both
- * carry the full Oculus viseme set + ARKit blendshapes, so lip-sync works on
+ * carry the full Oculus viseme set + ARKit blendshapes, so mouth animation works on
  * either. Faces are matched to the voice gender in lib/voice.ts (af_bella →
  * avaturn, am_fenrir → avatarsdk) and personas are differentiated by mood,
  * camera framing and photographic (soft-fill + directional key) lighting. The

@@ -202,7 +202,7 @@ export interface TtsChunk {
   vdurations: number[];
 }
 
-/** Playback sink (the 3D talking head) that takes over audio + lipsync. */
+/** Playback sink (the 3D talking head) that takes over audio + mouth animation. */
 export interface VoiceSink {
   /** Queue a chunk. onWord fires as each word is spoken. */
   speak(chunk: TtsChunk, onWord: (index: number, words: string[]) => void): void;
@@ -510,7 +510,7 @@ export class VoiceEngine {
     isFirst: boolean,
     isLast: boolean,
   ): void {
-    // 3D-head sink takes over playback + lipsync natively.
+    // 3D-head sink takes over playback + mouth animation natively.
     if (this.sink) {
       try {
         const sink = this.sink;

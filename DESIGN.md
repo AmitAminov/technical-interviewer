@@ -411,7 +411,7 @@ All tests must pass with no network and no API key.
   the start gate and loading screens.
 - Character generation: `scripts`/tmp Imagen-4 pipeline (Gemini key from Secret Manager
   `gemini-api-key`); 12 characters (3 roles × 2F/2M), ~60KB JPEG each.
-- Measured: warm idle first-audio ~450ms; ~1.8–2.7s under concurrent LLM CPU load; lip-sync
+- Measured: warm idle first-audio ~450ms; ~1.8–2.7s under concurrent LLM CPU load; mouth-animation
   offset ≈ 0ms by construction (viseme timeline ships with the audio).
 
 ## 14. Progress tracking & study curriculum (spec §16)

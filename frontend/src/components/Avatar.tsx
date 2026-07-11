@@ -23,7 +23,7 @@ export interface AvatarProps {
   /**
    * Explicit mouth shape (0-3) driven by real TTS visemes
    * (see visemeToMouthShape in lib/voice.ts). When provided while speaking it
-   * overrides the interval/word-tick cycling for tighter lip sync.
+   * overrides the interval/word-tick cycling for tighter mouth sync.
    */
   mouthShape?: number | null;
 }
@@ -280,7 +280,7 @@ export default function Avatar({
     return () => window.clearInterval(interval);
   }, [speaking]);
 
-  // …and TTS word-boundary events advance it too, for tighter lip sync).
+  // …and TTS word-boundary events advance it too, for tighter mouth sync).
   useEffect(() => {
     if (speaking && wordTick !== undefined) {
       setMouthIdx((i) => (i + 1) % 4);
