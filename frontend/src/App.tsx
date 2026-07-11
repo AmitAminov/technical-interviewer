@@ -20,9 +20,7 @@ function Header() {
     <header className="border-b border-slate-800 bg-slate-950/95">
       <div className="mx-auto flex max-w-5xl items-center gap-6 px-6 py-3">
         <Link to="/" className="flex items-center gap-2">
-          <span className="flex h-7 w-7 items-center justify-center rounded-full bg-indigo-500 text-sm font-bold text-white">
-            TI
-          </span>
+          <img src="/brand-emblem.png" alt="" className="h-7 w-7 rounded-md" />
           <span className="text-sm font-semibold tracking-tight text-slate-100">
             Technical Interviewer
           </span>
