@@ -10,13 +10,13 @@ study curriculum that tracks your progress across sessions.
 
 **Why this exists.** Real technical interviews are scarce and unforgiving. An average corporate
 opening draws roughly 250 applicants; only about four to six are interviewed and one is hired
-(Glassdoor) — so months of preparation and dozens-to-hundreds of applications buy only a handful
-of live interviews, and when you finally interview you almost never learn why you fell short
-(surveys put the share of candidates who want post-interview feedback near 94%, while only a
-small fraction ever receive any). This is the rehearsal room that otherwise doesn't exist:
+(Glassdoor). So months of preparation and dozens-to-hundreds of applications buy only a handful
+of live interviews, and when you finally interview you almost never learn why you fell short.
+(Surveys put the share of candidates who want post-interview feedback near 94%, while only a
+small fraction ever receive any.) This is the rehearsal room that otherwise doesn't exist:
 unlimited, role- and seniority-specific mock interviews that give you the rubric scoring,
-readiness report, and study plan a real interview never will — built to train myself and other
-candidates for the real thing.
+readiness report, and study plan a real interview never will. I built it to train myself and
+other candidates for the real thing.
 
 Built to a written specification (`technical_interviewer_software_specification.pdf`) with a
 binding architecture contract in [`DESIGN.md`](DESIGN.md). (The spec predates this
@@ -121,18 +121,18 @@ Timeouts bound every hop (no LLM call may block > 20s; planning must finish < 30
 
 ## Testing
 
-221 tests run with no API key and no live network calls from the app under test: the provider
+230+ tests run with no API key and no live network calls from the app under test: the provider
 chain is pinned to the deterministic offline engine, HTTP is mocked, and RAG tests build a real
 FAISS index from an in-repo fixture wiki (the `slow`-marked tier loads the MiniLM embedding
 model, cached locally after a one-time download):
 
-- **Backend (pytest, 160 tests)** — 147 test functions, 160 collected cases once
+- **Backend (pytest, 160+ tests)** — collected once
   parametrization is expanded: unit (API, scoring, hints, transcripts, parsing, RAG),
   AI-logic (scorer **monotonicity** — more expected points covered can never lower a metric;
   **determinism** — same answer, same score; role-specific rubric weights; hint penalties;
   prompt-injection scenarios end-to-end), and integration (full WebSocket interview →
   report flow).
-- **Frontend (Vitest + Testing Library, 61 tests, verified passing)** — setup validation, interview room states,
+- **Frontend (Vitest + Testing Library, 70+ tests, verified passing)** — setup validation, interview room states,
   camera/mic-denied fallbacks, pause/resume/end, report rendering, TTS chunking pipeline.
 
 ```bash
@@ -232,21 +232,24 @@ All settings are environment variables with working defaults (`backend/app/confi
 
 ## What an interview looks like
 
-1. **Setup** — role, mode (Quick Practice 10–20 min / Standard 45–60 / Deep Research 60–90),
-   difficulty (Junior → Staff/Lead), interviewer style, hint policy; optionally attach a
-   resume + job description, enable wiki grounding, internet research, or fully-local AI.
-2. **Planning** — research agent (if allowed) + planning agent + RAG produce a sectioned plan.
-3. **Live interview** — video-call UI: talking avatar, your camera preview, live transcript,
-   timer, section indicator. Answer by voice (partial transcripts in real time) or by typing.
-   Follow-ups, style-consistent phrasing, silence check-ins, hints on request or adaptively
-   (hints cost score), pause/resume/skip/end. Voice is **bilingual** (English via the browser,
-   Hebrew via Google Cloud TTS) and supports **barge-in** — talk over the interviewer and it
-   stops to listen. (A simulated interviewee can stand in for the human to exercise a full
-   session end to end — an internal test harness in `backend/app/sim/`, not part of a real run.)
-4. **Report** — overall score and role-readiness (0–100), per-topic scores, best/weakest
-   answers, missing concepts, communication + technical feedback, a study plan, and a
+1. **Setup.** Pick role, mode (Quick Practice 10–20 min / Standard 45–60 / Deep Research
+   60–90), difficulty (Junior → Staff/Lead), interviewer style, and hint policy. Optionally
+   attach a resume and job description, and turn on wiki grounding, internet research, or
+   fully-local AI.
+2. **Planning.** The research agent (if allowed), the planning agent, and RAG produce a
+   sectioned plan.
+3. **Live interview.** A video-call UI: talking avatar, your camera preview, live transcript,
+   timer, section indicator. You answer by voice (partial transcripts in real time) or by
+   typing. It does follow-ups, style-consistent phrasing, silence check-ins, hints on request
+   or adaptively (hints cost score), and pause/resume/skip/end. Voice is **bilingual** (English
+   via the browser, Hebrew via Google Cloud TTS) and supports **barge-in**: talk over the
+   interviewer and it stops to listen. (A simulated interviewee can stand in for the human to
+   exercise a full session end to end, an internal test harness in `backend/app/sim/`, not part
+   of a real run.)
+4. **Report.** Overall score and role-readiness (0–100), per-topic scores, best and weakest
+   answers, missing concepts, communication and technical feedback, a study plan, and a
    recommended next interview.
-5. **Progress** — cross-session readiness trend, per-topic trajectories, and a recency-weighted
+5. **Progress.** Cross-session readiness trend, per-topic trajectories, and a recency-weighted
    Now/Next/Later study curriculum cross-referenced to your wiki pages.
 
 ## Honest limitations
